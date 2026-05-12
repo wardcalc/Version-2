@@ -1,72 +1,84 @@
-// WardCalc Super Engine V3.1 (Titanium Anti-Crash Edition)
+// WardCalc Core Brain - V4.0 (Global Window Edition)
 
-// 1. SAFELY LOAD MEMORY (Prevents local storage crashes)
-let currentLang = 'en';
-let emergencyActive = false;
-let favorites = [];
-let currentCategory = 'All';
-let searchQuery = '';
-
-try {
-    currentLang = localStorage.getItem('wardcalc_lang') || 'en';
-    emergencyActive = localStorage.getItem('wardcalc_emergency') === 'true';
-    const savedFavs = localStorage.getItem('wardcalc_favorites');
-    if (savedFavs) {
-        favorites = JSON.parse(savedFavs);
-        if (!Array.isArray(favorites)) favorites = [];
+// 1. ATTACH THEME TOGGLE DIRECTLY TO THE BROWSER WINDOW
+window.toggleTheme = function() {
+    const html = document.documentElement;
+    const icon = document.getElementById('theme-icon');
+    if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        if(icon) icon.innerText = 'dark_mode';
+        localStorage.setItem('wardcalc_theme', 'light');
+    } else {
+        html.classList.add('dark');
+        if(icon) icon.innerText = 'light_mode';
+        localStorage.setItem('wardcalc_theme', 'dark');
     }
-} catch (e) {
-    console.warn("Memory read error. Resetting to safe defaults.");
-    favorites = [];
-}
+};
 
-// 2. DYNAMIC DICTIONARY
-function getDictionary(lang) {
-    if (lang === 'en' && typeof en !== 'undefined') return en;
-    if (lang === 'de' && typeof de !== 'undefined') return de;
-    if (lang === 'ru' && typeof ru !== 'undefined') return ru;
-    if (lang === 'uz' && typeof uz !== 'undefined') return uz;
-    return null;
-}
+// 2. ATTACH LANGUAGE TOGGLE DIRECTLY TO THE BROWSER WINDOW
+window.changeLang = function(lang) {
+    localStorage.setItem('wardcalc_lang', lang);
 
-// 3. THEME CONTROLLER
-function toggleTheme() {
-    try {
-        const html = document.documentElement;
-        const icon = document.getElementById('theme-icon');
-        if (html.classList.contains('dark')) { 
-            html.classList.remove('dark'); 
-            if(icon) icon.innerText = 'dark_mode'; 
-            localStorage.setItem('wardcalc_theme', 'light'); 
-        } else { 
-            html.classList.add('dark'); 
-            if(icon) icon.innerText = 'light_mode'; 
-            localStorage.setItem('wardcalc_theme', 'dark'); 
-        }
-    } catch(e) { console.error("Theme Error:", e); }
-}
+    // Get the right dictionary safely
+    let dict = null;
+    if (lang === 'en' && typeof en !== 'undefined') dict = en;
+    if (lang === 'de' && typeof de !== 'undefined') dict = de;
+    if (lang === 'ru' && typeof ru !== 'undefined') dict = ru;
+    if (lang === 'uz' && typeof uz !== 'undefined') dict = uz;
 
-// 4. BOOT SEQUENCE
+    // Apply words if dictionary exists
+    if (dict) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (dict[key]) el.innerText = dict[key];
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (dict[key]) el.setAttribute('placeholder', dict[key]);
+        });
+    }
+
+    // Highlight the active button
+    const buttons = document.querySelectorAll('#language-switcher button');
+    buttons.forEach(btn => {
+        btn.className = "px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary transition-colors font-mono";
+    });
+    const activeBtn = Array.from(buttons).find(b => b.innerText.toLowerCase() === lang);
+    if (activeBtn) {
+        activeBtn.className = "px-2 py-1 md:px-3 md:py-1 rounded-full bg-primary/10 text-primary font-bold transition-colors font-mono border border-primary/20";
+    }
+};
+
+// 3. BOOT SEQUENCE WHEN PAGE LOADS
 document.addEventListener("DOMContentLoaded", () => {
-    try {
+    // Set Initial Theme
+    if(localStorage.getItem('wardcalc_theme') === 'dark') {
+        document.documentElement.classList.add('dark');
         const icon = document.getElementById('theme-icon');
-        if(icon && document.documentElement.classList.contains('dark')) icon.innerText = 'light_mode';
+        if(icon) icon.innerText = 'light_mode';
+    }
 
-        const countSpan = document.getElementById("tool-count");
-        if(countSpan && typeof clinicalTools !== 'undefined') countSpan.innerText = clinicalTools.length;
+    // Set Initial Language (This highlights the EN button on load!)
+    const savedLang = localStorage.getItem('wardcalc_lang') || 'en';
+    window.changeLang(savedLang);
 
-        if (typeof activateEmergencyUI === 'function' && emergencyActive) activateEmergencyUI();
+    // Set Tool Count
+    const countSpan = document.getElementById("tool-count");
+    if(countSpan && typeof clinicalTools !== 'undefined') {
+        countSpan.innerText = clinicalTools.length;
+    }
 
-        changeLang(currentLang);
-        if (typeof setupEmergencyToggle === 'function') setupEmergencyToggle();
-        if (typeof setupLiveSearch === 'function') setupLiveSearch();
-        if (typeof renderCategories === 'function') renderCategories();
-        if (typeof renderDashboard === 'function') renderDashboard();
-    } catch(e) { console.error("Boot Sequence Error:", e); }
+    // Load Dashboard if we are on the index page
+    if (typeof window.renderCategories === 'function') window.renderCategories();
+    if (typeof window.renderDashboard === 'function') window.renderDashboard();
 });
 
-// 5. UI GENERATORS
-function renderCategories() {
+// 4. DASHBOARD TOOLS
+let currentCategory = 'All';
+let searchQuery = '';
+let favorites = JSON.parse(localStorage.getItem('wardcalc_favorites')) || [];
+
+window.renderCategories = function() {
     const container = document.getElementById("category-filters");
     if (!container || typeof clinicalTools === 'undefined') return;
 
@@ -74,8 +86,8 @@ function renderCategories() {
     let html = '';
     categories.forEach(cat => {
         const isActive = cat === currentCategory;
-        const activeClass = isActive 
-            ? "bg-secondary/20 text-secondary border-secondary/50 shadow-[0_0_10px_rgba(13,148,136,0.2)]" 
+        const activeClass = isActive
+            ? "bg-secondary/20 text-secondary border-secondary/50 shadow-[0_0_10px_rgba(13,148,136,0.2)]"
             : "bg-surface-container/50 text-on-surface-variant border-outline-variant/30 hover:border-secondary/50 hover:text-secondary";
 
         let i18nAttr = '';
@@ -83,37 +95,30 @@ function renderCategories() {
         if (cat === 'Favorites') i18nAttr = 'data-i18n="nav_favorites"';
         let icon = cat === 'Favorites' ? `<span class="material-symbols-outlined text-[14px] mr-1 ${isActive ? 'text-secondary' : ''}" style="font-variation-settings: 'FILL' 1;">star</span>` : '';
 
-        html += `<button onclick="filterCategory('${cat}')" class="flex items-center px-4 py-2 rounded-full font-mono text-xs font-bold transition-all duration-300 whitespace-nowrap border cursor-pointer ${activeClass}" ${i18nAttr}>${icon}${cat}</button>`;
+        html += `<button onclick="window.filterCategory('${cat}')" class="flex items-center px-4 py-2 rounded-full font-mono text-xs font-bold transition-all duration-300 whitespace-nowrap border cursor-pointer ${activeClass}" ${i18nAttr}>${icon}${cat}</button>`;
     });
-
     container.innerHTML = html;
-    applyTranslations(currentLang); 
-}
+    
+    // Apply translations to category buttons
+    const savedLang = localStorage.getItem('wardcalc_lang') || 'en';
+    window.changeLang(savedLang); 
+};
 
-function filterCategory(cat) {
+window.filterCategory = function(cat) {
     currentCategory = cat;
-    renderCategories();
-    renderDashboard();
-}
+    window.renderCategories();
+    window.renderDashboard();
+};
 
-function setupLiveSearch() {
-    const searchInput = document.getElementById('search-input');
-    if (!searchInput) return;
-    searchInput.addEventListener('input', (e) => {
-        searchQuery = e.target.value.toLowerCase();
-        renderDashboard(); 
-    });
-}
-
-function toggleFavorite(e, toolId) {
-    e.stopPropagation(); 
+window.toggleFavorite = function(e, toolId) {
+    e.stopPropagation();
     if (favorites.includes(toolId)) favorites = favorites.filter(id => id !== toolId);
     else favorites.push(toolId);
     localStorage.setItem('wardcalc_favorites', JSON.stringify(favorites));
-    renderDashboard(); 
-}
+    window.renderDashboard();
+};
 
-function renderDashboard() {
+window.renderDashboard = function() {
     const directory = document.getElementById("calculator-directory");
     if (!directory || typeof clinicalTools === 'undefined') return;
 
@@ -122,8 +127,8 @@ function renderDashboard() {
     else if (currentCategory !== 'All') filteredTools = clinicalTools.filter(t => t.category === currentCategory);
 
     if (searchQuery.trim() !== '') {
-        filteredTools = filteredTools.filter(t => 
-            t.defaultTitle.toLowerCase().includes(searchQuery) || 
+        filteredTools = filteredTools.filter(t =>
+            t.defaultTitle.toLowerCase().includes(searchQuery) ||
             t.defaultDesc.toLowerCase().includes(searchQuery) ||
             t.category.toLowerCase().includes(searchQuery)
         );
@@ -149,7 +154,7 @@ function renderDashboard() {
                 </div>
                 <div class="flex items-center gap-3">
                     <span class="font-mono text-[10px] text-secondary uppercase border border-secondary/20 bg-secondary/5 px-2 py-1 rounded-md tracking-widest">${tool.category}</span>
-                    <button onclick="toggleFavorite(event, '${tool.id}')" class="flex items-center justify-center transition-colors ${favColor}">
+                    <button onclick="window.toggleFavorite(event, '${tool.id}')" class="flex items-center justify-center transition-colors ${favColor}">
                         <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' ${favIconFill};">star</span>
                     </button>
                 </div>
@@ -160,56 +165,19 @@ function renderDashboard() {
     });
     html += '</div>';
     directory.innerHTML = html;
-    applyTranslations(currentLang);
-}
+    
+    // Translate the generated cards
+    const savedLang = localStorage.getItem('wardcalc_lang') || 'en';
+    window.changeLang(savedLang);
+};
 
-function activateEmergencyUI() {
-    const btn = document.getElementById('emergency-toggle');
-    if(!btn) return;
-    btn.className = "flex items-center gap-1 px-2 py-1.5 md:px-4 md:py-1.5 rounded-full transition-all font-mono text-[10px] md:text-xs font-bold cursor-pointer bg-error text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]";
-    document.body.classList.add("emergency-active");
-}
-
-function deactivateEmergencyUI() {
-    const btn = document.getElementById('emergency-toggle');
-    if(!btn) return;
-    btn.className = "flex items-center gap-1 border border-error/50 text-error bg-error/5 px-2 py-1.5 md:px-4 md:py-1.5 rounded-full hover:bg-error/10 hover:border-error transition-all font-mono text-[10px] md:text-xs font-bold cursor-pointer";
-    document.body.classList.remove("emergency-active");
-}
-
-function setupEmergencyToggle() {
-    const btn = document.getElementById('emergency-toggle');
-    if(!btn) return;
-    btn.addEventListener('click', () => {
-        emergencyActive = !emergencyActive;
-        localStorage.setItem('wardcalc_emergency', emergencyActive);
-        if(emergencyActive) activateEmergencyUI(); else deactivateEmergencyUI();
-    });
-}
-
-function applyTranslations(lang) {
-    try {
-        const dict = getDictionary(lang);
-        if (!dict) return; 
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (dict[key]) el.innerText = dict[key];
+// Setup Search
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            window.renderDashboard();
         });
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-            const key = el.getAttribute('data-i18n-placeholder');
-            if (dict[key]) el.setAttribute('placeholder', dict[key]);
-        });
-    } catch(e) { console.error("Translation Error:", e); }
-}
-
-function changeLang(lang) {
-    try {
-        currentLang = lang;
-        localStorage.setItem('wardcalc_lang', lang);
-        applyTranslations(lang); 
-        const buttons = document.querySelectorAll('#language-switcher button');
-        buttons.forEach(btn => btn.className = "px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary transition-colors font-mono");
-        const activeBtn = Array.from(buttons).find(b => b.innerText.toLowerCase() === lang);
-        if (activeBtn) activeBtn.className = "px-2 py-1 md:px-3 md:py-1 rounded-full bg-primary/10 text-primary font-bold transition-colors font-mono border border-primary/20";
-    } catch(e) { console.error("Language Change Error:", e); }
-}
+    }
+});
