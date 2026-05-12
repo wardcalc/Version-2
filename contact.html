@@ -6,7 +6,7 @@
     <title>Contact WardCalc | Global Clinical Hub</title>
     
     <script>
-        // Prevents white flash on load
+        // Forces dark mode on load if preferred
         try { if(localStorage.getItem('wardcalc_theme') === 'dark') document.documentElement.classList.add('dark'); } catch(e){}
     </script>
 
@@ -17,7 +17,7 @@
             --color-on-background: #0f172a; --color-on-surface: #0f172a; --color-on-surface-variant: #475569;
             --color-outline-variant: #e2e8f0; --color-primary: #4338ca; --color-secondary: #0d9488; --color-error: #dc2626;
         }
-        /* Forces Safari/Chrome to obey dark colors */
+        /* The "Force-Multiplier" for Safari/Chrome Dark Mode */
         html.dark {
             --color-background: #051424; --color-surface: #051424; --color-surface-variant: #273647;
             --color-surface-container: #122131; --color-surface-container-high: #1c2b3c;
@@ -31,7 +31,7 @@
         ::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
     </style>
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -72,54 +72,61 @@
             <div class="text-center max-w-3xl mb-12">
                 <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-outline-variant/50 bg-surface-container-high/60 text-on-surface-variant text-[9px] md:text-xs font-mono font-bold tracking-widest uppercase mb-6 shadow-sm">
                     <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_var(--color-secondary)]"></span>
-                    <span data-i18n="contact_pill">Global Communication Hub</span>
+                    <span data-i18n="contact_pill">Global Outreach Protocol</span>
                 </div>
 
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-on-surface mb-3 leading-tight tracking-tight">
-                    <span data-i18n="contact_title">Connect With The</span> <br class="hidden md:block" />
-                    <em class="text-primary font-serif font-bold" data-i18n="contact_highlight">WardCalc Network.</em>
+                    <span data-i18n="contact_title">Connect with the</span> <br class="hidden md:block" />
+                    <em class="text-primary font-serif font-bold" data-i18n="contact_highlight">WardCalc Global Hub.</em>
                 </h1>
                 <p class="text-sm md:text-base text-on-surface-variant opacity-90 max-w-2xl mx-auto leading-relaxed mt-4" data-i18n="contact_intro">
-                    Medicine is a collaborative science. Whether you are reporting clinical feedback, proposing institutional partnerships, or seeking to collaborate on educational medical content, our lines of communication are perpetually open.
+                    Medicine is a collaborative science. Whether you are reporting clinical feedback, proposing institutional partnerships, or seeking to collaborate on educational medical history content, our communication lines are perpetually open.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
                 
                 <div class="lg:col-span-7 flex flex-col gap-6">
-                    
-                    <div class="bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/20 rounded-xl p-6 md:p-8 shadow-sm group">
+                    <div class="bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/20 rounded-xl p-6 md:p-8 hover:border-secondary/50 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group">
                         <div class="w-11 h-11 rounded-xl border border-secondary/30 flex items-center justify-center bg-secondary/5 mb-6 group-hover:bg-secondary/10 transition-colors">
                             <span class="material-symbols-outlined text-secondary text-[22px]">health_and_safety</span>
                         </div>
-                        <h3 class="text-xl font-bold font-serif tracking-tight text-on-surface mb-2" data-i18n="contact_h1">Clinical Feedback & Verification</h3>
-                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed mb-4" data-i18n="contact_p1">In the high-stakes environment of modern medicine, isolated software development is a profound liability. Every algorithm and prognostic matrix within WardCalc is designed to interface with raw physiology. They must be subjected to relentless peer review.</p>
-                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed" data-i18n="contact_p2">We view our users as a distributed network of clinical validators. If you observe a mathematical discrepancy or an outdated reference range, your feedback is paramount. Our commitment is to update our logic within hours of a verified clinical report.</p>
+                        <h3 class="text-xl font-bold font-serif tracking-tight text-on-surface mb-2" data-i18n="contact_h1">Clinical Feedback & Logic Verification</h3>
+                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed mb-4" data-i18n="contact_p1">In high-stakes medicine, software must be scrutinized. Every algorithm within WardCalc interfaces with human physiology. We view our users as a distributed network of clinical validators. If you observe a mathematical discrepancy or an outdated reference range, your feedback is paramount.</p>
+                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed" data-i18n="contact_p2">Our commitment is to update our logic within hours of a verified clinical report. We invite attending physicians, clinical researchers, and pharmacologists to assist us in maintaining the most unassailable, evidence-based data available for bedside practitioners globally.</p>
                     </div>
 
-                    <div class="bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/20 rounded-xl p-6 md:p-8 shadow-sm group">
+                    <div class="bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/20 rounded-xl p-6 md:p-8 hover:border-secondary/50 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group">
                         <div class="w-11 h-11 rounded-xl border border-secondary/30 flex items-center justify-center bg-secondary/5 mb-6 group-hover:bg-secondary/10 transition-colors">
                             <span class="material-symbols-outlined text-secondary text-[22px]">account_balance</span>
                         </div>
-                        <h3 class="text-xl font-bold font-serif tracking-tight text-on-surface mb-2" data-i18n="contact_h2">Academic Integration</h3>
-                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed mb-4" data-i18n="contact_p3">Bridging the theoretical chasm between the lecture hall and the hospital floor requires structural collaboration. We seek partnerships with universities and residency programs to integrate WardCalc into core curricula.</p>
-                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed" data-i18n="contact_p4">Whether you are coordinating for a cohort like 2D-GenMed 21 or standardizing diagnostics for a facility like Prime Diagnostics, we can tailor our deployment. We are open to discussing institutional feedback loops that empower practitioners.</p>
+                        <h3 class="text-xl font-bold font-serif tracking-tight text-on-surface mb-2" data-i18n="contact_h2">Institutional & Academic Partnerships</h3>
+                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed mb-4" data-i18n="contact_p3">Bridging the theoretical chasm between the lecture hall and the hospital floor requires structural collaboration. We seek partnerships with medical universities and diagnostic facilities to integrate WardCalc into core clinical rotation workflows.</p>
+                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed" data-i18n="contact_p4">From coordinating resources for specific student cohorts to standardizing diagnostics for regional clinics, we can assist in tailoring deployments. We invite academic deans and residency directors to discuss institutional feedback loops that empower future practitioners.</p>
                     </div>
 
-                    <div class="bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/20 rounded-xl p-6 md:p-8 shadow-sm group">
+                    <div class="bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/20 rounded-xl p-6 md:p-8 hover:border-secondary/50 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group">
                         <div class="w-11 h-11 rounded-xl border border-secondary/30 flex items-center justify-center bg-secondary/5 mb-6 group-hover:bg-secondary/10 transition-colors">
                             <span class="material-symbols-outlined text-secondary text-[22px]">translate</span>
                         </div>
-                        <h3 class="text-xl font-bold font-serif tracking-tight text-on-surface mb-2" data-i18n="contact_h3">Linguistic Collaboration & FSP</h3>
-                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed mb-4" data-i18n="contact_p5">Medicine is a global language, yet terminology varies across borders. For graduates preparing for the European healthcare system, mastering Fachsprache at a C1 level is a clinical necessity.</p>
-                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed" data-i18n="contact_p6">If you are navigating the path to becoming an Assistenzarzt, preparing for the FSP, or hold a B2/C1 certification, we invite you to collaborate. Contributing to our translations fortifies your linguistic mastery and builds a bridge for others.</p>
+                        <h3 class="text-xl font-bold font-serif tracking-tight text-on-surface mb-2" data-i18n="contact_h3">Linguistic Research & FSP Collaboration</h3>
+                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed mb-4" data-i18n="contact_p5">Medicine is a global language, yet terminology varies across borders. For graduates preparing for the European healthcare system, mastering Fachsprache at a C1 level is a clinical necessity. We are expanding our native-speaking network to refine our multi-lingual matrices.</p>
+                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed" data-i18n="contact_p6">If you are an international doctor navigating the path to becoming an Assistenzarzt or hold B2/C1 certifications, we invite you to collaborate. Contributing to our medical translations fortifies your own linguistic mastery while constructing a bridge for thousands of others.</p>
                     </div>
 
+                    <div class="bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/20 rounded-xl p-6 md:p-8 hover:border-secondary/50 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group">
+                        <div class="w-11 h-11 rounded-xl border border-secondary/30 flex items-center justify-center bg-secondary/5 mb-6 group-hover:bg-secondary/10 transition-colors">
+                            <span class="material-symbols-outlined text-secondary text-[22px]">movie_creation</span>
+                        </div>
+                        <h3 class="text-xl font-bold font-serif tracking-tight text-on-surface mb-2" data-i18n="contact_h4">Educational Media & Documentary Inquiries</h3>
+                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed mb-4" data-i18n="contact_p7">Beyond algorithms, we believe in the power of context. Our media initiatives focus on profound historical accuracy and deep-dive medical documentary content. Rather than prioritizing viral sensationalism, we aim to elevate the standard of clinical education.</p>
+                        <p class="text-sm text-on-surface-variant opacity-90 leading-relaxed" data-i18n="contact_p8">If you are a medical historian, a clinical educator, or a documentary creator, we are eager to explore co-productions. Contact us for script reviews, digital syndication, and collaborations that focus on the documentary medical history niche.</p>
+                    </div>
                 </div>
 
                 <div class="lg:col-span-5">
                     <div class="bg-surface-container/60 backdrop-blur-xl border border-outline-variant/40 rounded-xl p-6 md:p-8 shadow-sm sticky top-32">
-                        <h3 class="text-xl font-bold font-serif text-on-surface mb-2" data-i18n="contact_form_title">Direct Inquiry Protocol</h3>
+                        <h3 class="text-xl font-bold font-serif text-on-surface mb-2" data-i18n="contact_form_title">Direct Communication Protocol</h3>
                         <p class="text-xs text-on-surface-variant opacity-80 mb-6" data-i18n="contact_form_desc">Use the secure form below to initiate contact. Response time: 48 hours.</p>
                         
                         <form class="space-y-4">
@@ -132,6 +139,16 @@
                                 <input type="email" class="w-full bg-surface-container-high/50 border border-outline-variant/50 rounded-lg px-4 py-3 text-on-surface focus:border-primary transition-colors text-sm" data-i18n-placeholder="contact_ph_email" placeholder="Institutional Email">
                             </div>
                             <div>
+                                <label class="block text-[10px] font-mono font-bold text-on-surface-variant uppercase tracking-widest mb-2" data-i18n="contact_label_subject">Inquiry Category</label>
+                                <select class="w-full bg-surface-container-high/50 border border-outline-variant/50 rounded-lg px-4 py-3 text-on-surface focus:border-primary transition-colors text-sm appearance-none">
+                                    <option data-i18n="contact_opt_1">Clinical Logic Feedback</option>
+                                    <option data-i18n="contact_opt_2">Institutional Partnership</option>
+                                    <option data-i18n="contact_opt_3">Linguistic/FSP Collaboration</option>
+                                    <option data-i18n="contact_opt_4">Documentary Production</option>
+                                    <option data-i18n="contact_opt_5">General Inquiry</option>
+                                </select>
+                            </div>
+                            <div>
                                 <label class="block text-[10px] font-mono font-bold text-on-surface-variant uppercase tracking-widest mb-2" data-i18n="contact_label_message">Message</label>
                                 <textarea rows="4" class="w-full bg-surface-container-high/50 border border-outline-variant/50 rounded-lg px-4 py-3 text-on-surface focus:border-primary transition-colors text-sm resize-none" data-i18n-placeholder="contact_ph_message"></textarea>
                             </div>
@@ -142,13 +159,14 @@
                         </form>
                     </div>
                 </div>
+
             </div>
 
             <div class="mt-16 pt-8 w-full border-t border-outline-variant/20 flex justify-center items-center gap-4">
                 <div class="w-10 h-10 rounded border border-primary/30 flex items-center justify-center bg-primary/10 text-primary font-serif font-bold text-lg">W</div>
                 <div class="text-left">
                     <h4 class="font-bold text-on-surface text-sm">WardCalc Administration</h4>
-                    <p class="text-[10px] font-mono text-on-surface-variant opacity-80 uppercase tracking-widest">Established 2026</p>
+                    <p class="text-[10px] font-mono text-on-surface-variant opacity-80 uppercase tracking-widest" data-i18n="stat_est">Established 2026</p>
                 </div>
             </div>
         </div>
