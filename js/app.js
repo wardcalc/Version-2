@@ -7,7 +7,7 @@ let favorites = JSON.parse(localStorage.getItem('wardcalc_favorites')) || [];
 let currentCategory = 'All';
 let searchQuery = '';
 
-const dictionaries = { en, ru, uz };
+const dictionaries = { en, de, ru, uz };
 
 // 2. INITIALIZATION (When the page loads)
 document.addEventListener("DOMContentLoaded", () => {
