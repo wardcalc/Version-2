@@ -1,4 +1,4 @@
-// WardCalc Super Engine V2.3
+// WardCalc Super Engine V2.4 (Crash-Proof Edition)
 
 let currentLang = localStorage.getItem('wardcalc_lang') || 'en';
 let emergencyActive = localStorage.getItem('wardcalc_emergency') === 'true';
@@ -6,7 +6,13 @@ let favorites = JSON.parse(localStorage.getItem('wardcalc_favorites')) || [];
 let currentCategory = 'All';
 let searchQuery = '';
 
-const dictionaries = { en, de, ru, uz };
+// CRITICAL SAFETY NET: If a dictionary has a typo or is missing, it won't crash the whole app!
+const dictionaries = { 
+    en: typeof en !== 'undefined' ? en : {}, 
+    de: typeof de !== 'undefined' ? de : {}, 
+    ru: typeof ru !== 'undefined' ? ru : {}, 
+    uz: typeof uz !== 'undefined' ? uz : {} 
+};
 
 // --- GLOBAL THEME ENGINE ---
 function toggleTheme() {
@@ -38,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 3. INITIALIZE ENGINE
-    if (emergencyActive) activateEmergencyUI();
+    if (typeof activateEmergencyUI === 'function' && emergencyActive) activateEmergencyUI();
     changeLang(currentLang);
     setupEmergencyToggle();
     setupLiveSearch();
@@ -172,7 +178,7 @@ function setupEmergencyToggle() {
 
 function applyTranslations(lang) {
     const dict = dictionaries[lang];
-    if (!dict) return;
+    if (!dict || Object.keys(dict).length === 0) return; // Added safety check
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key]) el.innerText = dict[key];
