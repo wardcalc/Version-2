@@ -19,3 +19,12 @@ const clinicalTools = [
         defaultDesc: "Rapid assessment of newborn viability at 1 and 5 minutes after birth."
     }
 ];
+    {
+        id: "sofa",
+        category: "Emergency",
+        icon: "monitor_heart",
+        titleKey: "tool_sofa_title",
+        descKey: "tool_sofa_desc",
+        defaultTitle: "SOFA Score",
+        defaultDesc: "Assessment of organ failure and mortality risk in the ICU."
+    }
