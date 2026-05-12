@@ -33,4 +33,14 @@ const en = {
     "tool_gcs_desc": "Active neurological assessment matrix for conscious level evaluation.",
     "tool_apgar_title": "APGAR Score",
     "tool_apgar_desc": "Rapid assessment of newborn viability at 1 and 5 minutes after birth."
-};
+};,
+    "about_manifesto": "The Clinical Manifesto",
+    "about_title": "Bridging the Gap Between",
+    "about_highlight": "Textbook & Bedside",
+    "about_genesis": "The Genesis of the Project",
+    "about_student": "Built by a Student",
+    "about_matrix": "Multilingual Matrix",
+    "about_accuracy": "Uncompromising Accuracy",
+    "about_access": "Commitment to Accessibility",
+    "about_future": "The Future of WardCalc"
+
