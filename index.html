@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WardCalc | Clinical Directory</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7893124697140576" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "primary": "#d0bcff",
+              "secondary": "#4fdbc8",
+              "error": "#ffb4ab",
+              "background": "#051424",
+              "surface": "#051424",
+              "surface-variant": "#273647",
+              "surface-container": "#122131",
+              "surface-container-high": "#1c2b3c",
+              "on-background": "#d4e4fa",
+              "on-surface": "#d4e4fa",
+              "on-surface-variant": "#cbc3d7",
+              "outline-variant": "#494454"
+            },
+            "fontFamily": {
+              "body": ["Space Grotesk", "sans-serif"],
+              "mono": ["JetBrains Mono", "monospace"]
+            }
+          }
+        }
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <style>
+        /* Ambient Background Noise & Scanlines */
+        .scanlines {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(5, 20, 36, 0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(208, 188, 255, 0.2); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(208, 188, 255, 0.5); }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body overflow-x-hidden min-h-screen relative selection:bg-primary selection:text-surface flex flex-col">
+    
+    <div class="scanlines fixed inset-0 pointer-events-none z-0 mix-blend-overlay opacity-50"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[30%] h-[30%] rounded-full bg-secondary/10 blur-[100px] pointer-events-none z-0"></div>
+
+    <header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 bg-surface-container/80 backdrop-blur-lg border-b border-outline-variant/30">
+        <div class="flex items-center gap-4 pl-64">
+            <span class="text-3xl font-bold text-primary uppercase tracking-tighter">WardCalc</span>
+        </div>
+        
+        <div class="flex-1 max-w-md mx-8 invisible md:visible">
+            <div class="relative group">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                <input type="text" data-i18n-placeholder="search_placeholder" placeholder="Search calculators..." class="w-full bg-surface-container-high/50 border border-outline-variant/50 rounded-lg text-on-surface pl-12 pr-4 py-2 backdrop-blur-md focus:border-primary focus:ring-0 focus:bg-primary/5 transition-all" />
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button id="emergency-toggle" class="flex items-center gap-1 border border-error/50 text-error bg-error/5 px-4 py-1.5 rounded-full hover:bg-error/20 hover:border-error transition-all font-mono text-xs font-bold shadow-[0_0_10px_rgba(255,180,171,0.1)]">
+                <span class="material-symbols-outlined text-[16px]">emergency</span>
+                <span data-i18n="nav_emergency">EMERGENCY</span>
+            </button>
+
+            <div id="language-switcher" class="flex items-center gap-1 bg-surface-container-high/40 p-1 rounded-full border border-outline-variant/30 backdrop-blur-md font-mono text-xs font-bold">
+                <button onclick="changeLang('en')" class="px-3 py-1 rounded-full bg-primary/20 text-primary">EN</button>
+                <button onclick="changeLang('ru')" class="px-3 py-1 rounded-full text-on-surface-variant hover:text-secondary">RU</button>
+                <button onclick="changeLang('uz')" class="px-3 py-1 rounded-full text-on-surface-variant hover:text-secondary">UZ</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="fixed left-0 top-0 h-full z-40 flex flex-col pt-24 pb-8 bg-surface-container-high/60 backdrop-blur-2xl w-64 border-r border-outline-variant/20">
+        <div class="px-6 mb-8">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full border border-primary/50 flex items-center justify-center bg-surface shadow-[0_0_15px_rgba(208,188,255,0.2)]">
+                    <span class="material-symbols-outlined text-primary">medical_services</span>
+                </div>
+                <div>
+                    <h2 class="font-mono text-xs uppercase text-primary font-bold">WARD_CALC</h2>
+                    <p class="text-[10px] font-mono text-on-surface-variant opacity-70">V2.0_CLINICAL</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 flex flex-col gap-2">
+            <a href="index.html" class="flex items-center gap-4 bg-primary/20 text-primary border-r-4 border-primary px-6 py-4 translate-x-2 transition-transform">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-mono text-xs uppercase font-bold" data-i18n="nav_dashboard">Dashboard</span>
+            </a>
+            <a href="#" class="flex items-center gap-4 text-on-surface-variant px-6 py-4 opacity-70 hover:bg-secondary/10 hover:text-secondary transition-all">
+                <span class="material-symbols-outlined">star</span>
+                <span class="font-mono text-xs uppercase font-bold" data-i18n="nav_favorites">Favorites</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="ml-64 pt-28 p-8 z-10 relative flex-1">
+        <div class="max-w-7xl mx-auto flex flex-col gap-8">
+            
+            <div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-lg flex justify-center items-center min-h-[90px] overflow-hidden">
+                <span class="text-on-surface-variant font-mono text-xs opacity-50">Advertisement Space</span>
+                </div>
+
+            <div class="flex justify-between items-end border-b border-outline-variant/20 pb-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-on-surface mb-1" data-i18n="dash_title">Clinical Calculator Directory</h1>
+                    <p class="text-on-surface-variant" data-i18n="dash_subtitle">Select a category or search for a specific protocol.</p>
+                </div>
+                <div class="flex items-center gap-2 text-secondary font-mono text-xs font-bold">
+                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_#4fdbc8]"></span>
+                    SYSTEM ONLINE
+                </div>
+            </div>
+
+            <div id="calculator-directory" class="w-full flex flex-col gap-10">
+                </div>
+
+        </div>
+    </main>
+
+    <footer class="ml-64 border-t border-outline-variant/20 bg-surface-container/20 backdrop-blur-md py-8 px-8 mt-auto z-10 relative">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            <div class="text-on-surface-variant text-sm flex items-center gap-2">
+                <span class="material-symbols-outlined text-[16px] text-primary">copyright</span>
+                <span>2026 WardCalc. All rights reserved.</span>
+            </div>
+
+            <div class="flex flex-wrap justify-center md:justify-end gap-6 font-mono text-xs uppercase font-bold text-on-surface-variant">
+                <a href="about.html" class="hover:text-secondary transition-colors duration-300" data-i18n="footer_about">About Us</a>
+                <a href="contact.html" class="hover:text-secondary transition-colors duration-300" data-i18n="footer_contact">Contact</a>
+                <a href="privacy.html" class="hover:text-secondary transition-colors duration-300" data-i18n="footer_privacy">Privacy Policy</a>
+                <a href="disclaimer.html" class="hover:text-secondary transition-colors duration-300 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px] text-error">warning</span>
+                    <span data-i18n="footer_disclaimer">Medical Disclaimer</span>
+                </a>
+            </div>
+            
+        </div>
+    </footer>
+
+    </body>
+</html>
