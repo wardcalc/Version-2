@@ -1,4 +1,4 @@
-// WardCalc Super Engine V2.2
+// WardCalc Super Engine V2.3
 
 let currentLang = localStorage.getItem('wardcalc_lang') || 'en';
 let emergencyActive = localStorage.getItem('wardcalc_emergency') === 'true';
@@ -8,14 +8,36 @@ let searchQuery = '';
 
 const dictionaries = { en, de, ru, uz };
 
+// --- GLOBAL THEME ENGINE ---
+function toggleTheme() {
+    const html = document.documentElement;
+    const icon = document.getElementById('theme-icon');
+    if (html.classList.contains('dark')) { 
+        html.classList.remove('dark'); 
+        if(icon) icon.innerText = 'dark_mode'; 
+        localStorage.setItem('wardcalc_theme', 'light'); 
+    } else { 
+        html.classList.add('dark'); 
+        if(icon) icon.innerText = 'light_mode'; 
+        localStorage.setItem('wardcalc_theme', 'dark'); 
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. AUTOMATIC TOOL COUNTER
+    // 1. APPLY SAVED THEME
+    if(localStorage.getItem('wardcalc_theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        const icon = document.getElementById('theme-icon');
+        if(icon) icon.innerText = 'light_mode';
+    }
+
+    // 2. AUTOMATIC TOOL COUNTER
     const countSpan = document.getElementById("tool-count");
     if(countSpan && typeof clinicalTools !== 'undefined') {
         countSpan.innerText = clinicalTools.length; 
     }
 
-    // 2. INITIALIZE ENGINE
+    // 3. INITIALIZE ENGINE
     if (emergencyActive) activateEmergencyUI();
     changeLang(currentLang);
     setupEmergencyToggle();
