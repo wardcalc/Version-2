@@ -4,28 +4,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WardCalc | Clinical Directory</title>
-    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7893124697140576" crossorigin="anonymous"></script>
 
     <style>
         :root {
-            /* LIGHT MODE (MDCalc Style Default) */
-            --color-background: #f8fafc; /* Slate 50 - Soft clinical white */
-            --color-surface: #ffffff; /* Pure white cards */
-            --color-surface-variant: #f1f5f9; /* Slate 100 */
+            --color-background: #f8fafc;
+            --color-surface: #ffffff;
+            --color-surface-variant: #f1f5f9;
             --color-surface-container: #ffffff;
             --color-surface-container-high: #f8fafc;
-            --color-on-background: #0f172a; /* Slate 900 - Crisp dark text */
+            --color-on-background: #0f172a;
             --color-on-surface: #0f172a;
-            --color-on-surface-variant: #475569; /* Slate 600 - Secondary text */
-            --color-outline-variant: #e2e8f0; /* Slate 200 - Soft borders */
-            --color-primary: #4338ca; /* Indigo 700 - Professional medical blue */
-            --color-secondary: #0d9488; /* Teal 600 - Success/accent */
-            --color-error: #dc2626; /* Red 600 */
+            --color-on-surface-variant: #475569;
+            --color-outline-variant: #e2e8f0;
+            --color-primary: #4338ca;
+            --color-secondary: #0d9488;
+            --color-error: #dc2626;
         }
 
         .dark {
-            /* DARK MODE (Arctic Glass) */
             --color-background: #051424;
             --color-surface: #051424;
             --color-surface-variant: #273647;
@@ -40,11 +37,9 @@
             --color-error: #ffb4ab;
         }
 
-        /* Ambient effects */
         .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05)); background-size: 100% 4px; }
         .dark .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); }
         
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: var(--color-surface-container); }
         ::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
@@ -52,42 +47,26 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Emergency Alert Border */
         body.emergency-active { border-top: 4px solid var(--color-error); transition: border 0.3s ease; }
     </style>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
+    <script>
       tailwind.config = {
         darkMode: "class",
-        theme: {
-          extend: {
+        theme: { extend: { 
             colors: {
-              "primary": "var(--color-primary)",
-              "secondary": "var(--color-secondary)",
-              "error": "var(--color-error)",
-              "background": "var(--color-background)",
-              "surface": "var(--color-surface)",
-              "surface-variant": "var(--color-surface-variant)",
-              "surface-container": "var(--color-surface-container)",
-              "surface-container-high": "var(--color-surface-container-high)",
-              "on-background": "var(--color-on-background)",
-              "on-surface": "var(--color-on-surface)",
-              "on-surface-variant": "var(--color-on-surface-variant)",
-              "outline-variant": "var(--color-outline-variant)"
-            },
-            fontFamily: {
-              "body": ["Space Grotesk", "sans-serif"],
-              "mono": ["JetBrains Mono", "monospace"]
-            }
-          }
-        }
+              "primary": "var(--color-primary)", "secondary": "var(--color-secondary)", "error": "var(--color-error)", "background": "var(--color-background)", "surface": "var(--color-surface)", "surface-variant": "var(--color-surface-variant)", "surface-container": "var(--color-surface-container)", "surface-container-high": "var(--color-surface-container-high)", "on-background": "var(--color-on-background)", "on-surface": "var(--color-on-surface)", "on-surface-variant": "var(--color-on-surface-variant)", "outline-variant": "var(--color-outline-variant)"
+            }, 
+            fontFamily: { 
+                "body": ["Space Grotesk", "sans-serif"], 
+                "mono": ["JetBrains Mono", "monospace"],
+                "serif": ["Playfair Display", "serif"] /* The elegant serif font added */
+            } 
+        } }
       }
     </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 </head>
 
@@ -105,15 +84,7 @@
             <span class="text-xl md:text-3xl font-bold text-primary uppercase tracking-tighter">WardCalc</span>
         </div>
         
-        <div class="flex-1 max-w-md mx-8 hidden md:block">
-            <div class="relative group">
-                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-                <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Search calculators..." class="w-full bg-surface-container-high/50 border border-outline-variant/50 rounded-lg text-on-surface pl-12 pr-4 py-2 backdrop-blur-md focus:border-primary focus:ring-0 focus:bg-primary/5 transition-all" />
-            </div>
-        </div>
-
         <div class="flex items-center gap-2 md:gap-4">
-            
             <button onclick="toggleTheme()" class="flex items-center justify-center p-1.5 md:p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors border border-transparent hover:border-outline-variant/50">
                 <span id="theme-icon" class="material-symbols-outlined text-[18px]">dark_mode</span>
             </button>
@@ -123,13 +94,12 @@
                 <span data-i18n="nav_emergency" class="hidden md:inline">EMERGENCY</span>
             </button>
 
-                        <div id="language-switcher" class="flex items-center gap-1 bg-surface-container-high/40 p-1 rounded-full border border-outline-variant/30 backdrop-blur-md font-mono text-[10px] md:text-xs font-bold">
+            <div id="language-switcher" class="flex items-center gap-1 bg-surface-container-high/40 p-1 rounded-full border border-outline-variant/30 backdrop-blur-md font-mono text-[10px] md:text-xs font-bold">
                 <button onclick="changeLang('en')" class="px-2 py-1 md:px-3 md:py-1 rounded-full bg-primary/20 text-primary">EN</button>
                 <button onclick="changeLang('de')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">DE</button>
                 <button onclick="changeLang('ru')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">RU</button>
                 <button onclick="changeLang('uz')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">UZ</button>
             </div>
-
         </div>
     </header>
 
@@ -160,34 +130,63 @@
         </div>
     </nav>
 
-    <main class="md:ml-64 pt-28 p-4 md:p-8 z-10 relative flex-1 flex flex-col">
-        <div class="max-w-7xl mx-auto w-full flex flex-col gap-6 md:gap-8 flex-1">
+    <main class="md:ml-64 pt-24 md:pt-28 p-4 md:p-8 z-10 relative flex-1 flex flex-col">
+        <div class="max-w-7xl mx-auto w-full flex flex-col gap-8 md:gap-10 flex-1">
             
-            <div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-lg flex justify-center items-center min-h-[90px] overflow-hidden">
+            <div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-xl flex justify-center items-center min-h-[90px] overflow-hidden">
                 <span class="text-on-surface-variant font-mono text-xs opacity-50">Advertisement Space (Top)</span>
             </div>
 
-            <div class="flex flex-col gap-4 border-b border-outline-variant/20 pb-4">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-2">
-                    <div>
-                        <h1 class="text-2xl md:text-3xl font-bold text-on-surface mb-1" data-i18n="dash_title">Clinical Calculator Directory</h1>
-                        <p class="text-sm md:text-base text-on-surface-variant" data-i18n="dash_subtitle">Select a category or search for a specific protocol.</p>
+            <div class="flex flex-col items-center text-center gap-6 md:gap-8 pb-4">
+                
+                <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-outline-variant/50 bg-surface-container-high/60 text-on-surface-variant text-[9px] md:text-xs font-mono font-bold tracking-widest uppercase shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_var(--color-secondary)]"></span>
+                    <span data-i18n="hero_pill">Built by a medical student • For medical professionals</span>
+                </div>
+
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-on-surface mb-3 leading-tight tracking-tight">
+                        <span data-i18n="hero_title_1">Clinical Tools</span> <br class="hidden md:block" />
+                        <em class="text-primary font-serif font-bold" data-i18n="hero_title_2">for Ward Rounds</em>
+                    </h1>
+                    <p class="text-sm md:text-base text-on-surface-variant opacity-90 max-w-2xl mx-auto leading-relaxed mt-4" data-i18n="hero_subtitle">
+                        Evidence-based calculators with mnemonics in 4 languages. Fast, reliable, and mobile-first — everything you need at the bedside.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 md:gap-6 w-full max-w-2xl mt-2">
+                    <div class="flex flex-col items-center justify-center py-5 px-2 bg-surface-container/60 border border-outline-variant/40 rounded-2xl backdrop-blur-md shadow-sm">
+                        <span id="tool-count" class="text-3xl md:text-4xl font-bold text-primary mb-1 font-serif">0</span>
+                        <span class="text-[9px] md:text-xs font-mono text-on-surface-variant tracking-widest uppercase" data-i18n="stat_tools">Calculators</span>
                     </div>
-                    <div class="flex items-center gap-2 text-secondary font-mono text-xs font-bold mt-2 md:mt-0">
-                        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_var(--color-secondary)]"></span>
-                        SYSTEM ONLINE
+                    <div class="flex flex-col items-center justify-center py-5 px-2 bg-surface-container/60 border border-outline-variant/40 rounded-2xl backdrop-blur-md shadow-sm">
+                        <span class="text-3xl md:text-4xl font-bold text-primary mb-1 font-serif">4</span>
+                        <span class="text-[9px] md:text-xs font-mono text-on-surface-variant tracking-widest uppercase" data-i18n="stat_langs">Languages</span>
                     </div>
+                    <div class="flex flex-col items-center justify-center py-5 px-2 bg-surface-container/60 border border-outline-variant/40 rounded-2xl backdrop-blur-md shadow-sm">
+                        <span class="text-3xl md:text-4xl font-bold text-primary mb-1 font-serif">100%</span>
+                        <span class="text-[9px] md:text-xs font-mono text-on-surface-variant tracking-widest uppercase" data-i18n="stat_free">Free</span>
+                    </div>
+                </div>
+
+                <div class="w-full max-w-2xl relative group mt-2">
+                    <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[22px]">search</span>
+                    <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Search tools (e.g., GCS, BMI)..." class="w-full bg-surface-container-high/80 border border-outline-variant/50 rounded-2xl text-on-surface pl-14 pr-6 py-4 md:py-5 backdrop-blur-md focus:border-primary focus:ring-0 focus:bg-primary/5 transition-all text-sm md:text-base shadow-sm" />
                 </div>
                 
-                <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-2 pt-2 hide-scrollbar w-full">
+                <div class="w-full text-left mt-6 flex flex-col gap-3">
+                    <div class="flex items-center gap-4 w-full">
+                        <span class="text-xs font-mono tracking-widest text-on-surface-variant uppercase opacity-70 whitespace-nowrap" data-i18n="cat_label">All Calculators</span>
+                        <div class="h-px bg-outline-variant/20 flex-1"></div>
                     </div>
+                    <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-2 pt-1 hide-scrollbar w-full"></div>
+                </div>
             </div>
 
-            <div id="calculator-directory" class="w-full flex flex-col gap-6 md:gap-10">
-                </div>
+            <div id="calculator-directory" class="w-full flex flex-col gap-6 md:gap-8"></div>
 
             <div class="w-full mt-auto pt-8">
-                <div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-lg flex justify-center items-center min-h-[90px] overflow-hidden">
+                <div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-xl flex justify-center items-center min-h-[90px] overflow-hidden">
                     <span class="text-on-surface-variant font-mono text-xs opacity-50">Advertisement Space (Bottom)</span>
                 </div>
             </div>
@@ -201,10 +200,11 @@
                 <span class="material-symbols-outlined text-[16px] text-primary">copyright</span>
                 <span>2026 WardCalc. All rights reserved.</span>
             </div>
-            <div class="flex flex-wrap justify-center md:justify-end gap-4 md:gap-6 font-mono text-[10px] md:text-xs uppercase font-bold text-on-surface-variant w-full md:w-auto">
+            <div class="flex flex-wrap justify-center md:justify-end gap-3 md:gap-6 font-mono text-[10px] md:text-xs uppercase font-bold text-on-surface-variant w-full md:w-auto">
                 <a href="about.html" class="hover:text-secondary transition-colors duration-300" data-i18n="footer_about">About Us</a>
                 <a href="contact.html" class="hover:text-secondary transition-colors duration-300" data-i18n="footer_contact">Contact</a>
                 <a href="privacy.html" class="hover:text-secondary transition-colors duration-300" data-i18n="footer_privacy">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-secondary transition-colors duration-300" data-i18n="footer_terms">Terms & Conditions</a>
                 <a href="disclaimer.html" class="hover:text-secondary transition-colors duration-300 flex items-center gap-1">
                     <span class="material-symbols-outlined text-[14px] text-error">warning</span>
                     <span data-i18n="footer_disclaimer">Medical Disclaimer</span>
@@ -214,39 +214,15 @@
     </footer>
 
     <script>
-        // Check local storage for theme preference immediately on load
-        if(localStorage.getItem('wardcalc_theme') === 'dark') {
-            document.documentElement.classList.add('dark');
-        }
-
-        // The Toggle Function
+        if(localStorage.getItem('wardcalc_theme') === 'dark') document.documentElement.classList.add('dark');
         function toggleTheme() {
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                icon.innerText = 'dark_mode'; // Show moon icon when in light mode
-                localStorage.setItem('wardcalc_theme', 'light');
-            } else {
-                html.classList.add('dark');
-                icon.innerText = 'light_mode'; // Show sun icon when in dark mode
-                localStorage.setItem('wardcalc_theme', 'dark');
-            }
+            const html = document.documentElement, icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) { html.classList.remove('dark'); icon.innerText = 'dark_mode'; localStorage.setItem('wardcalc_theme', 'light'); } 
+            else { html.classList.add('dark'); icon.innerText = 'light_mode'; localStorage.setItem('wardcalc_theme', 'dark'); }
         }
-
-        // Set correct icon on page load
         document.addEventListener("DOMContentLoaded", () => {
-            const icon = document.getElementById('theme-icon');
-            if (document.documentElement.classList.contains('dark')) {
-                icon.innerText = 'light_mode';
-            }
-
-            // Mobile Menu Logic
-            const mobileBtn = document.getElementById('mobile-menu-btn');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobile-overlay');
-
+            if (document.documentElement.classList.contains('dark')) document.getElementById('theme-icon').innerText = 'light_mode';
+            const mobileBtn = document.getElementById('mobile-menu-btn'), sidebar = document.getElementById('sidebar'), overlay = document.getElementById('mobile-overlay');
             function toggleMenu() { sidebar.classList.toggle('-translate-x-full'); overlay.classList.toggle('hidden'); }
             if(mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
             if(overlay) overlay.addEventListener('click', toggleMenu);
@@ -259,7 +235,5 @@
     <script src="js/locales/uz.js"></script>
     <script src="js/tools.js"></script>
     <script src="js/app.js"></script>
-
-
 </body>
 </html>
