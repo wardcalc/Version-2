@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,27 +7,76 @@
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7893124697140576" crossorigin="anonymous"></script>
 
+    <style>
+        :root {
+            /* LIGHT MODE (MDCalc Style Default) */
+            --color-background: #f8fafc; /* Slate 50 - Soft clinical white */
+            --color-surface: #ffffff; /* Pure white cards */
+            --color-surface-variant: #f1f5f9; /* Slate 100 */
+            --color-surface-container: #ffffff;
+            --color-surface-container-high: #f8fafc;
+            --color-on-background: #0f172a; /* Slate 900 - Crisp dark text */
+            --color-on-surface: #0f172a;
+            --color-on-surface-variant: #475569; /* Slate 600 - Secondary text */
+            --color-outline-variant: #e2e8f0; /* Slate 200 - Soft borders */
+            --color-primary: #4338ca; /* Indigo 700 - Professional medical blue */
+            --color-secondary: #0d9488; /* Teal 600 - Success/accent */
+            --color-error: #dc2626; /* Red 600 */
+        }
+
+        .dark {
+            /* DARK MODE (Arctic Glass) */
+            --color-background: #051424;
+            --color-surface: #051424;
+            --color-surface-variant: #273647;
+            --color-surface-container: #122131;
+            --color-surface-container-high: #1c2b3c;
+            --color-on-background: #d4e4fa;
+            --color-on-surface: #d4e4fa;
+            --color-on-surface-variant: #cbc3d7;
+            --color-outline-variant: #494454;
+            --color-primary: #d0bcff;
+            --color-secondary: #4fdbc8;
+            --color-error: #ffb4ab;
+        }
+
+        /* Ambient effects */
+        .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05)); background-size: 100% 4px; }
+        .dark .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--color-surface-container); }
+        ::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Emergency Alert Border */
+        body.emergency-active { border-top: 4px solid var(--color-error); transition: border 0.3s ease; }
+    </style>
+
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
-            "colors": {
-              "primary": "#d0bcff",
-              "secondary": "#4fdbc8",
-              "error": "#ffb4ab",
-              "background": "#051424",
-              "surface": "#051424",
-              "surface-variant": "#273647",
-              "surface-container": "#122131",
-              "surface-container-high": "#1c2b3c",
-              "on-background": "#d4e4fa",
-              "on-surface": "#d4e4fa",
-              "on-surface-variant": "#cbc3d7",
-              "outline-variant": "#494454"
+            colors: {
+              "primary": "var(--color-primary)",
+              "secondary": "var(--color-secondary)",
+              "error": "var(--color-error)",
+              "background": "var(--color-background)",
+              "surface": "var(--color-surface)",
+              "surface-variant": "var(--color-surface-variant)",
+              "surface-container": "var(--color-surface-container)",
+              "surface-container-high": "var(--color-surface-container-high)",
+              "on-background": "var(--color-on-background)",
+              "on-surface": "var(--color-on-surface)",
+              "on-surface-variant": "var(--color-on-surface-variant)",
+              "outline-variant": "var(--color-outline-variant)"
             },
-            "fontFamily": {
+            fontFamily: {
               "body": ["Space Grotesk", "sans-serif"],
               "mono": ["JetBrains Mono", "monospace"]
             }
@@ -40,21 +89,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-
-    <style>
-        /* Ambient Background Noise & Scanlines */
-        .scanlines {
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
-            background-size: 100% 4px;
-        }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(5, 20, 36, 0.5); }
-        ::-webkit-scrollbar-thumb { background: rgba(208, 188, 255, 0.2); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(208, 188, 255, 0.5); }
-    </style>
 </head>
 
-<body class="bg-background text-on-background font-body overflow-x-hidden min-h-screen relative selection:bg-primary selection:text-surface flex flex-col">
+<body class="bg-background text-on-background font-body overflow-x-hidden min-h-screen relative selection:bg-primary selection:text-surface flex flex-col transition-colors duration-500">
     
     <div class="scanlines fixed inset-0 pointer-events-none z-0 mix-blend-overlay opacity-50"></div>
     <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px] pointer-events-none z-0"></div>
@@ -71,12 +108,17 @@
         <div class="flex-1 max-w-md mx-8 hidden md:block">
             <div class="relative group">
                 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-                <input type="text" data-i18n-placeholder="search_placeholder" placeholder="Search calculators..." class="w-full bg-surface-container-high/50 border border-outline-variant/50 rounded-lg text-on-surface pl-12 pr-4 py-2 backdrop-blur-md focus:border-primary focus:ring-0 focus:bg-primary/5 transition-all" />
+                <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Search calculators..." class="w-full bg-surface-container-high/50 border border-outline-variant/50 rounded-lg text-on-surface pl-12 pr-4 py-2 backdrop-blur-md focus:border-primary focus:ring-0 focus:bg-primary/5 transition-all" />
             </div>
         </div>
 
         <div class="flex items-center gap-2 md:gap-4">
-            <button id="emergency-toggle" class="flex items-center gap-1 border border-error/50 text-error bg-error/5 px-2 py-1.5 md:px-4 md:py-1.5 rounded-full hover:bg-error/20 hover:border-error transition-all font-mono text-[10px] md:text-xs font-bold shadow-[0_0_10px_rgba(255,180,171,0.1)]">
+            
+            <button onclick="toggleTheme()" class="flex items-center justify-center p-1.5 md:p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors border border-transparent hover:border-outline-variant/50">
+                <span id="theme-icon" class="material-symbols-outlined text-[18px]">dark_mode</span>
+            </button>
+
+            <button id="emergency-toggle" class="flex items-center gap-1 border border-error/50 text-error bg-error/5 px-2 py-1.5 md:px-4 md:py-1.5 rounded-full transition-all font-mono text-[10px] md:text-xs font-bold cursor-pointer">
                 <span class="material-symbols-outlined text-[16px]">emergency</span>
                 <span data-i18n="nav_emergency" class="hidden md:inline">EMERGENCY</span>
             </button>
@@ -94,7 +136,7 @@
     <nav id="sidebar" class="fixed left-0 top-0 h-full z-50 flex flex-col pt-24 pb-8 bg-surface-container-high/95 md:bg-surface-container-high/60 backdrop-blur-2xl w-64 border-r border-outline-variant/20 -translate-x-full md:translate-x-0 transition-transform duration-300">
         <div class="px-6 mb-8">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full border border-primary/50 flex items-center justify-center bg-surface shadow-[0_0_15px_rgba(208,188,255,0.2)]">
+                <div class="w-10 h-10 rounded-full border border-primary/50 flex items-center justify-center bg-surface shadow-[0_0_15px_rgba(var(--color-primary),0.2)]">
                     <span class="material-symbols-outlined text-primary">medical_services</span>
                 </div>
                 <div>
@@ -116,38 +158,47 @@
         </div>
     </nav>
 
-    <main class="md:ml-64 pt-28 p-4 md:p-8 z-10 relative flex-1">
-        <div class="max-w-7xl mx-auto flex flex-col gap-6 md:gap-8">
+    <main class="md:ml-64 pt-28 p-4 md:p-8 z-10 relative flex-1 flex flex-col">
+        <div class="max-w-7xl mx-auto w-full flex flex-col gap-6 md:gap-8 flex-1">
             
             <div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-lg flex justify-center items-center min-h-[90px] overflow-hidden">
-                <span class="text-on-surface-variant font-mono text-xs opacity-50">Advertisement Space</span>
+                <span class="text-on-surface-variant font-mono text-xs opacity-50">Advertisement Space (Top)</span>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-2 border-b border-outline-variant/20 pb-4">
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-bold text-on-surface mb-1" data-i18n="dash_title">Clinical Calculator Directory</h1>
-                    <p class="text-sm md:text-base text-on-surface-variant" data-i18n="dash_subtitle">Select a category or search for a specific protocol.</p>
+            <div class="flex flex-col gap-4 border-b border-outline-variant/20 pb-4">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-2">
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold text-on-surface mb-1" data-i18n="dash_title">Clinical Calculator Directory</h1>
+                        <p class="text-sm md:text-base text-on-surface-variant" data-i18n="dash_subtitle">Select a category or search for a specific protocol.</p>
+                    </div>
+                    <div class="flex items-center gap-2 text-secondary font-mono text-xs font-bold mt-2 md:mt-0">
+                        <span class="w-2 h-2 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_var(--color-secondary)]"></span>
+                        SYSTEM ONLINE
+                    </div>
                 </div>
-                <div class="flex items-center gap-2 text-secondary font-mono text-xs font-bold mt-2 md:mt-0">
-                    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse shadow-[0_0_8px_#4fdbc8]"></span>
-                    SYSTEM ONLINE
-                </div>
+                
+                <div id="category-filters" class="flex items-center gap-2 overflow-x-auto pb-2 pt-2 hide-scrollbar w-full">
+                    </div>
             </div>
 
             <div id="calculator-directory" class="w-full flex flex-col gap-6 md:gap-10">
                 </div>
+
+            <div class="w-full mt-auto pt-8">
+                <div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-lg flex justify-center items-center min-h-[90px] overflow-hidden">
+                    <span class="text-on-surface-variant font-mono text-xs opacity-50">Advertisement Space (Bottom)</span>
+                </div>
+            </div>
 
         </div>
     </main>
 
     <footer class="md:ml-64 border-t border-outline-variant/20 bg-surface-container/20 backdrop-blur-md py-6 px-4 md:px-8 mt-auto z-10 relative">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-            
             <div class="text-on-surface-variant text-sm flex items-center justify-center md:justify-start gap-2 w-full md:w-auto">
                 <span class="material-symbols-outlined text-[16px] text-primary">copyright</span>
                 <span>2026 WardCalc. All rights reserved.</span>
             </div>
-
             <div class="flex flex-wrap justify-center md:justify-end gap-4 md:gap-6 font-mono text-[10px] md:text-xs uppercase font-bold text-on-surface-variant w-full md:w-auto">
                 <a href="about.html" class="hover:text-secondary transition-colors duration-300" data-i18n="footer_about">About Us</a>
                 <a href="contact.html" class="hover:text-secondary transition-colors duration-300" data-i18n="footer_contact">Contact</a>
@@ -157,21 +208,44 @@
                     <span data-i18n="footer_disclaimer">Medical Disclaimer</span>
                 </a>
             </div>
-            
         </div>
     </footer>
 
     <script>
+        // Check local storage for theme preference immediately on load
+        if(localStorage.getItem('wardcalc_theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+
+        // The Toggle Function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.innerText = 'dark_mode'; // Show moon icon when in light mode
+                localStorage.setItem('wardcalc_theme', 'light');
+            } else {
+                html.classList.add('dark');
+                icon.innerText = 'light_mode'; // Show sun icon when in dark mode
+                localStorage.setItem('wardcalc_theme', 'dark');
+            }
+        }
+
+        // Set correct icon on page load
         document.addEventListener("DOMContentLoaded", () => {
+            const icon = document.getElementById('theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.innerText = 'light_mode';
+            }
+
+            // Mobile Menu Logic
             const mobileBtn = document.getElementById('mobile-menu-btn');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobile-overlay');
 
-            function toggleMenu() {
-                sidebar.classList.toggle('-translate-x-full');
-                overlay.classList.toggle('hidden');
-            }
-
+            function toggleMenu() { sidebar.classList.toggle('-translate-x-full'); overlay.classList.toggle('hidden'); }
             if(mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
             if(overlay) overlay.addEventListener('click', toggleMenu);
         });
@@ -180,7 +254,6 @@
     <script src="js/locales/en.js"></script>
     <script src="js/locales/ru.js"></script>
     <script src="js/locales/uz.js"></script>
-
     <script src="js/tools.js"></script>
     <script src="js/app.js"></script>
 
