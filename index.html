@@ -6,6 +6,10 @@
     <title>WardCalc | Clinical Directory</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7893124697140576" crossorigin="anonymous"></script>
 
+    <script>
+        if(localStorage.getItem('wardcalc_theme') === 'dark') document.documentElement.classList.add('dark');
+    </script>
+
     <style>
         :root {
             --color-background: #f8fafc;
@@ -123,7 +127,6 @@
                 <span class="material-symbols-outlined">dashboard</span>
                 <span class="font-mono text-xs uppercase font-bold" data-i18n="nav_dashboard">Dashboard</span>
             </a>
-            
             <a href="#" onclick="filterCategory('Favorites'); event.preventDefault();" class="flex items-center gap-4 text-on-surface-variant px-6 py-4 opacity-70 hover:bg-secondary/10 hover:text-secondary transition-all cursor-pointer">
                 <span class="material-symbols-outlined">star</span>
                 <span class="font-mono text-xs uppercase font-bold" data-i18n="nav_favorites">Favorites</span>
@@ -215,22 +218,18 @@
     </footer>
 
     <script>
-        if(localStorage.getItem('wardcalc_theme') === 'dark') document.documentElement.classList.add('dark');
-        function toggleTheme() {
-            const html = document.documentElement, icon = document.getElementById('theme-icon');
-            if (html.classList.contains('dark')) { html.classList.remove('dark'); icon.innerText = 'dark_mode'; localStorage.setItem('wardcalc_theme', 'light'); } 
-            else { html.classList.add('dark'); icon.innerText = 'light_mode'; localStorage.setItem('wardcalc_theme', 'dark'); }
-        }
         document.addEventListener("DOMContentLoaded", () => {
-            if (document.documentElement.classList.contains('dark')) document.getElementById('theme-icon').innerText = 'light_mode';
-            const mobileBtn = document.getElementById('mobile-menu-btn'), sidebar = document.getElementById('sidebar'), overlay = document.getElementById('mobile-overlay');
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobile-overlay');
             
-            // Fixed toggle menu to handle mobile drawer closing properly when a link is clicked
-            function toggleMenu() { sidebar.classList.toggle('-translate-x-full'); overlay.classList.toggle('hidden'); }
+            function toggleMenu() { 
+                sidebar.classList.toggle('-translate-x-full'); 
+                overlay.classList.toggle('hidden'); 
+            }
             if(mobileBtn) mobileBtn.addEventListener('click', toggleMenu);
             if(overlay) overlay.addEventListener('click', toggleMenu);
             
-            // Auto-close sidebar when clicking a sidebar link on mobile
             const sidebarLinks = sidebar.querySelectorAll('a');
             sidebarLinks.forEach(link => {
                 link.addEventListener('click', () => {
@@ -240,12 +239,11 @@
         });
     </script>
 
-    <script src="js/locales/en.js"></script>
-    <script src="js/locales/de.js"></script>
-    <script src="js/locales/ru.js"></script>
-    <script src="js/locales/uz.js"></script>
-    
-    <script src="js/tools.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/locales/en.js?v=999"></script>
+    <script src="js/locales/de.js?v=999"></script>
+    <script src="js/locales/ru.js?v=999"></script>
+    <script src="js/locales/uz.js?v=999"></script>
+    <script src="js/tools.js?v=999"></script>
+    <script src="js/app.js?v=999"></script>
 </body>
 </html>
