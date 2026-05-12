@@ -4,12 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About WardCalc | Our Mission</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7893124697140576" crossorigin="anonymous"></script>
-
     <script>
-        if(localStorage.getItem('wardcalc_theme') === 'dark') document.documentElement.classList.add('dark');
+        try { if(localStorage.getItem('wardcalc_theme') === 'dark') document.documentElement.classList.add('dark'); } catch(e){}
     </script>
-
     <style>
         :root {
             --color-background: #f8fafc; --color-surface: #ffffff; --color-surface-variant: #f1f5f9;
@@ -25,12 +22,8 @@
         }
         .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05)); background-size: 100% 4px; }
         .dark .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: var(--color-surface-container); }
-        ::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
     </style>
-
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -43,7 +36,6 @@
 </head>
 
 <body class="bg-background text-on-background font-body overflow-x-hidden min-h-screen relative selection:bg-primary selection:text-surface flex flex-col transition-colors duration-500">
-    
     <div class="scanlines fixed inset-0 pointer-events-none z-0 mix-blend-overlay opacity-50"></div>
     <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px] pointer-events-none z-0"></div>
 
@@ -52,99 +44,74 @@
             <span class="material-symbols-outlined text-[28px] text-primary">arrow_back</span>
             <span class="text-xl md:text-3xl font-bold text-primary uppercase tracking-tighter">WardCalc</span>
         </a>
-        
         <div class="flex items-center gap-2 md:gap-4">
-            <button onclick="toggleTheme()" class="flex items-center justify-center p-1.5 md:p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors border border-transparent hover:border-outline-variant/50">
+            <button onclick="window.toggleTheme()" class="flex items-center justify-center p-1.5 md:p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors border border-transparent hover:border-outline-variant/50">
                 <span id="theme-icon" class="material-symbols-outlined text-[18px]">dark_mode</span>
             </button>
-            
             <div id="language-switcher" class="flex items-center gap-1 bg-surface-container-high/40 p-1 rounded-full border border-outline-variant/30 backdrop-blur-md font-mono text-[10px] md:text-xs font-bold">
-                <button onclick="changeLang('en')" class="px-2 py-1 md:px-3 md:py-1 rounded-full bg-primary/20 text-primary">EN</button>
-                <button onclick="changeLang('de')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">DE</button>
-                <button onclick="changeLang('ru')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">RU</button>
-                <button onclick="changeLang('uz')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">UZ</button>
+                <button onclick="window.changeLang('en')" class="px-2 py-1 md:px-3 md:py-1 rounded-full bg-primary/20 text-primary">EN</button>
+                <button onclick="window.changeLang('de')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">DE</button>
+                <button onclick="window.changeLang('ru')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">RU</button>
+                <button onclick="window.changeLang('uz')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">UZ</button>
             </div>
         </div>
     </header>
 
     <main class="pt-28 md:pt-32 pb-16 px-4 md:px-8 z-10 relative flex-1">
         <div class="max-w-4xl mx-auto w-full bg-surface-container/40 backdrop-blur-md border border-outline-variant/30 rounded-3xl p-6 md:p-12 shadow-sm">
-            
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-outline-variant/50 bg-surface-container-high/60 text-on-surface-variant text-[10px] font-mono font-bold tracking-widest uppercase mb-6">
                 <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
                 The Clinical Manifesto
             </div>
 
-            <h1 class="text-4xl md:text-6xl font-serif font-bold text-on-surface mb-6 leading-tight tracking-tight">
+            <h1 class="text-4xl md:text-6xl font-serif font-bold text-on-surface mb-8 leading-tight tracking-tight">
                 Bridging the Gap Between <em class="text-primary">Textbook & Bedside.</em>
             </h1>
 
-            <div class="prose prose-slate dark:prose-invert max-w-none text-on-surface-variant leading-relaxed space-y-6 md:space-y-8 text-base md:text-lg">
-                
+            <div class="flex flex-col gap-6 md:gap-8 text-base md:text-lg text-on-surface-variant leading-relaxed">
                 <p class="text-xl md:text-2xl font-serif text-on-surface font-medium leading-snug">
                     WardCalc was born from a fundamental clinical reality: the human brain is an extraordinary engine for diagnostic reasoning, but it is a highly flawed hard drive for memorizing formulas.
                 </p>
 
-                <hr class="border-outline-variant/30 my-8" />
+                <hr class="border-outline-variant/30 my-4" />
 
-                <h3 class="text-2xl font-bold text-on-surface mt-8 mb-4">The Genesis of the Project</h3>
-                <p>
-                    Transitioning from the classroom to the hospital ward is one of the most jarring experiences in medical training. In the lecture hall, you are given unlimited time to deliberate over theoretical cases. You memorize hundreds of scoring systems, diagnostic criteria, and pharmacokinetic formulas to pass rigorous examinations. But the moment you step onto the clinical floor, the environment shifts. Time becomes the most expensive currency in the room. 
-                </p>
-                <p>
-                    During acute patient presentations—whether it is calculating a Glasgow Coma Scale during a trauma bay handoff, assessing neonatal viability with an APGAR score, or stratifying cardiovascular risk—there is no time to second-guess memory. Medical professionals need immediate, unassailable, evidence-based data. 
-                </p>
-                <p>
-                    Yet, the current landscape of digital medical tools is deeply flawed. Many applications are bloated with intrusive advertisements, locked behind exorbitant subscription paywalls, or require high-speed internet connections—a luxury rarely found in the lead-lined walls of a radiology department or a basement emergency room. Furthermore, these tools are overwhelmingly monolingual, ignoring the deeply global nature of modern medicine. WardCalc was engineered to solve this exact matrix of problems.
-                </p>
+                <h3 class="text-2xl font-bold text-on-surface mt-4 mb-2">The Genesis of the Project</h3>
+                <p>Transitioning from the classroom to the hospital ward is one of the most jarring experiences in medical training. In the lecture hall, you are given unlimited time to deliberate over theoretical cases. You memorize hundreds of scoring systems, diagnostic criteria, and pharmacokinetic formulas to pass rigorous examinations. But the moment you step onto the clinical floor, the environment shifts. Time becomes the most expensive currency in the room.</p>
+                
+                <p>During acute patient presentations—whether it is calculating a Glasgow Coma Scale during a trauma bay handoff, assessing neonatal viability with an APGAR score, or stratifying cardiovascular risk—there is no time to second-guess memory. Medical professionals need immediate, unassailable, evidence-based data.</p>
+                
+                <p>Yet, the current landscape of digital medical tools is deeply flawed. Many applications are bloated with intrusive advertisements, locked behind exorbitant subscription paywalls, or require high-speed internet connections—a luxury rarely found in the lead-lined walls of a radiology department or a basement emergency room. Furthermore, these tools are overwhelmingly monolingual, ignoring the deeply global nature of modern medicine. WardCalc was engineered to solve this exact matrix of problems.</p>
 
-                <h3 class="text-2xl font-bold text-on-surface mt-10 mb-4">Built by a Student, For the Profession</h3>
-                <p>
-                    WardCalc is not the product of a massive Silicon Valley corporation; it is a grassroots clinical tool. It was meticulously designed and coded by a final-year medical student navigating the very same wards, carrying the same patient loads, and facing the exact same cognitive hurdles as the users it serves. 
-                </p>
-                <p>
-                    This unique perspective is the cornerstone of our architecture. Every pixel of this interface has been stripped of unnecessary friction. When a physician or nurse opens WardCalc, they are greeted by an interface optimized for the cognitive load of a high-stress environment. The search is instantaneous. The typography is clinically legible in both blindingly bright ICU lighting and dimly lit night-shift call rooms via our native Dark Mode. There are no splash screens, no forced logins, and no cluttered menus. Just pure, immediate clinical utility.
-                </p>
+                <h3 class="text-2xl font-bold text-on-surface mt-8 mb-2">Built by a Student, For the Profession</h3>
+                <p>WardCalc is not the product of a massive Silicon Valley corporation; it is a grassroots clinical tool. It was meticulously designed and coded by a final-year medical student navigating the very same wards, carrying the same patient loads, and facing the exact same cognitive hurdles as the users it serves.</p>
+                
+                <p>This unique perspective is the cornerstone of our architecture. Every pixel of this interface has been stripped of unnecessary friction. When a physician or nurse opens WardCalc, they are greeted by an interface optimized for the cognitive load of a high-stress environment. The search is instantaneous. The typography is clinically legible in both blindingly bright ICU lighting and dimly lit night-shift call rooms via our native Dark Mode. There are no splash screens, no forced logins, and no cluttered menus. Just pure, immediate clinical utility.</p>
 
-                <blockquote class="border-l-4 border-primary pl-6 py-2 my-8 bg-primary/5 rounded-r-lg text-on-surface italic font-serif text-xl">
+                <blockquote class="border-l-4 border-primary pl-6 py-4 my-6 bg-primary/5 rounded-r-lg text-on-surface italic font-serif text-xl">
                     "Technology in the clinical setting should act as a silent, invisible assistant—never a barrier between the physician and the patient."
                 </blockquote>
 
-                <h3 class="text-2xl font-bold text-on-surface mt-10 mb-4">Medicine Without Borders: The Multilingual Matrix</h3>
-                <p>
-                    Healthcare is inherently global. Medical professionals are increasingly migrating across borders to fill critical shortages, requiring them to practice medicine in secondary or tertiary languages. A physician might learn their foundational pathology in English, conduct their residency in Russian, and ultimately practice in Germany—requiring mastery of complex clinical terminology (Fachsprache) at a C1 level.
-                </p>
-                <p>
-                    WardCalc is the first clinical calculator directory built with a native, seamless multilingual matrix. By supporting English, German, Russian, and Uzbek directly in the core engine, we serve a dual purpose. 
-                </p>
-                <p>
-                    First, it allows practitioners to calculate critical scores in the language they process fastest during an emergency. Second, and perhaps more importantly, it acts as an ambient educational tool. An international medical graduate preparing for the German Fachsprachprüfung (FSP) or an adaptation period can toggle the application to German, passively internalizing exact clinical translations for "Bewusstseinszustand" (Level of Consciousness) or "Atemfrequenz" (Respiratory Rate) while performing their daily rounds. WardCalc is not just a calculator; it is an integrated linguistic bridge for the global physician.
-                </p>
+                <h3 class="text-2xl font-bold text-on-surface mt-8 mb-2">Medicine Without Borders: The Multilingual Matrix</h3>
+                <p>Healthcare is inherently global. Medical professionals are increasingly migrating across borders to fill critical shortages, requiring them to practice medicine in secondary or tertiary languages. A physician might learn their foundational pathology in English, conduct their residency in Russian, and ultimately practice in Germany—requiring mastery of complex clinical terminology (Fachsprache) at a C1 level.</p>
+                
+                <p>WardCalc is the first clinical calculator directory built with a native, seamless multilingual matrix. By supporting English, German, Russian, and Uzbek directly in the core engine, we serve a dual purpose.</p>
+                
+                <p>First, it allows practitioners to calculate critical scores in the language they process fastest during an emergency. Second, and perhaps more importantly, it acts as an ambient educational tool. An international medical graduate preparing for the German Fachsprachprüfung (FSP) or an adaptation period can toggle the application to German, passively internalizing exact clinical translations for "Bewusstseinszustand" (Level of Consciousness) or "Atemfrequenz" (Respiratory Rate) while performing their daily rounds. WardCalc is not just a calculator; it is an integrated linguistic bridge for the global physician.</p>
 
-                <h3 class="text-2xl font-bold text-on-surface mt-10 mb-4">Uncompromising Accuracy and Evidence-Based Logic</h3>
-                <p>
-                    In software development, a bug is an inconvenience. In medical software, a calculation error is a patient safety event. We do not take this responsibility lightly. Every single mathematical protocol and scoring matrix coded into WardCalc is strictly derived from universally accepted, peer-reviewed medical guidelines, textbooks, and international consortiums. 
-                </p>
-                <p>
-                    Our calculators do not simply spit out a raw number; they provide the structured breakdown and clinical interpretation necessary to make immediate bedside decisions. Furthermore, the underlying engine has been built to eventually support localized unit toggling—ensuring that whether your hospital utilizes SI units (mmol/L) or Conventional units (mg/dL), the math remains flawlessly accurate.
-                </p>
+                <h3 class="text-2xl font-bold text-on-surface mt-8 mb-2">Uncompromising Accuracy and Evidence-Based Logic</h3>
+                <p>In software development, a bug is an inconvenience. In medical software, a calculation error is a patient safety event. We do not take this responsibility lightly. Every single mathematical protocol and scoring matrix coded into WardCalc is strictly derived from universally accepted, peer-reviewed medical guidelines, textbooks, and international consortiums.</p>
+                
+                <p>Our calculators do not simply spit out a raw number; they provide the structured breakdown and clinical interpretation necessary to make immediate bedside decisions. Furthermore, the underlying engine has been built to eventually support localized unit toggling—ensuring that whether your hospital utilizes SI units (mmol/L) or Conventional units (mg/dL), the math remains flawlessly accurate.</p>
 
-                <h3 class="text-2xl font-bold text-on-surface mt-10 mb-4">A Commitment to Accessibility</h3>
-                <p>
-                    We believe that tools directly impacting patient mortality and morbidity should not be restricted by geographic economic disparities. A junior doctor working in a resource-limited setting deserves the exact same computational support as an attending physician in a top-tier private institution.
-                </p>
-                <p>
-                    For this reason, the core clinical calculators of WardCalc are, and will remain, 100% free to access. We support the server and development costs through minimally intrusive, ethically placed medical advertising spaces that never obscure clinical data or slow down emergency workflows. 
-                </p>
+                <h3 class="text-2xl font-bold text-on-surface mt-8 mb-2">A Commitment to Accessibility</h3>
+                <p>We believe that tools directly impacting patient mortality and morbidity should not be restricted by geographic economic disparities. A junior doctor working in a resource-limited setting deserves the exact same computational support as an attending physician in a top-tier private institution.</p>
+                
+                <p>For this reason, the core clinical calculators of WardCalc are, and will remain, 100% free to access. We support the server and development costs through minimally intrusive, ethically placed medical advertising spaces that never obscure clinical data or slow down emergency workflows.</p>
 
-                <h3 class="text-2xl font-bold text-on-surface mt-10 mb-4">The Future of WardCalc</h3>
-                <p>
-                    Version 2.0 of WardCalc is just the beginning. Our roadmap is intensely focused on making the physician's workflow even smoother. In the coming phases, we will be implementing Electronic Health Record (EHR) "Quick-Copy" formatting, allowing practitioners to copy complex scorings with a single tap, perfectly formatted for immediate pasting into patient charts. We are also advancing our Progressive Web App (PWA) capabilities, ensuring that once WardCalc is loaded on a device, it will function with 100% reliability entirely offline.
-                </p>
-                <p>
-                    Ward rounds are complex, exhausting, and demanding. Your tools shouldn't be. Welcome to WardCalc.
-                </p>
-
+                <h3 class="text-2xl font-bold text-on-surface mt-8 mb-2">The Future of WardCalc</h3>
+                <p>Version 2.0 of WardCalc is just the beginning. Our roadmap is intensely focused on making the physician's workflow even smoother. In the coming phases, we will be implementing Electronic Health Record (EHR) "Quick-Copy" formatting, allowing practitioners to copy complex scorings with a single tap, perfectly formatted for immediate pasting into patient charts. We are also advancing our Progressive Web App (PWA) capabilities, ensuring that once WardCalc is loaded on a device, it will function with 100% reliability entirely offline.</p>
+                
+                <p>Ward rounds are complex, exhausting, and demanding. Your tools shouldn't be. Welcome to WardCalc.</p>
             </div>
             
             <div class="mt-16 pt-8 border-t border-outline-variant/30 flex items-center gap-4">
@@ -156,7 +123,6 @@
                     <p class="text-sm font-mono text-on-surface-variant opacity-80">Established 2026</p>
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -169,11 +135,11 @@
         </div>
     </footer>
 
-    <script src="js/locales/en.js?v=999"></script>
-    <script src="js/locales/de.js?v=999"></script>
-    <script src="js/locales/ru.js?v=999"></script>
-    <script src="js/locales/uz.js?v=999"></script>
-    <script src="js/tools.js?v=999"></script>
-    <script src="js/app.js?v=999"></script>
+    <script src="js/locales/en.js"></script>
+    <script src="js/locales/de.js"></script>
+    <script src="js/locales/ru.js"></script>
+    <script src="js/locales/uz.js"></script>
+    <script src="js/tools.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
