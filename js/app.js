@@ -1,4 +1,4 @@
-// WardCalc Super Engine V2.4 (Crash-Proof Edition)
+// WardCalc Super Engine V3.0 (Fully Automated Global Core)
 
 let currentLang = localStorage.getItem('wardcalc_lang') || 'en';
 let emergencyActive = localStorage.getItem('wardcalc_emergency') === 'true';
@@ -6,15 +6,7 @@ let favorites = JSON.parse(localStorage.getItem('wardcalc_favorites')) || [];
 let currentCategory = 'All';
 let searchQuery = '';
 
-// CRITICAL SAFETY NET: If a dictionary has a typo or is missing, it won't crash the whole app!
-const dictionaries = { 
-    en: typeof en !== 'undefined' ? en : {}, 
-    de: typeof de !== 'undefined' ? de : {}, 
-    ru: typeof ru !== 'undefined' ? ru : {}, 
-    uz: typeof uz !== 'undefined' ? uz : {} 
-};
-
-// --- GLOBAL THEME ENGINE ---
+// --- 1. GLOBAL THEME AUTOMATION ---
 function toggleTheme() {
     const html = document.documentElement;
     const icon = document.getElementById('theme-icon');
@@ -29,22 +21,32 @@ function toggleTheme() {
     }
 }
 
+// --- 2. DYNAMIC LANGUAGE FETCHER (Fixes the translation bug) ---
+function getDictionary(lang) {
+    if (lang === 'en' && typeof en !== 'undefined') return en;
+    if (lang === 'de' && typeof de !== 'undefined') return de;
+    if (lang === 'ru' && typeof ru !== 'undefined') return ru;
+    if (lang === 'uz' && typeof uz !== 'undefined') return uz;
+    return null;
+}
+
+// --- 3. SYSTEM BOOT SEQUENCE ---
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. APPLY SAVED THEME
-    if(localStorage.getItem('wardcalc_theme') === 'dark') {
-        document.documentElement.classList.add('dark');
-        const icon = document.getElementById('theme-icon');
-        if(icon) icon.innerText = 'light_mode';
+    // Auto-set the theme icon on any page
+    const icon = document.getElementById('theme-icon');
+    if(icon && document.documentElement.classList.contains('dark')) {
+        icon.innerText = 'light_mode';
     }
 
-    // 2. AUTOMATIC TOOL COUNTER
+    // Auto-count tools 
     const countSpan = document.getElementById("tool-count");
     if(countSpan && typeof clinicalTools !== 'undefined') {
         countSpan.innerText = clinicalTools.length; 
     }
 
-    // 3. INITIALIZE ENGINE
     if (typeof activateEmergencyUI === 'function' && emergencyActive) activateEmergencyUI();
+    
+    // Boot up systems
     changeLang(currentLang);
     setupEmergencyToggle();
     setupLiveSearch();
@@ -177,8 +179,9 @@ function setupEmergencyToggle() {
 }
 
 function applyTranslations(lang) {
-    const dict = dictionaries[lang];
-    if (!dict || Object.keys(dict).length === 0) return; // Added safety check
+    const dict = getDictionary(lang);
+    if (!dict) return; // The ultimate safety net
+    
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key]) el.innerText = dict[key];
