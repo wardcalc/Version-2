@@ -266,7 +266,7 @@
                 </div>
             </div>
 
-            <div id="calculatorGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                       <div id="calculatorGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
                 
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="chads" data-cat="cardio">
                     <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
@@ -277,7 +277,6 @@
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_chads_title">CHA2DS2-VASc Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_chads_desc">Atrial fibrillation stroke risk assessment.</p>
                 </div>
-
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="hasbled" data-cat="cardio">
                     <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
                     <button onclick="toggleFav('hasbled', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
@@ -286,6 +285,60 @@
                         <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_hasbled_title">HAS-BLED Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_hasbled_desc">Major bleeding risk in atrial fibrillation.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="heart" data-cat="cardio">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('heart', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_heart_title">HEART Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_heart_desc">Predicts 6-week risk of major adverse cardiac events.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="timi" data-cat="cardio">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('timi', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_timi_title">TIMI Risk Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_timi_desc">Mortality risk for UA/NSTEMI patients.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="grace" data-cat="cardio">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('grace', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_grace_title">GRACE Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_grace_desc">6-month mortality probability for acute coronary syndrome.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="ascvd" data-cat="cardio">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('ascvd', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_ascvd_title">ASCVD Risk Estimator</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_ascvd_desc">10-year risk for atherosclerotic cardiovascular disease.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="framingham" data-cat="cardio">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('framingham', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_framingham_title">Framingham Risk Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_framingham_desc">10-year risk of developing coronary heart disease.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="qtc" data-cat="cardio">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('qtc', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_qtc_title">QTc Calculator</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_qtc_desc">Corrected QT interval using Bazett’s formula.</p>
                 </div>
 
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="wells" data-cat="pulmo">
@@ -297,15 +350,105 @@
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_wells_title">Wells' Criteria for PE</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_wells_desc">Clinical probability of pulmonary embolism.</p>
                 </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="perc" data-cat="pulmo">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('perc', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">air</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_pulmo">Pulmonology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_perc_title">PERC Rule</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_perc_desc">Pulmonary embolism rule-out criteria for low-risk patients.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="curb" data-cat="pulmo">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('curb', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">air</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_pulmo">Pulmonology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_curb_title">CURB-65 Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_curb_desc">Pneumonia severity and hospitalization criteria.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="psi" data-cat="pulmo">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('psi', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">air</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_pulmo">Pulmonology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_psi_title">PSI / PORT Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_psi_desc">Pneumonia Severity Index for mortality prediction.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="lights" data-cat="pulmo">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('lights', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">air</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_pulmo">Pulmonology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_lights_title">Light's Criteria</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_lights_desc">Differentiates exudative vs. transudative pleural effusions.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="bode" data-cat="pulmo">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('bode', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">air</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_pulmo">Pulmonology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_bode_title">BODE Index</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_bode_desc">Multidimensional scoring system for COPD survival.</p>
+                </div>
 
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="childpugh" data-cat="gastro">
                     <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
                     <button onclick="toggleFav('childpugh', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
                     <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
-                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">stomach</span></div>
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">science</span></div>
                         <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_gastro">Gastroenterology</span>
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_child_title">Child-Pugh Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_child_desc">Prognosis and mortality in chronic liver disease.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="meld" data-cat="gastro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('meld', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">science</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_gastro">Gastroenterology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_meld_title">MELD Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_meld_desc">Model for End-Stage Liver Disease 3-month mortality.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="meldna" data-cat="gastro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('meldna', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">science</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_gastro">Gastroenterology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_meldna_title">MELD-Na Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_meldna_desc">Sodium-adjusted MELD for liver transplant prioritization.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="gbs" data-cat="gastro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('gbs', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">science</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_gastro">Gastroenterology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_gbs_title">Glasgow-Blatchford Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_gbs_desc">Screening tool for upper GI hemorrhage interventions.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="rockall" data-cat="gastro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('rockall', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">science</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_gastro">Gastroenterology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_rockall_title">Rockall Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_rockall_desc">Mortality risk following an upper GI bleed.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="maddrey" data-cat="gastro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('maddrey', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">science</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_gastro">Gastroenterology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_maddrey_title">Maddrey's Function</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_maddrey_desc">Prognosis and steroid need in alcoholic hepatitis.</p>
                 </div>
 
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="egfr" data-cat="nephro">
@@ -317,6 +460,69 @@
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_egfr_title">eGFR Calculator</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_egfr_desc">Renal function estimation using the CKD-EPI equation.</p>
                 </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="crcl" data-cat="nephro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('crcl', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">water_drop</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_nephro">Nephrology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_crcl_title">Creatinine Clearance</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_crcl_desc">Cockcroft-Gault equation for medication dosing.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="fena" data-cat="nephro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('fena', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">water_drop</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_nephro">Nephrology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_fena_title">FENa</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_fena_desc">Fractional Excretion of Sodium to determine AKI etiology.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="feurea" data-cat="nephro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('feurea', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">water_drop</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_nephro">Nephrology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_feurea_title">FEUrea</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_feurea_desc">Fractional Excretion of Urea for AKI on diuretics.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="aniongap" data-cat="nephro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('aniongap', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">water_drop</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_nephro">Nephrology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_aniongap_title">Anion Gap</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_aniongap_desc">Categorization of metabolic acidosis.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="winters" data-cat="nephro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('winters', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">water_drop</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_nephro">Nephrology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_winters_title">Winter's Formula</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_winters_desc">Expected respiratory compensation in metabolic acidosis.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="calcium" data-cat="nephro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('calcium', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">water_drop</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_nephro">Nephrology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_calcium_title">Corrected Calcium</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_calcium_desc">True calcium levels in the presence of hypoalbuminemia.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="sodium" data-cat="nephro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('sodium', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">water_drop</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_nephro">Nephrology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_sodium_title">Corrected Sodium</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_sodium_desc">True sodium levels in the presence of hyperglycemia.</p>
+                </div>
 
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="gcs" data-cat="critical">
                     <a href="gcs.html" class="absolute inset-0 z-10 rounded-2xl"></a>
@@ -326,6 +532,69 @@
                         <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_gcs_title">Glasgow Coma Scale (GCS)</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_gcs_desc">Active neurological assessment matrix for conscious level evaluation.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="sofa" data-cat="critical">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('sofa', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">emergency</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_sofa_title">SOFA Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_sofa_desc">Sequential Organ Failure Assessment for sepsis mortality.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="qsofa" data-cat="critical">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('qsofa', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">emergency</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_qsofa_title">qSOFA Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_qsofa_desc">Rapid bedside screening for sepsis criteria.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="apache" data-cat="critical">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('apache', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">emergency</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_apache_title">APACHE II Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_apache_desc">Disease severity classification for ICU mortality probability.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="parkland" data-cat="critical">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('parkland', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">emergency</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_parkland_title">Parkland Formula</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_parkland_desc">24-hour IV fluid resuscitation for burn victims.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="ivfluids" data-cat="critical">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('ivfluids', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">emergency</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_ivfluids_title">Maintenance IV Fluids</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_ivfluids_desc">4-2-1 rule for hourly intravenous fluid rates.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="nexus" data-cat="critical">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('nexus', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">emergency</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_nexus_title">NEXUS Criteria</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_nexus_desc">Decision rule for clearing the cervical spine without imaging.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="canadian" data-cat="critical">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('canadian', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">emergency</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_canadian_title">Canadian CT Head Rule</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_canadian_desc">Identifies patients needing imaging after minor head trauma.</p>
                 </div>
 
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="alvarado" data-cat="surgery">
@@ -337,6 +606,33 @@
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_alvarado_title">Alvarado Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_alvarado_desc">Clinical probability of acute appendicitis.</p>
                 </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="ranson" data-cat="surgery">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('ranson', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">content_cut</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_surgery">Surgery</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_ranson_title">Ranson Criteria</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_ranson_desc">Mortality predictor for acute pancreatitis.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="caprini" data-cat="surgery">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('caprini', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">content_cut</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_surgery">Surgery</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_caprini_title">Caprini Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_caprini_desc">VTE and DVT risk assessment in surgical patients.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="nsqip" data-cat="surgery">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('nsqip', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">content_cut</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_surgery">Surgery</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_nsqip_title">NSQIP Risk Calculator</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_nsqip_desc">Predicts post-operative surgical complications.</p>
+                </div>
 
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="nihss" data-cat="neuro">
                     <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
@@ -346,6 +642,33 @@
                         <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_neuro">Neurology</span>
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_nihss_title">NIH Stroke Scale</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_nihss_desc">Quantifies the severity of acute cerebral infarction.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="abcd2" data-cat="neuro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('abcd2', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">psychology</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_neuro">Neurology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_abcd2_title">ABCD2 Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_abcd2_desc">Stroke risk prediction in the days following a TIA.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="hunt" data-cat="neuro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('hunt', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">psychology</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_neuro">Neurology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_hunt_title">Hunt & Hess Scale</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_hunt_desc">Mortality predictor for subarachnoid hemorrhage.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="chalice" data-cat="neuro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('chalice', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">psychology</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_neuro">Neurology</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_chalice_title">CHALICE Rule</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_chalice_desc">Determines the need for CT in pediatric head injuries.</p>
                 </div>
 
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="apgar" data-cat="general">
@@ -357,6 +680,53 @@
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_apgar_title">APGAR Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_apgar_desc">Rapid assessment of newborn viability at 1 and 5 minutes after birth.</p>
                 </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="holliday" data-cat="general">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('holliday', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">child_care</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_general">General & Peds</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_holliday_title">Holliday-Segar Formula</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_holliday_desc">Caloric and fluid maintenance for pediatric patients.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="bishop" data-cat="general">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('bishop', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">child_care</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_general">General & Peds</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_bishop_title">Bishop Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_bishop_desc">Cervical readiness for the induction of labor.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="centor" data-cat="general">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('centor', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">child_care</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_general">General & Peds</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_centor_title">Centor Score (McIsaac)</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_centor_desc">Probability of Group A Streptococcal pharyngitis.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="bmi" data-cat="general">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('bmi', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">child_care</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_general">General & Peds</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_bmi_title">BMI & BSA Calculator</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_bmi_desc">Body Mass Index and Body Surface Area for drug dosing.</p>
+                </div>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="ecog" data-cat="general">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('ecog', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">child_care</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_general">General & Peds</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_ecog_title">ECOG Performance</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_ecog_desc">Baseline functional assessment for oncology patients.</p>
+                </div>
+                
+            
             </div>
 
             <div id="noResultsMsg" class="hidden flex-col items-center justify-center py-12 text-center w-full">
