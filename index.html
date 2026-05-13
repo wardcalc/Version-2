@@ -766,10 +766,16 @@
     <script src="js/app.js?v=99999"></script>
 
         <script>
-        // 1. Dark Mode
+                // 1. Dark Mode
         window.toggleTheme = function() {
             document.documentElement.classList.toggle('dark');
-            localStorage.setItem('wardcalc_theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('wardcalc_theme', isDark ? 'dark' : 'light');
+            
+            const icon = document.getElementById('theme-icon');
+            if(icon) {
+                icon.innerText = isDark ? 'light_mode' : 'dark_mode';
+            }
         };
 
         // 2. THE BULLETPROOF TRANSLATION ENGINE
@@ -803,9 +809,15 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            // APPLY LANGUAGE IMMEDIATELY ON LOAD
+                        // APPLY LANGUAGE IMMEDIATELY ON LOAD
             const savedLang = localStorage.getItem('wardcalc_lang') || 'en';
             window.applyTranslations(savedLang);
+
+            // SET INITIAL THEME ICON
+            const themeIcon = document.getElementById('theme-icon');
+            if(themeIcon) {
+                themeIcon.innerText = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
+            }
 
             // UI Elements
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
