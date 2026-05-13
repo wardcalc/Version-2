@@ -160,6 +160,8 @@ document.addEventListener("DOMContentLoaded", () => {
         favorites = JSON.parse(favs);
         if(!Array.isArray(favorites)) favorites = [];
     } catch(e) { favorites = []; }
+// Auto-count tools and update the dashboard number
+document.getElementById('tool-count').innerText = document.querySelectorAll('.calc-card').length;
 
     // 2. Set Theme
     try {
