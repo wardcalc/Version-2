@@ -149,12 +149,20 @@
 
 <body class="bg-background text-on-background font-body overflow-x-hidden min-h-screen relative selection:bg-primary selection:text-surface flex flex-col transition-colors duration-500">
     
-        <div class="fixed inset-0 z-0 pointer-events-none bg-dots"></div>
-    <div class="fixed top-0 left-0 right-0 h-[600px] bg-gradient-to-b from-primary/5 via-primary/0 to-transparent pointer-events-none z-0"></div>
-    <div class="scanlines fixed inset-0 pointer-events-none z-0 mix-blend-overlay opacity-40"></div>
+            <div class="fixed inset-0 z-0 pointer-events-none bg-medical-grid transition-colors duration-500"></div>
     
-    <div class="fixed top-[-15%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[140px] pointer-events-none z-0 animate-ambient"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/10 blur-[120px] pointer-events-none z-0 animate-ambient-slow"></div>
+    <div class="fixed top-[15%] left-0 w-full h-[200px] pointer-events-none z-0 overflow-hidden flex justify-center opacity-30 md:opacity-50">
+        <svg viewBox="0 0 1000 100" class="w-full max-w-7xl h-full" preserveAspectRatio="none">
+            <path class="ecg-path" d="M0,50 L200,50 L230,50 L245,20 L270,90 L295,10 L320,60 L340,50 L1000,50" fill="none" stroke="var(--color-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </div>
+
+    <div class="fixed top-0 left-0 right-0 h-[400px] bg-gradient-to-b from-primary/5 to-transparent pointer-events-none z-0"></div>
+
+    <div class="fixed top-[-10%] left-[-5%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[130px] pointer-events-none z-0 animate-pulse-slow"></div>
+    <div class="fixed bottom-[-10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-secondary/10 blur-[120px] pointer-events-none z-0 animate-pulse-slow" style="animation-delay: 4s;"></div>
+    
+    <div class="scanlines fixed inset-0 pointer-events-none z-0 mix-blend-overlay opacity-30"></div>
 
         <header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 md:px-8 py-4 bg-surface-container/90 backdrop-blur-lg border-b border-outline-variant/30 transition-colors">
         <div class="flex items-center gap-3">
