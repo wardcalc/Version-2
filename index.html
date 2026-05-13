@@ -6,12 +6,10 @@
     <title>WardCalc | Clinical Calculator Directory</title>
     
     <script>
-        // Forces dark mode on load if preferred
         try { if(localStorage.getItem('wardcalc_theme') === 'dark') document.documentElement.classList.add('dark'); } catch(e){}
     </script>
 
     <style>
-        /* SYNCHRONIZED CSS ENGINE */
         :root {
             --color-background: #f8fafc; --color-surface: #ffffff; --color-surface-variant: #f1f5f9;
             --color-surface-container: #ffffff; --color-surface-container-high: #f8fafc;
@@ -27,7 +25,6 @@
         .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05)); background-size: 100% 4px; }
         html.dark .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); }
         
-        /* Custom scrollbar hiding for the filter bar */
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -105,6 +102,7 @@
                 
                 <div class="flex items-center gap-3 overflow-x-auto pb-4 hide-scrollbar px-4" id="filterBar">
                     <button class="filter-btn active whitespace-nowrap px-6 py-2.5 rounded-full border border-primary bg-primary text-white text-sm font-bold transition-all shadow-[0_0_12px_rgba(var(--color-primary),0.4)]" data-filter="all" data-i18n="cat_all">All</button>
+                    <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="favorites" data-i18n="nav_favorites">Favorites</button>
                     <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_cardio" data-i18n="cat_cardio">Cardiology</button>
                     <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_pulmo" data-i18n="cat_pulmo">Pulmonology</button>
                     <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_gastro" data-i18n="cat_gastro">Gastroenterology</button>
@@ -152,11 +150,11 @@
         </div>
     </footer>
 
-    <script src="js/locales/en.js?v=50000"></script>
-    <script src="js/locales/de.js?v=50000"></script>
-    <script src="js/locales/ru.js?v=50000"></script>
-    <script src="js/locales/uz.js?v=50000"></script>
-    <script src="js/tools.js?v=50000"></script>
-    <script src="js/app.js?v=50000"></script>
+    <script src="js/locales/en.js?v=60000"></script>
+    <script src="js/locales/de.js?v=60000"></script>
+    <script src="js/locales/ru.js?v=60000"></script>
+    <script src="js/locales/uz.js?v=60000"></script>
+    <script src="js/tools.js?v=60000"></script>
+    <script src="js/app.js?v=60000"></script>
 </body>
 </html>
