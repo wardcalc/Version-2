@@ -18,7 +18,7 @@
             --color-on-background: #0f172a; --color-on-surface: #0f172a; --color-on-surface-variant: #475569;
             --color-outline-variant: #e2e8f0; --color-primary: #4338ca; --color-secondary: #0d9488; --color-error: #dc2626;
 
-            /* Category Specific RGB Colors (Light Mode) */
+            /* Category Specific Colors (Light Mode) */
             --c-cardio: 225, 29, 72;    /* Rose */
             --c-pulmo: 2, 132, 199;     /* Sky Blue */
             --c-gastro: 217, 119, 6;    /* Amber */
@@ -28,7 +28,6 @@
             --c-neuro: 124, 58, 237;    /* Violet */
             --c-general: 13, 148, 136;  /* Teal */
         }
-
         html.dark {
             /* Standard Themes Dark */
             --color-background: #051424; --color-surface: #051424; --color-surface-variant: #273647;
@@ -36,7 +35,7 @@
             --color-on-background: #d4e4fa; --color-on-surface: #d4e4fa; --color-on-surface-variant: #cbc3d7;
             --color-outline-variant: #494454; --color-primary: #d0bcff; --color-secondary: #4fdbc8; --color-error: #ffb4ab;
 
-            /* Category Specific RGB Colors (Dark Mode Brightened) */
+            /* Category Specific Colors (Dark Mode) */
             --c-cardio: 251, 113, 133;
             --c-pulmo: 56, 189, 248;
             --c-gastro: 251, 191, 36;
@@ -50,33 +49,24 @@
         .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05)); background-size: 100% 4px; }
         html.dark .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); }
         
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: var(--color-surface-container); }
         ::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
         body.emergency-active { border-top: 4px solid var(--color-error); transition: border 0.3s ease; }
 
-        /* =========================================
-           SYNCHRONIZED FILTER BUTTON CSS
-           ========================================= */
-        .filter-btn {
-            background-color: rgba(128, 128, 128, 0.08);
-            color: var(--color-on-surface-variant);
-            border: 1px solid rgba(128, 128, 128, 0.2);
-        }
-        html.dark .filter-btn { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .filter-btn:hover { background-color: rgba(128, 128, 128, 0.15); }
-        
-        /* Text color for active buttons */
-        .filter-btn.active { color: #ffffff; font-weight: bold; }
-        html.dark .filter-btn.active { color: #0f172a; } /* Keeps text readable on bright pastel buttons in dark mode */
-        
-        /* Unique Active Colors */
+        /* BYPASS APP.JS WITH NEW CLASS .cat-tab */
+        .cat-tab { background-color: rgba(128, 128, 128, 0.08); color: var(--color-on-surface-variant); border: 1px solid rgba(128, 128, 128, 0.2); outline: none; }
+        html.dark .cat-tab { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .cat-tab:hover { background-color: rgba(128, 128, 128, 0.15); }
+        .cat-tab.active { color: #ffffff; font-weight: bold; }
+        html.dark .cat-tab.active { color: #0f172a; }
+
         .btn-all.active, .btn-fav.active { background-color: var(--color-primary); border-color: var(--color-primary); box-shadow: 0 0 12px rgba(var(--color-primary), 0.4); }
         html.dark .btn-all.active, html.dark .btn-fav.active { color: var(--color-on-background); }
-
         .btn-cardio.active { background-color: rgb(var(--c-cardio)); border-color: rgb(var(--c-cardio)); box-shadow: 0 0 12px rgba(var(--c-cardio), 0.4); }
         .btn-pulmo.active { background-color: rgb(var(--c-pulmo)); border-color: rgb(var(--c-pulmo)); box-shadow: 0 0 12px rgba(var(--c-pulmo), 0.4); }
         .btn-gastro.active { background-color: rgb(var(--c-gastro)); border-color: rgb(var(--c-gastro)); box-shadow: 0 0 12px rgba(var(--c-gastro), 0.4); }
@@ -86,59 +76,46 @@
         .btn-neuro.active { background-color: rgb(var(--c-neuro)); border-color: rgb(var(--c-neuro)); box-shadow: 0 0 12px rgba(var(--c-neuro), 0.4); }
         .btn-general.active { background-color: rgb(var(--c-general)); border-color: rgb(var(--c-general)); box-shadow: 0 0 12px rgba(var(--c-general), 0.4); }
 
-        /* =========================================
-           SYNCHRONIZED CARD THEMES
-           ========================================= */
+        /* Synchronized Card Themes */
         .calc-card { border-left: 4px solid transparent; }
-        
         .calc-card[data-cat="cardio"] { border-left-color: rgb(var(--c-cardio)); }
         .calc-card[data-cat="cardio"] .cat-icon { background-color: rgba(var(--c-cardio), 0.1); color: rgb(var(--c-cardio)); }
         .calc-card[data-cat="cardio"] .cat-badge { background-color: rgba(var(--c-cardio), 0.05); border-color: rgba(var(--c-cardio), 0.3); color: rgb(var(--c-cardio)); }
-        .calc-card[data-cat="cardio"] .fav-btn.active, .calc-card[data-cat="cardio"] .fav-btn:hover { color: rgb(var(--c-cardio)); }
-
+        
         .calc-card[data-cat="pulmo"] { border-left-color: rgb(var(--c-pulmo)); }
         .calc-card[data-cat="pulmo"] .cat-icon { background-color: rgba(var(--c-pulmo), 0.1); color: rgb(var(--c-pulmo)); }
         .calc-card[data-cat="pulmo"] .cat-badge { background-color: rgba(var(--c-pulmo), 0.05); border-color: rgba(var(--c-pulmo), 0.3); color: rgb(var(--c-pulmo)); }
-        .calc-card[data-cat="pulmo"] .fav-btn.active, .calc-card[data-cat="pulmo"] .fav-btn:hover { color: rgb(var(--c-pulmo)); }
 
         .calc-card[data-cat="gastro"] { border-left-color: rgb(var(--c-gastro)); }
         .calc-card[data-cat="gastro"] .cat-icon { background-color: rgba(var(--c-gastro), 0.1); color: rgb(var(--c-gastro)); }
         .calc-card[data-cat="gastro"] .cat-badge { background-color: rgba(var(--c-gastro), 0.05); border-color: rgba(var(--c-gastro), 0.3); color: rgb(var(--c-gastro)); }
-        .calc-card[data-cat="gastro"] .fav-btn.active, .calc-card[data-cat="gastro"] .fav-btn:hover { color: rgb(var(--c-gastro)); }
 
         .calc-card[data-cat="nephro"] { border-left-color: rgb(var(--c-nephro)); }
         .calc-card[data-cat="nephro"] .cat-icon { background-color: rgba(var(--c-nephro), 0.1); color: rgb(var(--c-nephro)); }
         .calc-card[data-cat="nephro"] .cat-badge { background-color: rgba(var(--c-nephro), 0.05); border-color: rgba(var(--c-nephro), 0.3); color: rgb(var(--c-nephro)); }
-        .calc-card[data-cat="nephro"] .fav-btn.active, .calc-card[data-cat="nephro"] .fav-btn:hover { color: rgb(var(--c-nephro)); }
 
         .calc-card[data-cat="critical"] { border-left-color: rgb(var(--c-critical)); }
         .calc-card[data-cat="critical"] .cat-icon { background-color: rgba(var(--c-critical), 0.1); color: rgb(var(--c-critical)); }
         .calc-card[data-cat="critical"] .cat-badge { background-color: rgba(var(--c-critical), 0.05); border-color: rgba(var(--c-critical), 0.3); color: rgb(var(--c-critical)); }
-        .calc-card[data-cat="critical"] .fav-btn.active, .calc-card[data-cat="critical"] .fav-btn:hover { color: rgb(var(--c-critical)); }
 
         .calc-card[data-cat="surgery"] { border-left-color: rgb(var(--c-surgery)); }
         .calc-card[data-cat="surgery"] .cat-icon { background-color: rgba(var(--c-surgery), 0.1); color: rgb(var(--c-surgery)); }
         .calc-card[data-cat="surgery"] .cat-badge { background-color: rgba(var(--c-surgery), 0.05); border-color: rgba(var(--c-surgery), 0.3); color: rgb(var(--c-surgery)); }
-        .calc-card[data-cat="surgery"] .fav-btn.active, .calc-card[data-cat="surgery"] .fav-btn:hover { color: rgb(var(--c-surgery)); }
 
         .calc-card[data-cat="neuro"] { border-left-color: rgb(var(--c-neuro)); }
         .calc-card[data-cat="neuro"] .cat-icon { background-color: rgba(var(--c-neuro), 0.1); color: rgb(var(--c-neuro)); }
         .calc-card[data-cat="neuro"] .cat-badge { background-color: rgba(var(--c-neuro), 0.05); border-color: rgba(var(--c-neuro), 0.3); color: rgb(var(--c-neuro)); }
-        .calc-card[data-cat="neuro"] .fav-btn.active, .calc-card[data-cat="neuro"] .fav-btn:hover { color: rgb(var(--c-neuro)); }
 
         .calc-card[data-cat="general"] { border-left-color: rgb(var(--c-general)); }
         .calc-card[data-cat="general"] .cat-icon { background-color: rgba(var(--c-general), 0.1); color: rgb(var(--c-general)); }
         .calc-card[data-cat="general"] .cat-badge { background-color: rgba(var(--c-general), 0.05); border-color: rgba(var(--c-general), 0.3); color: rgb(var(--c-general)); }
-        .calc-card[data-cat="general"] .fav-btn.active, .calc-card[data-cat="general"] .fav-btn:hover { color: rgb(var(--c-general)); }
     </style>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
       tailwind.config = {
         darkMode: "class",
-        theme: { extend: { colors: {
-              "primary": "var(--color-primary)", "secondary": "var(--color-secondary)", "error": "var(--color-error)", "background": "var(--color-background)", "surface": "var(--color-surface)", "surface-variant": "var(--color-surface-variant)", "surface-container": "var(--color-surface-container)", "surface-container-high": "var(--color-surface-container-high)", "on-background": "var(--color-on-background)", "on-surface": "var(--color-on-surface)", "on-surface-variant": "var(--color-on-surface-variant)", "outline-variant": "var(--color-outline-variant)"
-            }, fontFamily: { "body": ["Space Grotesk", "sans-serif"], "mono": ["JetBrains Mono", "monospace"], "serif": ["Playfair Display", "serif"] } } }
+        theme: { extend: { colors: { "primary": "var(--color-primary)", "secondary": "var(--color-secondary)", "error": "var(--color-error)", "background": "var(--color-background)", "surface": "var(--color-surface)", "surface-variant": "var(--color-surface-variant)", "surface-container": "var(--color-surface-container)", "surface-container-high": "var(--color-surface-container-high)", "on-background": "var(--color-on-background)", "on-surface": "var(--color-on-surface)", "on-surface-variant": "var(--color-on-surface-variant)", "outline-variant": "var(--color-outline-variant)" }, fontFamily: { "body": ["Space Grotesk", "sans-serif"], "mono": ["JetBrains Mono", "monospace"], "serif": ["Playfair Display", "serif"] } } }
       }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -198,7 +175,7 @@
                 <span class="material-symbols-outlined">dashboard</span>
                 <span class="font-mono text-xs uppercase font-bold" data-i18n="nav_dashboard">Dashboard</span>
             </a>
-            <a href="#" id="sidebar-fav-btn" class="flex items-center gap-4 text-on-surface-variant px-6 py-4 opacity-70 hover:bg-secondary/10 hover:text-secondary transition-all cursor-pointer">
+            <a href="#" onclick="runFilter('favorites')" class="flex items-center gap-4 text-on-surface-variant px-6 py-4 opacity-70 hover:bg-secondary/10 hover:text-secondary transition-all cursor-pointer">
                 <span class="material-symbols-outlined">star</span>
                 <span class="font-mono text-xs uppercase font-bold" data-i18n="nav_favorites">Favorites</span>
             </a>
@@ -208,20 +185,9 @@
     <main class="md:ml-64 pt-24 md:pt-28 p-4 md:p-8 z-10 relative flex-1 flex flex-col">
         <div class="max-w-7xl mx-auto w-full flex flex-col gap-8 md:gap-10 flex-1">
             
-            <!-- TOP AD SPACE -->
-<div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-xl flex flex-col justify-center items-center min-h-[100px] overflow-hidden p-2 text-center">
-    <span class="text-on-surface-variant font-mono text-[10px] opacity-50 uppercase mb-1">Advertisement</span>
-    <ins class="adsbygoogle w-full"
-         style="display:block"
-         data-ad-client="ca-pub-7893124697140576"
-         data-ad-slot="YOUR_TOP_AD_SLOT_ID"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-
+            <div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-xl flex justify-center items-center min-h-[90px] overflow-hidden">
+                <span class="text-on-surface-variant font-mono text-xs opacity-50">Advertisement Space (Top)</span>
+            </div>
 
             <div class="flex flex-col items-center text-center gap-6 md:gap-8 pb-4">
                 
@@ -242,7 +208,7 @@
 
                 <div class="grid grid-cols-3 gap-3 md:gap-6 w-full max-w-2xl mt-2">
                     <div class="flex flex-col items-center justify-center py-5 px-2 bg-surface-container/60 border border-outline-variant/40 rounded-2xl backdrop-blur-md shadow-sm">
-                        <span class="text-3xl md:text-4xl font-bold text-primary mb-1 font-serif">50</span>
+                        <span id="tool-count" class="text-3xl md:text-4xl font-bold text-primary mb-1 font-serif">50</span>
                         <span class="text-[9px] md:text-xs font-mono text-on-surface-variant tracking-widest uppercase" data-i18n="stat_tools">Calculators</span>
                     </div>
                     <div class="flex flex-col items-center justify-center py-5 px-2 bg-surface-container/60 border border-outline-variant/40 rounded-2xl backdrop-blur-md shadow-sm">
@@ -257,27 +223,27 @@
 
                 <div class="w-full max-w-2xl relative group mt-2">
                     <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[22px]">search</span>
-                    <input type="text" id="searchInput" data-i18n-placeholder="search_placeholder" placeholder="Search tools (e.g., GCS, BMI)..." class="w-full bg-surface-container-high/80 border border-outline-variant/50 rounded-2xl text-on-surface pl-14 pr-6 py-4 md:py-5 backdrop-blur-md focus:border-primary focus:ring-0 focus:bg-primary/5 transition-all text-sm md:text-base shadow-sm" />
+                    <input type="text" id="wardSearch" oninput="runSearch()" data-i18n-placeholder="search_placeholder" placeholder="Search tools (e.g., GCS, BMI)..." class="w-full bg-surface-container-high/80 border border-outline-variant/50 rounded-2xl text-on-surface pl-14 pr-6 py-4 md:py-5 backdrop-blur-md focus:border-primary focus:ring-0 focus:bg-primary/5 transition-all text-sm md:text-base shadow-sm" />
                 </div>
                 
                 <div class="w-full text-left mt-6 flex flex-col gap-3 relative">
                     <div class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
-                    <div id="filterBar" class="flex items-center gap-2 overflow-x-auto pb-2 pt-1 hide-scrollbar w-full">
-                        <button class="filter-btn btn-all active whitespace-nowrap px-6 py-2.5 rounded-full text-sm transition-all" data-filter="all" data-i18n="cat_all">All</button>
-                        <button class="filter-btn btn-fav whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="favorites" data-i18n="nav_favorites">Favorites</button>
-                        <button class="filter-btn btn-cardio whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="cardio" data-i18n="cat_cardio">Cardiology</button>
-                        <button class="filter-btn btn-pulmo whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="pulmo" data-i18n="cat_pulmo">Pulmonology</button>
-                        <button class="filter-btn btn-gastro whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="gastro" data-i18n="cat_gastro">Gastroenterology</button>
-                        <button class="filter-btn btn-nephro whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="nephro" data-i18n="cat_nephro">Nephrology</button>
-                        <button class="filter-btn btn-critical whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="critical" data-i18n="cat_critical">Critical Care</button>
-                        <button class="filter-btn btn-surgery whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="surgery" data-i18n="cat_surgery">Surgery</button>
-                        <button class="filter-btn btn-neuro whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="neuro" data-i18n="cat_neuro">Neurology</button>
-                        <button class="filter-btn btn-general whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="general" data-i18n="cat_general">General & Peds</button>
+                    <div class="flex items-center gap-2 overflow-x-auto pb-2 pt-1 hide-scrollbar w-full">
+                        <button onclick="runFilter('all')" data-btn="all" class="cat-tab btn-all active whitespace-nowrap px-6 py-2.5 rounded-full text-sm transition-all" data-i18n="cat_all">All</button>
+                        <button onclick="runFilter('favorites')" data-btn="favorites" class="cat-tab btn-fav whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-i18n="nav_favorites">Favorites</button>
+                        <button onclick="runFilter('cardio')" data-btn="cardio" class="cat-tab btn-cardio whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-i18n="cat_cardio">Cardiology</button>
+                        <button onclick="runFilter('pulmo')" data-btn="pulmo" class="cat-tab btn-pulmo whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-i18n="cat_pulmo">Pulmonology</button>
+                        <button onclick="runFilter('gastro')" data-btn="gastro" class="cat-tab btn-gastro whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-i18n="cat_gastro">Gastroenterology</button>
+                        <button onclick="runFilter('nephro')" data-btn="nephro" class="cat-tab btn-nephro whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-i18n="cat_nephro">Nephrology</button>
+                        <button onclick="runFilter('critical')" data-btn="critical" class="cat-tab btn-critical whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-i18n="cat_critical">Critical Care</button>
+                        <button onclick="runFilter('surgery')" data-btn="surgery" class="cat-tab btn-surgery whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-i18n="cat_surgery">Surgery</button>
+                        <button onclick="runFilter('neuro')" data-btn="neuro" class="cat-tab btn-neuro whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-i18n="cat_neuro">Neurology</button>
+                        <button onclick="runFilter('general')" data-btn="general" class="cat-tab btn-general whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-i18n="cat_general">General & Peds</button>
                     </div>
                 </div>
             </div>
 
-                       <div id="calculatorGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
+            <div id="calculatorGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="chads" data-cat="cardio">
                     <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
@@ -725,7 +691,7 @@
                         <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">child_care</span></div>
                         <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_general">General & Peds</span>
                     </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_bmi_title">BMI & BSA Calculator</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_bmi_desc">Body Mass Index and Body Surface Area for drug dosing.</p>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_bmi_title">BMI & BSA</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_bmi_desc">Body Mass Index and Body Surface Area for drug dosing.</p>
                 </div>
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="ecog" data-cat="general">
                     <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
@@ -737,7 +703,6 @@
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_ecog_title">ECOG Performance</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_ecog_desc">Baseline functional assessment for oncology patients.</p>
                 </div>
                 
-            
             </div>
 
             <div id="noResultsMsg" class="hidden flex-col items-center justify-center py-12 text-center w-full">
@@ -745,19 +710,6 @@
                 <h3 class="text-xl font-bold font-serif text-on-surface mb-2" data-i18n="search_empty_title">No tools found</h3>
                 <p class="text-on-surface-variant text-sm" data-i18n="search_empty_desc">Try searching with different keywords or switch categories.</p>
             </div>
-<!-- BOTTOM AD SPACE -->
-<div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-xl flex flex-col justify-center items-center min-h-[100px] overflow-hidden mt-6 p-2 text-center">
-    <span class="text-on-surface-variant font-mono text-[10px] opacity-50 uppercase mb-1">Advertisement</span>
-    <ins class="adsbygoogle w-full"
-         style="display:block"
-         data-ad-client="ca-pub-7893124697140576"
-         data-ad-slot="YOUR_BOTTOM_AD_SLOT_ID"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
 
         </div>
     </main>
@@ -766,10 +718,7 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-serif font-bold text-sm border border-primary/30">W</div>
-                <div>
-                    <h4 class="font-bold text-on-surface text-sm">WardCalc</h4>
-                    <p class="text-[10px] font-mono text-on-surface-variant opacity-80 uppercase tracking-widest" data-i18n="stat_est">Established 2026</p>
-                </div>
+                <div><h4 class="font-bold text-on-surface text-sm">WardCalc</h4><p class="text-[10px] font-mono text-on-surface-variant opacity-80 uppercase tracking-widest" data-i18n="stat_est">Established 2026</p></div>
             </div>
             <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-bold font-mono uppercase tracking-widest text-on-surface-variant">
                 <a href="about.html" class="hover:text-primary transition-colors" data-i18n="footer_about">About Us</a>
@@ -781,46 +730,34 @@
         </div>
     </footer>
 
-    <script src="js/locales/en.js?v=90000"></script>
-    <script src="js/locales/de.js?v=90000"></script>
-    <script src="js/locales/ru.js?v=90000"></script>
-    <script src="js/locales/uz.js?v=90000"></script>
-    <script src="js/tools.js?v=90000"></script>
-    <script src="js/app.js?v=90000"></script>
+    <script src="js/locales/en.js?v=200000"></script>
+    <script src="js/locales/de.js?v=200000"></script>
+    <script src="js/locales/ru.js?v=200000"></script>
+    <script src="js/locales/uz.js?v=200000"></script>
+    <script src="js/tools.js?v=200000"></script>
+    <script src="js/app.js?v=200000"></script>
 
     <script>
-                <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Sidebar Logic
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobile-overlay');
-            
-            function toggleSidebar() { 
-                if(sidebar) sidebar.classList.toggle('-translate-x-full'); 
-                if(overlay) overlay.classList.toggle('hidden'); 
-            }
+            function toggleSidebar() { if(sidebar) sidebar.classList.toggle('-translate-x-full'); if(overlay) overlay.classList.toggle('hidden'); }
             if(mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
             if(overlay) overlay.addEventListener('click', toggleSidebar);
 
-            // Emergency Toggle
             const emergencyBtn = document.getElementById('emergency-toggle');
             if(emergencyBtn) {
                 emergencyBtn.addEventListener('click', () => {
                     document.body.classList.toggle('emergency-active');
-                    emergencyBtn.classList.toggle('bg-error'); 
-                    emergencyBtn.classList.toggle('text-white');
-                    emergencyBtn.classList.toggle('text-error'); 
-                    emergencyBtn.classList.toggle('bg-error/5');
+                    emergencyBtn.classList.toggle('bg-error'); emergencyBtn.classList.toggle('text-white');
+                    emergencyBtn.classList.toggle('text-error'); emergencyBtn.classList.toggle('bg-error/5');
                 });
             }
 
-            const searchInput = document.getElementById('searchInput');
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const sidebarFavBtn = document.getElementById('sidebar-fav-btn');
+            const searchInput = document.getElementById('wardSearch');
             const cards = document.querySelectorAll('.calc-card');
             const noResultsMsg = document.getElementById('noResultsMsg');
-            
             let favorites = JSON.parse(localStorage.getItem('wardcalc_favorites')) || [];
 
             window.updateFavIcons = function() {
@@ -830,38 +767,29 @@
                     const icon = card.querySelector('.fav-icon');
                     if(btn && icon) {
                         if (favorites.includes(id)) {
-                            icon.innerText = 'favorite'; 
-                            btn.classList.add('active'); 
-                            icon.classList.remove('text-outline-variant');
+                            icon.innerText = 'favorite'; btn.classList.add('text-error'); icon.classList.remove('text-outline-variant');
                         } else {
-                            icon.innerText = 'favorite_border'; 
-                            btn.classList.remove('active'); 
-                            icon.classList.add('text-outline-variant');
+                            icon.innerText = 'favorite_border'; btn.classList.remove('text-error'); icon.classList.add('text-outline-variant');
                         }
                     }
                 });
             };
 
             window.toggleFav = function(id, event) {
-                event.preventDefault(); 
-                event.stopPropagation(); 
-                if (favorites.includes(id)) {
-                    favorites = favorites.filter(fav => fav !== id);
-                } else {
-                    favorites.push(id);
-                }
+                event.preventDefault(); event.stopPropagation(); 
+                if (favorites.includes(id)) favorites = favorites.filter(fav => fav !== id);
+                else favorites.push(id);
                 localStorage.setItem('wardcalc_favorites', JSON.stringify(favorites));
                 updateFavIcons();
-                
-                const activeBtn = document.querySelector('.filter-btn.active');
-                if(activeBtn && activeBtn.getAttribute('data-filter') === 'favorites') {
-                    applyFilters();
-                }
+                const activeBtn = document.querySelector('.cat-tab.active');
+                if(activeBtn && activeBtn.getAttribute('data-btn') === 'favorites') window.runFilter('favorites');
             };
 
-            function applyFilters() {
-                const activeBtn = document.querySelector('.filter-btn.active');
-                const filterValue = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+            window.runFilter = function(filterValue) {
+                document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+                const targetBtn = document.querySelector(`.cat-tab[data-btn="${filterValue}"]`);
+                if(targetBtn) targetBtn.classList.add('active');
+
                 const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
                 let visibleCount = 0;
 
@@ -874,64 +802,28 @@
                     else if (filterValue === 'favorites') matchesCategory = favorites.includes(id);
                     else matchesCategory = (cat === filterValue);
 
-                    // Crash-proof text extraction using ?. (Optional Chaining)
                     const titleNode = card.querySelector('h3');
                     const descNode = card.querySelector('p');
                     const title = titleNode ? titleNode.textContent.toLowerCase() : '';
                     const desc = descNode ? descNode.textContent.toLowerCase() : '';
-                    
                     const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
 
-                    if (matchesCategory && matchesSearch) { 
-                        card.style.display = 'flex'; 
-                        visibleCount++; 
-                    } else { 
-                        card.style.display = 'none'; 
-                    }
+                    if (matchesCategory && matchesSearch) { card.style.display = 'flex'; visibleCount++; }
+                    else { card.style.display = 'none'; }
                 });
 
-                if(visibleCount === 0) { 
-                    if(noResultsMsg) { 
-                        noResultsMsg.classList.remove('hidden'); 
-                        noResultsMsg.classList.add('flex'); 
-                    } 
-                } else { 
-                    if(noResultsMsg) { 
-                        noResultsMsg.classList.add('hidden'); 
-                        noResultsMsg.classList.remove('flex'); 
-                    } 
-                }
-            }
+                if(visibleCount === 0) { if(noResultsMsg) { noResultsMsg.classList.remove('hidden'); noResultsMsg.classList.add('flex'); } }
+                else { if(noResultsMsg) { noResultsMsg.classList.add('hidden'); noResultsMsg.classList.remove('flex'); } }
+            };
 
-            function activateFilter(targetFilter) {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                const targetBtn = document.querySelector(`.filter-btn[data-filter="${targetFilter}"]`);
-                if(targetBtn) targetBtn.classList.add('active');
-                applyFilters();
-            }
+            window.runSearch = function() {
+                const activeBtn = document.querySelector('.cat-tab.active');
+                const filterValue = activeBtn ? activeBtn.getAttribute('data-btn') : 'all';
+                window.runFilter(filterValue);
+            };
 
-            filterBtns.forEach(btn => { 
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    activateFilter(btn.getAttribute('data-filter'));
-                }); 
-            });
-            
-            if(sidebarFavBtn) { 
-                sidebarFavBtn.addEventListener('click', (e) => { 
-                    e.preventDefault(); 
-                    toggleSidebar(); 
-                    activateFilter('favorites'); 
-                }); 
-            }
-            
-            if(searchInput) {
-                searchInput.addEventListener('keyup', applyFilters);
-            }
-            
             updateFavIcons();
         });
     </script>
-
 </body>
 </html>
