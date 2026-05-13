@@ -422,7 +422,6 @@
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_maddrey_title">Maddrey's Function</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_maddrey_desc">Prognosis and steroid need in alcoholic hepatitis.</p>
                 </div>
-
                 <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 transition-all duration-300 shadow-sm group" data-id="egfr" data-cat="nephro">
                     <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
                     <button onclick="window.toggleFav('egfr', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon text-outline-variant">favorite_border</span></button>
@@ -495,7 +494,8 @@
                     </div>
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_sodium_title">Corrected Sodium</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_sodium_desc">True sodium levels in the presence of hyperglycemia.</p>
                 </div>
-<div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 transition-all duration-300 shadow-sm group" data-id="gcs" data-cat="critical">
+
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 transition-all duration-300 shadow-sm group" data-id="gcs" data-cat="critical">
                     <a href="gcs.html" class="absolute inset-0 z-10 rounded-2xl"></a>
                     <button onclick="window.toggleFav('gcs', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon text-outline-variant">favorite_border</span></button>
                     <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
@@ -697,8 +697,7 @@
                     <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_ecog_title">ECOG Performance</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_ecog_desc">Baseline functional assessment for oncology patients.</p>
                 </div>
             </div>
-
-            <div id="noResultsMsg" class="hidden flex-col items-center justify-center py-12 text-center w-full">
+<div id="noResultsMsg" class="hidden flex-col items-center justify-center py-12 text-center w-full">
                 <span class="material-symbols-outlined text-4xl text-outline-variant mb-4">search_off</span>
                 <h3 class="text-xl font-bold font-serif text-on-surface mb-2" data-i18n="search_empty_title">No tools found</h3>
                 <p class="text-on-surface-variant text-sm" data-i18n="search_empty_desc">Try searching with different keywords or switch categories.</p>
@@ -710,18 +709,51 @@
 
         </div>
     </main>
-<footer class="border-t border-outline-variant/20 bg-surface-container/20 backdrop-blur-md pt-12 pb-8 px-4 md:px-8 mt-auto z-10 relative">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-serif font-bold text-sm border border-primary/30">W</div>
-                <div><h4 class="font-bold text-on-surface text-sm">WardCalc</h4><p class="text-[10px] font-mono text-on-surface-variant opacity-80 uppercase tracking-widest" data-i18n="stat_est">Established 2026</p></div>
+
+    <footer class="border-t border-outline-variant/30 bg-surface-container-high/50 backdrop-blur-xl mt-auto relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-12 flex flex-col items-center gap-8">
+            <div class="flex flex-col items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary p-[1px] shadow-lg shadow-primary/20">
+                    <div class="w-full h-full bg-surface rounded-[15px] flex items-center justify-center">
+                        <span class="font-serif font-bold text-xl text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">W</span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h4 class="font-bold text-on-surface text-lg tracking-tight">WardCalc</h4>
+                    <p class="text-[10px] font-mono text-on-surface-variant opacity-70 uppercase tracking-widest mt-1" data-i18n="stat_est">Established 2026</p>
+                </div>
             </div>
-            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-bold font-mono uppercase tracking-widest text-on-surface-variant">
-                <a href="about.html" class="hover:text-primary transition-colors" data-i18n="footer_about">About Us</a>
-                <a href="contact.html" class="hover:text-primary transition-colors" data-i18n="footer_contact">Contact</a>
-                <a href="privacy.html" class="hover:text-primary transition-colors" data-i18n="footer_privacy">Privacy Policy</a>
-                <a href="terms.html" class="hover:text-primary transition-colors" data-i18n="footer_terms">Terms</a>
-                <a href="disclaimer.html" class="hover:text-error transition-colors" data-i18n="footer_disclaimer">Medical Disclaimer</a>
+
+            <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-xs font-bold font-mono uppercase tracking-widest text-on-surface-variant">
+                <a href="about.html" class="hover:text-primary transition-colors relative group">
+                    <span data-i18n="footer_about">About Us</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </a>
+                <a href="contact.html" class="hover:text-primary transition-colors relative group">
+                    <span data-i18n="footer_contact">Contact</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </a>
+                <a href="privacy.html" class="hover:text-primary transition-colors relative group">
+                    <span data-i18n="footer_privacy">Privacy Policy</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </a>
+                <a href="terms.html" class="hover:text-primary transition-colors relative group">
+                    <span data-i18n="footer_terms">Terms</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
+                </a>
+                <a href="disclaimer.html" class="text-error/80 hover:text-error transition-colors relative group">
+                    <span data-i18n="footer_disclaimer">Medical Disclaimer</span>
+                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-error transition-all group-hover:w-full"></span>
+                </a>
+            </div>
+            
+            <div class="w-full border-t border-outline-variant/20 pt-6 flex justify-center text-center">
+                <p class="text-xs text-on-surface-variant opacity-60 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">copyright</span>
+                    2026 WardCalc Network. All rights reserved.
+                </p>
             </div>
         </div>
     </footer>
@@ -734,19 +766,15 @@
     <script src="js/app.js?v=99999"></script>
 
     <script>
-        // Inline Dark Mode & Language Switcher to ensure immediate functionality
         window.toggleTheme = function() {
             document.documentElement.classList.toggle('dark');
             localStorage.setItem('wardcalc_theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
         };
 
+        // FIXED TRANSLATION SCRIPT: Forces immediate page reload to guarantee language switch
         window.changeLang = function(lang) {
             localStorage.setItem('wardcalc_lang', lang);
-            if(window.applyTranslations) {
-                window.applyTranslations(lang);
-            } else {
-                location.reload();
-            }
+            window.location.reload(); 
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -777,9 +805,9 @@
             const noResultsMsg = document.getElementById('noResultsMsg');
             let favorites = JSON.parse(localStorage.getItem('wardcalc_favorites')) || [];
 
-            // Card Entrance Animation Stagger
+            // Card Entrance Animation
             cards.forEach((card, index) => {
-                card.style.animation = `slideUpFade 0.5s ease forwards ${index * 0.05}s`;
+                card.style.animation = `slideUpFade 0.4s ease forwards ${index * 0.03}s`;
             });
 
             window.updateFavIcons = function() {
@@ -804,11 +832,10 @@
             window.toggleFav = function(id, event) {
                 event.preventDefault(); event.stopPropagation(); 
                 
-                // Add pop animation
                 const icon = event.currentTarget.querySelector('.fav-icon');
                 if(icon) {
                     icon.classList.remove('animate-pop');
-                    void icon.offsetWidth; // trigger reflow
+                    void icon.offsetWidth; 
                     icon.classList.add('animate-pop');
                 }
 
