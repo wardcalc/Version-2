@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms & Conditions | WardCalc</title>
+    
+    <script>
+        // Forces dark mode on load if preferred
+        try { if(localStorage.getItem('wardcalc_theme') === 'dark') document.documentElement.classList.add('dark'); } catch(e){}
+    </script>
+
+    <style>
+        /* SYNCHRONIZED CSS ENGINE */
+        :root {
+            --color-background: #f8fafc; --color-surface: #ffffff; --color-surface-variant: #f1f5f9;
+            --color-surface-container: #ffffff; --color-surface-container-high: #f8fafc;
+            --color-on-background: #0f172a; --color-on-surface: #0f172a; --color-on-surface-variant: #475569;
+            --color-outline-variant: #e2e8f0; --color-primary: #4338ca; --color-secondary: #0d9488; --color-error: #dc2626;
+        }
+        html.dark {
+            --color-background: #051424; --color-surface: #051424; --color-surface-variant: #273647;
+            --color-surface-container: #122131; --color-surface-container-high: #1c2b3c;
+            --color-on-background: #d4e4fa; --color-on-surface: #d4e4fa; --color-on-surface-variant: #cbc3d7;
+            --color-outline-variant: #494454; --color-primary: #d0bcff; --color-secondary: #4fdbc8; --color-error: #ffb4ab;
+        }
+        .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05)); background-size: 100% 4px; }
+        html.dark .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--color-surface-container); }
+        ::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
+    </style>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: { extend: { colors: {
+              "primary": "var(--color-primary)", "secondary": "var(--color-secondary)", "error": "var(--color-error)", "background": "var(--color-background)", "surface": "var(--color-surface)", "surface-variant": "var(--color-surface-variant)", "surface-container": "var(--color-surface-container)", "surface-container-high": "var(--color-surface-container-high)", "on-background": "var(--color-on-background)", "on-surface": "var(--color-on-surface)", "on-surface-variant": "var(--color-on-surface-variant)", "outline-variant": "var(--color-outline-variant)"
+            }, fontFamily: { "body": ["Space Grotesk", "sans-serif"], "mono": ["JetBrains Mono", "monospace"], "serif": ["Playfair Display", "serif"] } } }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-background text-on-background font-body overflow-x-hidden min-h-screen relative selection:bg-primary selection:text-surface flex flex-col transition-colors duration-500">
+    
+    <div class="scanlines fixed inset-0 pointer-events-none z-0 mix-blend-overlay opacity-50"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[150px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/10 blur-[120px] pointer-events-none z-0"></div>
+
+    <header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 md:px-8 py-4 bg-surface-container/90 backdrop-blur-lg border-b border-outline-variant/30">
+        <a href="index.html" class="flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity">
+            <span class="material-symbols-outlined text-[28px] text-primary">arrow_back</span>
+            <span class="text-xl md:text-3xl font-bold text-primary uppercase tracking-tighter">WardCalc</span>
+        </a>
+        <div class="flex items-center gap-2 md:gap-4">
+            <button onclick="window.toggleTheme()" class="flex items-center justify-center p-1.5 md:p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors border border-transparent hover:border-outline-variant/50">
+                <span id="theme-icon" class="material-symbols-outlined text-[18px]">dark_mode</span>
+            </button>
+            <div id="language-switcher" class="flex items-center gap-1 bg-surface-container-high/40 p-1 rounded-full border border-outline-variant/30 backdrop-blur-md font-mono text-[10px] md:text-xs font-bold">
+                <button onclick="window.changeLang('en')" class="px-2 py-1 md:px-3 md:py-1 rounded-full bg-primary/20 text-primary">EN</button>
+                <button onclick="window.changeLang('de')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">DE</button>
+                <button onclick="window.changeLang('ru')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">RU</button>
+                <button onclick="window.changeLang('uz')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">UZ</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-16 px-4 md:px-8 z-10 relative flex-1">
+        <div class="max-w-4xl mx-auto w-full flex flex-col items-center">
+            
+            <div class="text-center max-w-3xl mb-12">
+                <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-outline-variant/50 bg-surface-container-high/60 text-on-surface-variant text-[9px] md:text-xs font-mono font-bold tracking-widest uppercase mb-6 shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_var(--color-primary)]"></span>
+                    <span data-i18n="terms_pill">Legal & Compliance</span>
+                </div>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-on-surface mb-3 leading-tight tracking-tight">
+                    <span data-i18n="terms_title">Terms of Use &</span> <br class="hidden md:block" />
+                    <em class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-serif font-bold" data-i18n="terms_highlight">Clinical Agreement.</em>
+                </h1>
+                <p class="text-sm md:text-base text-on-surface-variant opacity-90 max-w-2xl mx-auto leading-relaxed mt-4" data-i18n="terms_intro">
+                    Effective Date: May 2026. By accessing or utilizing the WardCalc digital platform, you explicitly acknowledge and agree to be bound by these comprehensive Terms and Conditions. Please review this document with the utmost clinical and legal diligence.
+                </p>
+            </div>
+
+            <div class="w-full bg-surface-container/40 backdrop-blur-md border border-outline-variant/30 rounded-3xl p-6 md:p-12 shadow-sm">
+                
+                <div class="space-y-8 text-sm md:text-base text-on-surface-variant leading-relaxed opacity-90">
+                    
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="terms_h1">1. Professional Scope and Acceptance of Terms</h2>
+                        <p class="mb-4" data-i18n="terms_p1_1">Welcome to WardCalc, a specialized clinical calculation directory and medical reference platform. These Terms and Conditions constitute a legally binding agreement between you (the "User", "Practitioner", or "Visitor") and the administration of WardCalc. By accessing, browsing, interacting with, or utilizing any computational tools provided on this platform, you explicitly confirm that you have read, comprehended, and unconditionally accepted all stipulations contained within this agreement.</p>
+                        <p class="mb-4" data-i18n="terms_p1_2">WardCalc is engineered exclusively for an audience of certified medical professionals, resident physicians, clinical pharmacologists, registered nurses, and actively enrolled medical students. It is structurally designed to augment the workflow of trained healthcare providers operating within formal clinical environments, such as hospital wards, diagnostic centers, and emergency departments. If you are a member of the general public lacking formal medical accreditation, you are explicitly warned that this platform is not intended for layperson self-diagnosis, triage, or the self-administration of medical treatment. If you do not agree to every clause of these Terms, you must immediately cease all use of the WardCalc platform.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="terms_h2">2. Crucial Medical Disclaimer and Limitation of Liability</h2>
+                        <p class="mb-4" data-i18n="terms_p2_1">This clause represents the foundational legal premise of the WardCalc platform. The software, algorithms, scoring matrices, and reference ranges provided herein—including but not limited to the Glasgow Coma Scale (GCS), APGAR Score, and pharmacological dosing equations—are provided strictly for educational and ambient reference purposes. WardCalc is a computational aid, not an autonomous diagnostic engine.</p>
+                        <p class="mb-4" data-i18n="terms_p2_2">Under no circumstances does the output of any WardCalc algorithm constitute formal medical advice, definitive diagnosis, or a binding clinical directive. The human physiology is infinitely complex, and no mathematical formula can account for every confounding clinical variable, comorbidity, or patient-specific nuance. The ultimate responsibility for diagnostic accuracy, treatment planning, and patient safety rests entirely and inalienably upon the attending healthcare professional's independent clinical judgment.</p>
+                        <p data-i18n="terms_p2_3">While we strive for uncompromising accuracy by sourcing our algorithms from globally recognized, peer-reviewed medical literature, medical science is a rapidly evolving field. WardCalc administration makes no absolute warranties or representations regarding the perpetual accuracy, completeness, or current validity of the provided tools. You explicitly agree that WardCalc, its developers, and affiliated administrators shall bear zero liability for any patient morbidity, mortality, misdiagnosis, or adverse clinical outcome resulting directly or indirectly from your reliance upon, or misuse of, the calculations generated by this platform.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="terms_h3">3. Intellectual Property and Platform Architecture</h2>
+                        <p class="mb-4" data-i18n="terms_p3_1">The specific clinical scoring systems, physiological formulas, and medical guidelines referenced within WardCalc (such as universally accepted diagnostic criteria) belong to the public domain or to their respective scientific authors and organizations. WardCalc makes no claim of ownership over fundamental medical science.</p>
+                        <p data-i18n="terms_p3_2">However, the proprietary architecture of the WardCalc platform—including its underlying source code, the custom multilingual translation matrices, the specific visual layout, the glassmorphism UI design, the logic flows, branding elements, and logos—are the exclusive intellectual property of the WardCalc administration. You are granted a limited, non-exclusive, non-transferable, and revocable license to utilize the platform for personal clinical or educational use. You are strictly prohibited from scraping, cloning, reverse-engineering, decompiling, or commercially redistributing the WardCalc software infrastructure without explicit, written legal authorization from the administration.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="terms_h4">4. Multilingual Translation Variances and Clinical Context</h2>
+                        <p class="mb-4" data-i18n="terms_p4_1">A core feature of WardCalc is its seamless multilingual matrix, providing clinical interfaces in English, German (Fachsprache), Russian, and Uzbek. This feature is designed to assist international medical graduates, particularly those navigating complex linguistic exams such as the Fachsprachprüfung (FSP), and to streamline calculations during high-stress, cross-cultural medical scenarios.</p>
+                        <p data-i18n="terms_p4_2">Despite our rigorous efforts to collaborate with native-speaking professionals to ensure the highest degree of medical translation accuracy, clinical terminology can possess subtle regional and institutional variations. The User acknowledges that translations are provided as an ambient aid. In the event of an ambiguous translation or a perceived linguistic discrepancy regarding a critical physiological metric, the User is obligated to defer to standard, localized clinical guidelines or the primary English medical literature. WardCalc assumes no liability for clinical errors resulting from misinterpretation of the provided translated text.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="terms_h5">5. Acceptable Use and Platform Integrity</h2>
+                        <p class="mb-4" data-i18n="terms_p5_1">To maintain a stable, secure, and rapid environment for the thousands of medical professionals relying on WardCalc during clinical shifts, Users agree to a strict code of acceptable conduct. You agree not to interact with the platform in any manner that could disable, overburden, damage, or impair the server infrastructure or interfere with any other party's uninterrupted use of the website.</p>
+                        <p data-i18n="terms_p5_2">Furthermore, the utilization of automated scripts, web scrapers, spiders, or macro-programs to continuously query or extract data from the WardCalc algorithms is expressly forbidden. Any attempt to bypass the platform's security measures, inject malicious code (such as cross-site scripting or SQL injection), or execute Distributed Denial of Service (DDoS) protocols will result in immediate IP blacklisting and potential referral to relevant international cybersecurity authorities.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="terms_h6">6. Third-Party Integrations and Advertising Networks</h2>
+                        <p class="mb-4" data-i18n="terms_p6_1">To ensure that the core computational tools of WardCalc remain 100% free for medical personnel—particularly those operating in resource-limited or developing healthcare systems—the platform utilizes third-party advertising networks, such as Google AdSense, to generate sustainable server revenue. The presence of a third-party advertisement on the WardCalc interface does not constitute an endorsement, medical recommendation, or validation of the advertised product, service, or institution by the WardCalc administration.</p>
+                        <p data-i18n="terms_p6_2">If a User chooses to click on a third-party advertisement or external link, they will be directed away from the secure WardCalc environment. We exercise absolutely no control over the content, privacy policies, or clinical claims made by these external websites. The User assumes all inherent risks associated with navigating to third-party digital properties, and WardCalc shall not be held liable for any damages or losses incurred through interaction with external vendors.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="terms_h7">7. As-Is Provision and Service Modifications</h2>
+                        <p class="mb-4" data-i18n="terms_p7_1">The WardCalc platform is provided on an "AS IS" and "AS AVAILABLE" basis. While we utilize modern, cache-resistant digital infrastructure to provide maximum uptime and offline capabilities, we make no absolute guarantees that the service will be entirely uninterrupted, error-free, or instantaneously accessible at all times.</p>
+                        <p data-i18n="terms_p7_2">The administration reserves the sovereign right to unilaterally modify, suspend, temporarily disable, or permanently discontinue any clinical calculator, feature, or localized language matrix within the platform without prior notice. We shall not be held liable to you or any third party for the consequences of any modification, algorithmic update, or suspension of the WardCalc service.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="terms_h8">8. Comprehensive Indemnification</h2>
+                        <p class="mb-4" data-i18n="terms_p8_1">By utilizing this platform, you legally agree to fully indemnify, defend, and hold harmless the WardCalc administration, its developers, affiliated clinical researchers, and institutional partners from and against any and all claims, liabilities, damages, clinical malpractice suits, losses, costs, or expenses (including reasonable legal and attorney fees) arising out of or fundamentally related to your use of the platform.</p>
+                        <p data-i18n="terms_p8_2">This indemnification clause explicitly covers instances wherein you utilize WardCalc output to justify a clinical intervention that subsequently results in patient harm, as well as any breach by you of these Terms and Conditions or your violation of any relevant regional healthcare legislation, including but not limited to patient privacy laws.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="terms_h9">9. Revisions to the Terms of Use</h2>
+                        <p data-i18n="terms_p9_1">As medical science advances and the technological capabilities of the WardCalc platform are expanded, it may become necessary to revise, update, or expand this legal agreement. The administration reserves the right to modify these Terms and Conditions at our sole discretion at any time. Significant alterations will be immediately deployed to this webpage, and the "Effective Date" at the header will reflect the most recent update. Your continued utilization of the WardCalc platform following the publication of revised Terms constitutes your definitive legal acceptance of the updated agreement.</p>
+                    </section>
+                </div>
+            </div>
+            
+            <div class="mt-16 pt-8 w-full border-t border-outline-variant/30 flex justify-center items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-serif font-bold text-xl border border-primary/30">W</div>
+                <div class="text-left">
+                    <h4 class="font-bold text-on-surface text-lg">WardCalc Administration</h4>
+                    <p class="text-sm font-mono text-on-surface-variant opacity-80 uppercase tracking-widest" data-i18n="stat_est">Established 2026</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-outline-variant/20 bg-surface-container/20 backdrop-blur-md py-6 px-4 md:px-8 mt-auto z-10 relative">
+        <div class="max-w-7xl mx-auto flex justify-center text-center">
+            <div class="text-on-surface-variant text-sm flex items-center gap-2">
+                <span class="material-symbols-outlined text-[16px] text-primary">copyright</span>
+                <span>2026 WardCalc. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/locales/en.js?v=30000"></script>
+    <script src="js/locales/de.js?v=30000"></script>
+    <script src="js/locales/ru.js?v=30000"></script>
+    <script src="js/locales/uz.js?v=30000"></script>
+    <script src="js/tools.js?v=30000"></script>
+    <script src="js/app.js?v=30000"></script>
+</body>
+</html>
