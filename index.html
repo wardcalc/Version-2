@@ -12,63 +12,133 @@
 
     <style>
         :root {
-            --color-background: #f8fafc;
-            --color-surface: #ffffff;
-            --color-surface-variant: #f1f5f9;
-            --color-surface-container: #ffffff;
-            --color-surface-container-high: #f8fafc;
-            --color-on-background: #0f172a;
-            --color-on-surface: #0f172a;
-            --color-on-surface-variant: #475569;
-            --color-outline-variant: #e2e8f0;
-            --color-primary: #4338ca;
-            --color-secondary: #0d9488;
-            --color-error: #dc2626;
+            /* Standard Themes */
+            --color-background: #f8fafc; --color-surface: #ffffff; --color-surface-variant: #f1f5f9;
+            --color-surface-container: #ffffff; --color-surface-container-high: #f8fafc;
+            --color-on-background: #0f172a; --color-on-surface: #0f172a; --color-on-surface-variant: #475569;
+            --color-outline-variant: #e2e8f0; --color-primary: #4338ca; --color-secondary: #0d9488; --color-error: #dc2626;
+
+            /* Category Specific RGB Colors (Light Mode) */
+            --c-cardio: 225, 29, 72;    /* Rose */
+            --c-pulmo: 2, 132, 199;     /* Sky Blue */
+            --c-gastro: 217, 119, 6;    /* Amber */
+            --c-nephro: 8, 145, 178;    /* Cyan */
+            --c-critical: 220, 38, 38;  /* Red */
+            --c-surgery: 5, 150, 105;   /* Emerald */
+            --c-neuro: 124, 58, 237;    /* Violet */
+            --c-general: 13, 148, 136;  /* Teal */
         }
 
-        .dark {
-            --color-background: #051424;
-            --color-surface: #051424;
-            --color-surface-variant: #273647;
-            --color-surface-container: #122131;
-            --color-surface-container-high: #1c2b3c;
-            --color-on-background: #d4e4fa;
-            --color-on-surface: #d4e4fa;
-            --color-on-surface-variant: #cbc3d7;
-            --color-outline-variant: #494454;
-            --color-primary: #d0bcff;
-            --color-secondary: #4fdbc8;
-            --color-error: #ffb4ab;
+        html.dark {
+            /* Standard Themes Dark */
+            --color-background: #051424; --color-surface: #051424; --color-surface-variant: #273647;
+            --color-surface-container: #122131; --color-surface-container-high: #1c2b3c;
+            --color-on-background: #d4e4fa; --color-on-surface: #d4e4fa; --color-on-surface-variant: #cbc3d7;
+            --color-outline-variant: #494454; --color-primary: #d0bcff; --color-secondary: #4fdbc8; --color-error: #ffb4ab;
+
+            /* Category Specific RGB Colors (Dark Mode Brightened) */
+            --c-cardio: 251, 113, 133;
+            --c-pulmo: 56, 189, 248;
+            --c-gastro: 251, 191, 36;
+            --c-nephro: 34, 211, 238;
+            --c-critical: 248, 113, 113;
+            --c-surgery: 52, 211, 153;
+            --c-neuro: 167, 139, 250;
+            --c-general: 45, 212, 191;
         }
 
         .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05)); background-size: 100% 4px; }
-        .dark .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); }
-        
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: var(--color-surface-container); }
-        ::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+        html.dark .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); }
         
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--color-surface-container); }
+        ::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
         
         body.emergency-active { border-top: 4px solid var(--color-error); transition: border 0.3s ease; }
+
+        /* =========================================
+           SYNCHRONIZED FILTER BUTTON CSS
+           ========================================= */
+        .filter-btn {
+            background-color: rgba(128, 128, 128, 0.08);
+            color: var(--color-on-surface-variant);
+            border: 1px solid rgba(128, 128, 128, 0.2);
+        }
+        html.dark .filter-btn { background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .filter-btn:hover { background-color: rgba(128, 128, 128, 0.15); }
+        
+        /* Text color for active buttons */
+        .filter-btn.active { color: #ffffff; font-weight: bold; }
+        html.dark .filter-btn.active { color: #0f172a; } /* Keeps text readable on bright pastel buttons in dark mode */
+        
+        /* Unique Active Colors */
+        .btn-all.active, .btn-fav.active { background-color: var(--color-primary); border-color: var(--color-primary); box-shadow: 0 0 12px rgba(var(--color-primary), 0.4); }
+        html.dark .btn-all.active, html.dark .btn-fav.active { color: var(--color-on-background); }
+
+        .btn-cardio.active { background-color: rgb(var(--c-cardio)); border-color: rgb(var(--c-cardio)); box-shadow: 0 0 12px rgba(var(--c-cardio), 0.4); }
+        .btn-pulmo.active { background-color: rgb(var(--c-pulmo)); border-color: rgb(var(--c-pulmo)); box-shadow: 0 0 12px rgba(var(--c-pulmo), 0.4); }
+        .btn-gastro.active { background-color: rgb(var(--c-gastro)); border-color: rgb(var(--c-gastro)); box-shadow: 0 0 12px rgba(var(--c-gastro), 0.4); }
+        .btn-nephro.active { background-color: rgb(var(--c-nephro)); border-color: rgb(var(--c-nephro)); box-shadow: 0 0 12px rgba(var(--c-nephro), 0.4); }
+        .btn-critical.active { background-color: rgb(var(--c-critical)); border-color: rgb(var(--c-critical)); box-shadow: 0 0 12px rgba(var(--c-critical), 0.4); }
+        .btn-surgery.active { background-color: rgb(var(--c-surgery)); border-color: rgb(var(--c-surgery)); box-shadow: 0 0 12px rgba(var(--c-surgery), 0.4); }
+        .btn-neuro.active { background-color: rgb(var(--c-neuro)); border-color: rgb(var(--c-neuro)); box-shadow: 0 0 12px rgba(var(--c-neuro), 0.4); }
+        .btn-general.active { background-color: rgb(var(--c-general)); border-color: rgb(var(--c-general)); box-shadow: 0 0 12px rgba(var(--c-general), 0.4); }
+
+        /* =========================================
+           SYNCHRONIZED CARD THEMES
+           ========================================= */
+        .calc-card { border-left: 4px solid transparent; }
+        
+        .calc-card[data-cat="cardio"] { border-left-color: rgb(var(--c-cardio)); }
+        .calc-card[data-cat="cardio"] .cat-icon { background-color: rgba(var(--c-cardio), 0.1); color: rgb(var(--c-cardio)); }
+        .calc-card[data-cat="cardio"] .cat-badge { background-color: rgba(var(--c-cardio), 0.05); border-color: rgba(var(--c-cardio), 0.3); color: rgb(var(--c-cardio)); }
+        .calc-card[data-cat="cardio"] .fav-btn.active, .calc-card[data-cat="cardio"] .fav-btn:hover { color: rgb(var(--c-cardio)); }
+
+        .calc-card[data-cat="pulmo"] { border-left-color: rgb(var(--c-pulmo)); }
+        .calc-card[data-cat="pulmo"] .cat-icon { background-color: rgba(var(--c-pulmo), 0.1); color: rgb(var(--c-pulmo)); }
+        .calc-card[data-cat="pulmo"] .cat-badge { background-color: rgba(var(--c-pulmo), 0.05); border-color: rgba(var(--c-pulmo), 0.3); color: rgb(var(--c-pulmo)); }
+        .calc-card[data-cat="pulmo"] .fav-btn.active, .calc-card[data-cat="pulmo"] .fav-btn:hover { color: rgb(var(--c-pulmo)); }
+
+        .calc-card[data-cat="gastro"] { border-left-color: rgb(var(--c-gastro)); }
+        .calc-card[data-cat="gastro"] .cat-icon { background-color: rgba(var(--c-gastro), 0.1); color: rgb(var(--c-gastro)); }
+        .calc-card[data-cat="gastro"] .cat-badge { background-color: rgba(var(--c-gastro), 0.05); border-color: rgba(var(--c-gastro), 0.3); color: rgb(var(--c-gastro)); }
+        .calc-card[data-cat="gastro"] .fav-btn.active, .calc-card[data-cat="gastro"] .fav-btn:hover { color: rgb(var(--c-gastro)); }
+
+        .calc-card[data-cat="nephro"] { border-left-color: rgb(var(--c-nephro)); }
+        .calc-card[data-cat="nephro"] .cat-icon { background-color: rgba(var(--c-nephro), 0.1); color: rgb(var(--c-nephro)); }
+        .calc-card[data-cat="nephro"] .cat-badge { background-color: rgba(var(--c-nephro), 0.05); border-color: rgba(var(--c-nephro), 0.3); color: rgb(var(--c-nephro)); }
+        .calc-card[data-cat="nephro"] .fav-btn.active, .calc-card[data-cat="nephro"] .fav-btn:hover { color: rgb(var(--c-nephro)); }
+
+        .calc-card[data-cat="critical"] { border-left-color: rgb(var(--c-critical)); }
+        .calc-card[data-cat="critical"] .cat-icon { background-color: rgba(var(--c-critical), 0.1); color: rgb(var(--c-critical)); }
+        .calc-card[data-cat="critical"] .cat-badge { background-color: rgba(var(--c-critical), 0.05); border-color: rgba(var(--c-critical), 0.3); color: rgb(var(--c-critical)); }
+        .calc-card[data-cat="critical"] .fav-btn.active, .calc-card[data-cat="critical"] .fav-btn:hover { color: rgb(var(--c-critical)); }
+
+        .calc-card[data-cat="surgery"] { border-left-color: rgb(var(--c-surgery)); }
+        .calc-card[data-cat="surgery"] .cat-icon { background-color: rgba(var(--c-surgery), 0.1); color: rgb(var(--c-surgery)); }
+        .calc-card[data-cat="surgery"] .cat-badge { background-color: rgba(var(--c-surgery), 0.05); border-color: rgba(var(--c-surgery), 0.3); color: rgb(var(--c-surgery)); }
+        .calc-card[data-cat="surgery"] .fav-btn.active, .calc-card[data-cat="surgery"] .fav-btn:hover { color: rgb(var(--c-surgery)); }
+
+        .calc-card[data-cat="neuro"] { border-left-color: rgb(var(--c-neuro)); }
+        .calc-card[data-cat="neuro"] .cat-icon { background-color: rgba(var(--c-neuro), 0.1); color: rgb(var(--c-neuro)); }
+        .calc-card[data-cat="neuro"] .cat-badge { background-color: rgba(var(--c-neuro), 0.05); border-color: rgba(var(--c-neuro), 0.3); color: rgb(var(--c-neuro)); }
+        .calc-card[data-cat="neuro"] .fav-btn.active, .calc-card[data-cat="neuro"] .fav-btn:hover { color: rgb(var(--c-neuro)); }
+
+        .calc-card[data-cat="general"] { border-left-color: rgb(var(--c-general)); }
+        .calc-card[data-cat="general"] .cat-icon { background-color: rgba(var(--c-general), 0.1); color: rgb(var(--c-general)); }
+        .calc-card[data-cat="general"] .cat-badge { background-color: rgba(var(--c-general), 0.05); border-color: rgba(var(--c-general), 0.3); color: rgb(var(--c-general)); }
+        .calc-card[data-cat="general"] .fav-btn.active, .calc-card[data-cat="general"] .fav-btn:hover { color: rgb(var(--c-general)); }
     </style>
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script>
       tailwind.config = {
         darkMode: "class",
-        theme: { extend: { 
-            colors: {
+        theme: { extend: { colors: {
               "primary": "var(--color-primary)", "secondary": "var(--color-secondary)", "error": "var(--color-error)", "background": "var(--color-background)", "surface": "var(--color-surface)", "surface-variant": "var(--color-surface-variant)", "surface-container": "var(--color-surface-container)", "surface-container-high": "var(--color-surface-container-high)", "on-background": "var(--color-on-background)", "on-surface": "var(--color-on-surface)", "on-surface-variant": "var(--color-on-surface-variant)", "outline-variant": "var(--color-outline-variant)"
-            }, 
-            fontFamily: { 
-                "body": ["Space Grotesk", "sans-serif"], 
-                "mono": ["JetBrains Mono", "monospace"],
-                "serif": ["Playfair Display", "serif"] 
-            } 
-        } }
+            }, fontFamily: { "body": ["Space Grotesk", "sans-serif"], "mono": ["JetBrains Mono", "monospace"], "serif": ["Playfair Display", "serif"] } } }
       }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -182,102 +252,111 @@
                 <div class="w-full text-left mt-6 flex flex-col gap-3 relative">
                     <div class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
                     <div id="filterBar" class="flex items-center gap-2 overflow-x-auto pb-2 pt-1 hide-scrollbar w-full">
-                        <button class="filter-btn active whitespace-nowrap px-6 py-2.5 rounded-full border border-primary bg-primary text-white text-sm font-bold transition-all shadow-[0_0_12px_rgba(var(--color-primary),0.4)]" data-filter="all" data-i18n="cat_all">All</button>
-                        <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="favorites" data-i18n="nav_favorites">Favorites</button>
-                        <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_cardio" data-i18n="cat_cardio">Cardiology</button>
-                        <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_pulmo" data-i18n="cat_pulmo">Pulmonology</button>
-                        <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_gastro" data-i18n="cat_gastro">Gastroenterology</button>
-                        <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_nephro" data-i18n="cat_nephro">Nephrology</button>
-                        <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_critical" data-i18n="cat_critical">Critical Care</button>
-                        <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_surgery" data-i18n="cat_surgery">Surgery</button>
-                        <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_neuro" data-i18n="cat_neuro">Neurology</button>
-                        <button class="filter-btn whitespace-nowrap px-5 py-2.5 rounded-full border border-outline-variant/60 bg-surface-container/60 hover:bg-surface-container-high hover:border-primary/50 text-on-surface-variant text-sm font-medium transition-all" data-filter="cat_general" data-i18n="cat_general">General & Peds</button>
+                        <button class="filter-btn btn-all active whitespace-nowrap px-6 py-2.5 rounded-full text-sm transition-all" data-filter="all" data-i18n="cat_all">All</button>
+                        <button class="filter-btn btn-fav whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="favorites" data-i18n="nav_favorites">Favorites</button>
+                        <button class="filter-btn btn-cardio whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="cardio" data-i18n="cat_cardio">Cardiology</button>
+                        <button class="filter-btn btn-pulmo whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="pulmo" data-i18n="cat_pulmo">Pulmonology</button>
+                        <button class="filter-btn btn-gastro whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="gastro" data-i18n="cat_gastro">Gastroenterology</button>
+                        <button class="filter-btn btn-nephro whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="nephro" data-i18n="cat_nephro">Nephrology</button>
+                        <button class="filter-btn btn-critical whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="critical" data-i18n="cat_critical">Critical Care</button>
+                        <button class="filter-btn btn-surgery whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="surgery" data-i18n="cat_surgery">Surgery</button>
+                        <button class="filter-btn btn-neuro whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="neuro" data-i18n="cat_neuro">Neurology</button>
+                        <button class="filter-btn btn-general whitespace-nowrap px-5 py-2.5 rounded-full text-sm transition-all" data-filter="general" data-i18n="cat_general">General & Peds</button>
                     </div>
                 </div>
             </div>
 
-            <div id="calculatorGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-full">
+            <div id="calculatorGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                 
-                <a href="#" class="calc-card cat_cardio relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:border-primary/40 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="chads">
-                    <button onclick="toggleFav('chads', event)" class="absolute top-4 right-4 z-20 text-outline-variant hover:text-error transition-colors p-2"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
-                        <span class="px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container text-[10px] font-mono text-on-surface-variant font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="chads" data-cat="cardio">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('chads', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
                     </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8" data-i18n="tool_chads_title">CHA2DS2-VASc Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed" data-i18n="tool_chads_desc">Atrial fibrillation stroke risk assessment.</p>
-                </a>
-                
-                <a href="#" class="calc-card cat_cardio relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:border-primary/40 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="hasbled">
-                    <button onclick="toggleFav('hasbled', event)" class="absolute top-4 right-4 z-20 text-outline-variant hover:text-error transition-colors p-2"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
-                        <span class="px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container text-[10px] font-mono text-on-surface-variant font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
-                    </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8" data-i18n="tool_hasbled_title">HAS-BLED Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed" data-i18n="tool_hasbled_desc">Major bleeding risk in atrial fibrillation.</p>
-                </a>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_chads_title">CHA2DS2-VASc Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_chads_desc">Atrial fibrillation stroke risk assessment.</p>
+                </div>
 
-                <a href="#" class="calc-card cat_pulmo relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:border-primary/40 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="wells">
-                    <button onclick="toggleFav('wells', event)" class="absolute top-4 right-4 z-20 text-outline-variant hover:text-error transition-colors p-2"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[20px]">air</span></div>
-                        <span class="px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container text-[10px] font-mono text-on-surface-variant font-bold tracking-wider uppercase" data-i18n="cat_pulmo">Pulmonology</span>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="hasbled" data-cat="cardio">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('hasbled', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">monitor_heart</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_cardio">Cardiology</span>
                     </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8" data-i18n="tool_wells_title">Wells' Criteria for PE</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed" data-i18n="tool_wells_desc">Clinical probability of pulmonary embolism.</p>
-                </a>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_hasbled_title">HAS-BLED Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_hasbled_desc">Major bleeding risk in atrial fibrillation.</p>
+                </div>
 
-                <a href="#" class="calc-card cat_gastro relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:border-primary/40 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="childpugh">
-                    <button onclick="toggleFav('childpugh', event)" class="absolute top-4 right-4 z-20 text-outline-variant hover:text-error transition-colors p-2"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[20px]">stomach</span></div>
-                        <span class="px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container text-[10px] font-mono text-on-surface-variant font-bold tracking-wider uppercase" data-i18n="cat_gastro">Gastroenterology</span>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="wells" data-cat="pulmo">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('wells', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">air</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_pulmo">Pulmonology</span>
                     </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8" data-i18n="tool_child_title">Child-Pugh Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed" data-i18n="tool_child_desc">Prognosis and mortality in chronic liver disease.</p>
-                </a>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_wells_title">Wells' Criteria for PE</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_wells_desc">Clinical probability of pulmonary embolism.</p>
+                </div>
 
-                <a href="#" class="calc-card cat_nephro relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:border-primary/40 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="egfr">
-                    <button onclick="toggleFav('egfr', event)" class="absolute top-4 right-4 z-20 text-outline-variant hover:text-error transition-colors p-2"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[20px]">water_drop</span></div>
-                        <span class="px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container text-[10px] font-mono text-on-surface-variant font-bold tracking-wider uppercase" data-i18n="cat_nephro">Nephrology</span>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="childpugh" data-cat="gastro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('childpugh', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">stomach</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_gastro">Gastroenterology</span>
                     </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8" data-i18n="tool_egfr_title">eGFR Calculator</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed" data-i18n="tool_egfr_desc">Renal function estimation using the CKD-EPI equation.</p>
-                </a>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_child_title">Child-Pugh Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_child_desc">Prognosis and mortality in chronic liver disease.</p>
+                </div>
 
-                <a href="gcs.html" class="calc-card cat_critical relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:border-error/40 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group border-l-4 border-l-error" data-id="gcs">
-                    <button onclick="toggleFav('gcs', event)" class="absolute top-4 right-4 z-20 text-outline-variant hover:text-error transition-colors p-2"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-error/10 flex items-center justify-center text-error group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[20px]">emergency</span></div>
-                        <span class="px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container text-[10px] font-mono text-on-surface-variant font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="egfr" data-cat="nephro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('egfr', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">water_drop</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_nephro">Nephrology</span>
                     </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8" data-i18n="tool_gcs_title">Glasgow Coma Scale (GCS)</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed" data-i18n="tool_gcs_desc">Active neurological assessment matrix for conscious level evaluation.</p>
-                </a>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_egfr_title">eGFR Calculator</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_egfr_desc">Renal function estimation using the CKD-EPI equation.</p>
+                </div>
 
-                <a href="#" class="calc-card cat_surgery relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:border-primary/40 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="alvarado">
-                    <button onclick="toggleFav('alvarado', event)" class="absolute top-4 right-4 z-20 text-outline-variant hover:text-error transition-colors p-2"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[20px]">content_cut</span></div>
-                        <span class="px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container text-[10px] font-mono text-on-surface-variant font-bold tracking-wider uppercase" data-i18n="cat_surgery">Surgery</span>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="gcs" data-cat="critical">
+                    <a href="gcs.html" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('gcs', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">emergency</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_critical">Critical Care</span>
                     </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8" data-i18n="tool_alvarado_title">Alvarado Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed" data-i18n="tool_alvarado_desc">Clinical probability of acute appendicitis.</p>
-                </a>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_gcs_title">Glasgow Coma Scale (GCS)</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_gcs_desc">Active neurological assessment matrix for conscious level evaluation.</p>
+                </div>
 
-                <a href="#" class="calc-card cat_neuro relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:border-primary/40 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="nihss">
-                    <button onclick="toggleFav('nihss', event)" class="absolute top-4 right-4 z-20 text-outline-variant hover:text-error transition-colors p-2"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[20px]">psychology</span></div>
-                        <span class="px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container text-[10px] font-mono text-on-surface-variant font-bold tracking-wider uppercase" data-i18n="cat_neuro">Neurology</span>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="alvarado" data-cat="surgery">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('alvarado', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">content_cut</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_surgery">Surgery</span>
                     </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8" data-i18n="tool_nihss_title">NIH Stroke Scale</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed" data-i18n="tool_nihss_desc">Quantifies the severity of acute cerebral infarction.</p>
-                </a>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_alvarado_title">Alvarado Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_alvarado_desc">Clinical probability of acute appendicitis.</p>
+                </div>
 
-                <a href="#" class="calc-card cat_general relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:border-primary/40 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group border-l-4 border-l-secondary" data-id="apgar">
-                    <button onclick="toggleFav('apgar', event)" class="absolute top-4 right-4 z-20 text-outline-variant hover:text-error transition-colors p-2"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[20px]">child_care</span></div>
-                        <span class="px-3 py-1 rounded-full border border-outline-variant/30 bg-surface-container text-[10px] font-mono text-on-surface-variant font-bold tracking-wider uppercase" data-i18n="cat_general">General & Peds</span>
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="nihss" data-cat="neuro">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('nihss', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">psychology</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_neuro">Neurology</span>
                     </div>
-                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8" data-i18n="tool_apgar_title">APGAR Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed" data-i18n="tool_apgar_desc">Rapid assessment of newborn viability at 1 and 5 minutes after birth.</p>
-                </a>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_nihss_title">NIH Stroke Scale</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_nihss_desc">Quantifies the severity of acute cerebral infarction.</p>
+                </div>
+
+                <div class="calc-card relative flex flex-col bg-surface-container/40 backdrop-blur-[8px] border border-outline-variant/30 rounded-2xl p-6 hover:bg-surface-container/60 transition-all duration-300 shadow-sm group" data-id="apgar" data-cat="general">
+                    <a href="#" class="absolute inset-0 z-10 rounded-2xl"></a>
+                    <button onclick="toggleFav('apgar', event)" class="fav-btn absolute top-3 right-3 z-20 p-2 text-outline-variant transition-colors cursor-pointer"><span class="material-symbols-outlined text-[24px] fav-icon">favorite_border</span></button>
+                    <div class="flex items-center gap-3 mb-4 z-20 pointer-events-none">
+                        <div class="w-10 h-10 rounded-xl cat-icon flex items-center justify-center transition-transform group-hover:scale-110"><span class="material-symbols-outlined text-[20px]">child_care</span></div>
+                        <span class="px-3 py-1 rounded-full border cat-badge text-[10px] font-mono font-bold tracking-wider uppercase" data-i18n="cat_general">General & Peds</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-serif text-on-surface mb-2 pr-8 z-20 pointer-events-none" data-i18n="tool_apgar_title">APGAR Score</h3><p class="text-sm text-on-surface-variant opacity-80 leading-relaxed z-20 pointer-events-none" data-i18n="tool_apgar_desc">Rapid assessment of newborn viability at 1 and 5 minutes after birth.</p>
+                </div>
             </div>
 
             <div id="noResultsMsg" class="hidden flex-col items-center justify-center py-12 text-center w-full">
@@ -290,7 +369,7 @@
     </main>
 
     <footer class="border-t border-outline-variant/20 bg-surface-container/20 backdrop-blur-md pt-12 pb-8 px-4 md:px-8 mt-auto z-10 relative">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-serif font-bold text-sm border border-primary/30">W</div>
                 <div>
@@ -308,28 +387,26 @@
         </div>
     </footer>
 
-    <script src="js/locales/en.js?v=70000"></script>
-    <script src="js/locales/de.js?v=70000"></script>
-    <script src="js/locales/ru.js?v=70000"></script>
-    <script src="js/locales/uz.js?v=70000"></script>
-    <script src="js/tools.js?v=70000"></script>
-    <script src="js/app.js?v=70000"></script>
+    <script src="js/locales/en.js?v=90000"></script>
+    <script src="js/locales/de.js?v=90000"></script>
+    <script src="js/locales/ru.js?v=90000"></script>
+    <script src="js/locales/uz.js?v=90000"></script>
+    <script src="js/tools.js?v=90000"></script>
+    <script src="js/app.js?v=90000"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Sidebar Logic
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobile-overlay');
 
             function toggleSidebar() {
-                sidebar.classList.toggle('-translate-x-full');
-                overlay.classList.toggle('hidden');
+                if(sidebar) sidebar.classList.toggle('-translate-x-full');
+                if(overlay) overlay.classList.toggle('hidden');
             }
             if(mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
             if(overlay) overlay.addEventListener('click', toggleSidebar);
 
-            // Emergency Toggle Logic
             const emergencyBtn = document.getElementById('emergency-toggle');
             if(emergencyBtn) {
                 emergencyBtn.addEventListener('click', () => {
@@ -341,7 +418,6 @@
                 });
             }
 
-            // Smart Filter & Favorites Engine
             const searchInput = document.getElementById('searchInput');
             const filterBtns = document.querySelectorAll('.filter-btn');
             const sidebarFavBtn = document.getElementById('sidebar-fav-btn');
@@ -353,15 +429,16 @@
             window.updateFavIcons = function() {
                 cards.forEach(card => {
                     const id = card.getAttribute('data-id');
+                    const btn = card.querySelector('.fav-btn');
                     const icon = card.querySelector('.fav-icon');
-                    if(icon) {
+                    if(btn && icon) {
                         if (favorites.includes(id)) {
                             icon.innerText = 'favorite';
-                            icon.classList.add('text-error');
+                            btn.classList.add('active');
                             icon.classList.remove('text-outline-variant');
                         } else {
                             icon.innerText = 'favorite_border';
-                            icon.classList.remove('text-error');
+                            btn.classList.remove('active');
                             icon.classList.add('text-outline-variant');
                         }
                     }
@@ -394,15 +471,12 @@
 
                 cards.forEach(card => {
                     const id = card.getAttribute('data-id');
+                    const cat = card.getAttribute('data-cat');
                     let matchesCategory = false;
 
-                    if (filterValue === 'all') {
-                        matchesCategory = true;
-                    } else if (filterValue === 'favorites') {
-                        matchesCategory = favorites.includes(id);
-                    } else {
-                        matchesCategory = card.classList.contains(filterValue);
-                    }
+                    if (filterValue === 'all') matchesCategory = true;
+                    else if (filterValue === 'favorites') matchesCategory = favorites.includes(id);
+                    else matchesCategory = (cat === filterValue);
 
                     const title = card.querySelector('h3').innerText.toLowerCase();
                     const desc = card.querySelector('p').innerText.toLowerCase();
@@ -429,31 +503,21 @@
                 }
             }
 
-            const activeClasses = ['active', 'bg-primary', 'text-white', 'border-primary', 'shadow-[0_0_12px_rgba(var(--color-primary),0.4)]'];
-            const inactiveClasses = ['bg-surface-container/60', 'text-on-surface-variant', 'border-outline-variant/60'];
-
             function activateFilter(targetFilter) {
-                filterBtns.forEach(b => {
-                    b.classList.remove(...activeClasses);
-                    b.classList.add(...inactiveClasses);
-                    if(b.getAttribute('data-filter') === targetFilter) {
-                        b.classList.remove(...inactiveClasses);
-                        b.classList.add(...activeClasses);
-                    }
-                });
+                filterBtns.forEach(b => b.classList.remove('active'));
+                const targetBtn = document.querySelector(`.filter-btn[data-filter="${targetFilter}"]`);
+                if(targetBtn) targetBtn.classList.add('active');
                 applyFilters();
             }
 
             filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    activateFilter(btn.getAttribute('data-filter'));
-                });
+                btn.addEventListener('click', () => activateFilter(btn.getAttribute('data-filter')));
             });
 
             if(sidebarFavBtn) {
                 sidebarFavBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    toggleSidebar(); // Close mobile sidebar
+                    toggleSidebar(); 
                     activateFilter('favorites');
                 });
             }
