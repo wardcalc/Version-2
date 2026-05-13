@@ -765,19 +765,49 @@
     <script src="js/tools.js?v=99999"></script>
     <script src="js/app.js?v=99999"></script>
 
-    <script>
+        <script>
+        // 1. Dark Mode
         window.toggleTheme = function() {
             document.documentElement.classList.toggle('dark');
             localStorage.setItem('wardcalc_theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
         };
 
-                // FIXED TRANSLATION SCRIPT: Forces immediate page reload to guarantee language switch
+        // 2. THE BULLETPROOF TRANSLATION ENGINE
+        window.applyTranslations = function(lang) {
+            let dict = null;
+            // Safely grab the dictionaries you pasted into the .js files
+            if (lang === 'en' && typeof en !== 'undefined') dict = en;
+            if (lang === 'de' && typeof de !== 'undefined') dict = de;
+            if (lang === 'ru' && typeof ru !== 'undefined') dict = ru;
+            if (lang === 'uz' && typeof uz !== 'undefined') dict = uz;
+            
+            if (!dict) return; // Stop if dictionary isn't loaded
+
+            // Translate Text
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.innerHTML = dict[key];
+            });
+
+            // Translate Placeholders (like the Search Bar)
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (dict[key]) el.placeholder = dict[key];
+            });
+        };
+
+        // 3. Smooth Language Switcher (NO RELOAD NEEDED)
         window.changeLang = function(lang) {
             localStorage.setItem('wardcalc_lang', lang);
-            window.location.reload(); 
+            window.applyTranslations(lang); // Instant swap!
         };
 
         document.addEventListener('DOMContentLoaded', () => {
+            // APPLY LANGUAGE IMMEDIATELY ON LOAD
+            const savedLang = localStorage.getItem('wardcalc_lang') || 'en';
+            window.applyTranslations(savedLang);
+
+            // UI Elements
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const closeSidebarBtn = document.getElementById('close-sidebar-btn');
             const sidebar = document.getElementById('sidebar');
