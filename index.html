@@ -789,26 +789,28 @@
     <script src="js/app.js?v=90000"></script>
 
     <script>
-            <script>
+                <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Sidebar Logic
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobile-overlay');
-
-            function toggleSidebar() {
-                if(sidebar) sidebar.classList.toggle('-translate-x-full');
-                if(overlay) overlay.classList.toggle('hidden');
+            
+            function toggleSidebar() { 
+                if(sidebar) sidebar.classList.toggle('-translate-x-full'); 
+                if(overlay) overlay.classList.toggle('hidden'); 
             }
             if(mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
             if(overlay) overlay.addEventListener('click', toggleSidebar);
 
+            // Emergency Toggle
             const emergencyBtn = document.getElementById('emergency-toggle');
             if(emergencyBtn) {
                 emergencyBtn.addEventListener('click', () => {
                     document.body.classList.toggle('emergency-active');
-                    emergencyBtn.classList.toggle('bg-error');
+                    emergencyBtn.classList.toggle('bg-error'); 
                     emergencyBtn.classList.toggle('text-white');
-                    emergencyBtn.classList.toggle('text-error');
+                    emergencyBtn.classList.toggle('text-error'); 
                     emergencyBtn.classList.toggle('bg-error/5');
                 });
             }
@@ -828,12 +830,12 @@
                     const icon = card.querySelector('.fav-icon');
                     if(btn && icon) {
                         if (favorites.includes(id)) {
-                            icon.innerText = 'favorite';
-                            btn.classList.add('active');
+                            icon.innerText = 'favorite'; 
+                            btn.classList.add('active'); 
                             icon.classList.remove('text-outline-variant');
                         } else {
-                            icon.innerText = 'favorite_border';
-                            btn.classList.remove('active');
+                            icon.innerText = 'favorite_border'; 
+                            btn.classList.remove('active'); 
                             icon.classList.add('text-outline-variant');
                         }
                     }
@@ -843,7 +845,6 @@
             window.toggleFav = function(id, event) {
                 event.preventDefault(); 
                 event.stopPropagation(); 
-                
                 if (favorites.includes(id)) {
                     favorites = favorites.filter(fav => fav !== id);
                 } else {
@@ -873,28 +874,32 @@
                     else if (filterValue === 'favorites') matchesCategory = favorites.includes(id);
                     else matchesCategory = (cat === filterValue);
 
-                    const title = card.querySelector('h3').innerText.toLowerCase();
-                    const desc = card.querySelector('p').innerText.toLowerCase();
+                    // Crash-proof text extraction using ?. (Optional Chaining)
+                    const titleNode = card.querySelector('h3');
+                    const descNode = card.querySelector('p');
+                    const title = titleNode ? titleNode.textContent.toLowerCase() : '';
+                    const desc = descNode ? descNode.textContent.toLowerCase() : '';
+                    
                     const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
 
-                    if (matchesCategory && matchesSearch) {
-                        card.style.display = 'flex';
-                        visibleCount++;
-                    } else {
-                        card.style.display = 'none';
+                    if (matchesCategory && matchesSearch) { 
+                        card.style.display = 'flex'; 
+                        visibleCount++; 
+                    } else { 
+                        card.style.display = 'none'; 
                     }
                 });
 
-                if(visibleCount === 0) {
-                    if(noResultsMsg) {
-                        noResultsMsg.classList.remove('hidden');
-                        noResultsMsg.classList.add('flex');
-                    }
-                } else {
-                    if(noResultsMsg) {
-                        noResultsMsg.classList.add('hidden');
-                        noResultsMsg.classList.remove('flex');
-                    }
+                if(visibleCount === 0) { 
+                    if(noResultsMsg) { 
+                        noResultsMsg.classList.remove('hidden'); 
+                        noResultsMsg.classList.add('flex'); 
+                    } 
+                } else { 
+                    if(noResultsMsg) { 
+                        noResultsMsg.classList.add('hidden'); 
+                        noResultsMsg.classList.remove('flex'); 
+                    } 
                 }
             }
 
@@ -905,21 +910,28 @@
                 applyFilters();
             }
 
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => activateFilter(btn.getAttribute('data-filter')));
-            });
-
-            if(sidebarFavBtn) {
-                sidebarFavBtn.addEventListener('click', (e) => {
+            filterBtns.forEach(btn => { 
+                btn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    activateFilter(btn.getAttribute('data-filter'));
+                }); 
+            });
+            
+            if(sidebarFavBtn) { 
+                sidebarFavBtn.addEventListener('click', (e) => { 
+                    e.preventDefault(); 
                     toggleSidebar(); 
-                    activateFilter('favorites');
-                });
+                    activateFilter('favorites'); 
+                }); 
             }
-
-            if(searchInput) searchInput.addEventListener('keyup', applyFilters);
+            
+            if(searchInput) {
+                searchInput.addEventListener('keyup', applyFilters);
+            }
+            
             updateFavIcons();
         });
     </script>
+
 </body>
 </html>
