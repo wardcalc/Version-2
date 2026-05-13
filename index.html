@@ -102,24 +102,36 @@
         .calc-card[data-cat="general"] { border-left-color: rgb(var(--c-general)); }
         .calc-card[data-cat="general"] .cat-icon { background-color: rgba(var(--c-general), 0.1); color: rgb(var(--c-general)); }
         .calc-card[data-cat="general"] .cat-badge { background-color: rgba(var(--c-general), 0.05); border-color: rgba(var(--c-general), 0.3); color: rgb(var(--c-general)); }
-            /* --- MODERN SAAS BACKGROUND EFFECTS --- */
-        .bg-dots {
-            background-image: radial-gradient(var(--color-outline-variant) 1px, transparent 1px);
-            background-size: 24px 24px;
-            opacity: 0.6;
+                    /* --- PREMIUM MEDICAL BACKGROUND EFFECTS --- */
+        .bg-medical-grid {
+            /* Subtle medical cross (+) pattern */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234338ca' fill-opacity='0.05'%3E%3Cpath d='M28 20h4v8h8v4h-8v8h-4v-8h-8v-4h8v-8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        html.dark .bg-dots {
-            opacity: 0.15;
+        html.dark .bg-medical-grid {
+            /* Cyan/Teal cross for dark mode */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234fdbc8' fill-opacity='0.05'%3E%3Cpath d='M28 20h4v8h8v4h-8v8h-4v-8h-8v-4h8v-8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
-        @keyframes slowPulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
+
+        /* Breathing Animation for Orbs */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
         }
-        .animate-ambient {
-            animation: slowPulse 12s ease-in-out infinite;
+        .animate-pulse-slow { 
+            animation: pulse-slow 8s ease-in-out infinite; 
         }
-        .animate-ambient-slow {
-            animation: slowPulse 18s ease-in-out infinite;
+
+        /* Animated ECG Line */
+        @keyframes ecg-draw {
+            0% { stroke-dashoffset: 1000; opacity: 0; }
+            15% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 0; }
+        }
+        .ecg-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: ecg-draw 6s linear infinite;
         }
 
     </style>
