@@ -121,11 +121,13 @@
     <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px] pointer-events-none z-0"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[30%] h-[30%] rounded-full bg-secondary/10 blur-[100px] pointer-events-none z-0"></div>
 
-    <header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 md:px-8 py-4 bg-surface-container/90 backdrop-blur-lg border-b border-outline-variant/30 transition-colors">
-        <div class="flex items-center gap-3 md:gap-4 md:pl-64">
-            <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center text-on-surface hover:text-primary transition-colors">
-                <span class="material-symbols-outlined text-[28px]">menu</span>
-            </button>
+        <header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 md:px-8 py-4 bg-surface-container/90 backdrop-blur-lg border-b border-outline-variant/30 transition-colors">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary to-secondary p-[1px] shadow-sm flex-shrink-0">
+                <div class="w-full h-full bg-surface rounded-[11px] flex items-center justify-center">
+                    <span class="font-serif font-bold text-sm md:text-lg text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">W</span>
+                </div>
+            </div>
             <span class="text-xl md:text-3xl font-bold text-primary uppercase tracking-tighter">WardCalc</span>
         </div>
         
@@ -178,7 +180,7 @@
         </div>
     </nav>
 
-    <main class="md:ml-64 pt-24 md:pt-28 p-4 md:p-8 z-10 relative flex-1 flex flex-col">
+        <main class="pt-24 md:pt-28 p-4 md:p-8 z-10 relative flex-1 flex flex-col w-full">
         <div class="max-w-7xl mx-auto w-full flex flex-col gap-8 md:gap-10 flex-1">
             
             <div class="w-full bg-surface-container/30 border border-outline-variant/20 rounded-xl flex justify-center items-center min-h-[90px] overflow-hidden shadow-sm">
@@ -710,48 +712,40 @@
         </div>
     </main>
 
-        <footer class="border-t border-outline-variant/30 bg-surface-container-high/50 backdrop-blur-xl mt-auto relative overflow-hidden">
+            <footer class="border-t border-outline-variant/30 bg-surface-container-high/50 backdrop-blur-xl mt-auto relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
         
-        <div class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-12 flex flex-col items-center gap-8">
-            <div class="flex flex-col items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary p-[1px] shadow-lg shadow-primary/20">
-                    <div class="w-full h-full bg-surface rounded-[15px] flex items-center justify-center">
-                        <span class="font-serif font-bold text-xl text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">W</span>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h4 class="font-bold text-on-surface text-lg tracking-tight">WardCalc</h4>
-                    <p class="text-[10px] font-mono text-on-surface-variant opacity-70 uppercase tracking-widest mt-1" data-i18n="stat_est">Established 2026</p>
-                </div>
+        <div class="max-w-4xl mx-auto px-4 py-8 md:py-10 flex flex-col items-center gap-6">
+            <div class="text-center">
+                <h4 class="font-bold text-on-surface text-lg tracking-tight">WardCalc</h4>
+                <p class="text-[10px] font-mono text-on-surface-variant opacity-70 uppercase tracking-widest mt-1" data-i18n="stat_est">Established 2026</p>
             </div>
 
-            <div class="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-xs font-bold font-mono uppercase tracking-widest text-on-surface-variant">
+            <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-[11px] md:text-xs font-bold font-mono uppercase tracking-widest text-on-surface-variant text-center">
                 <a href="about.html" class="hover:text-primary transition-colors relative group">
                     <span data-i18n="footer_about">About Us</span>
-                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
                 </a>
+                <span class="opacity-30 hidden md:inline">•</span>
                 <a href="contact.html" class="hover:text-primary transition-colors relative group">
                     <span data-i18n="footer_contact">Contact</span>
-                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
                 </a>
+                <span class="opacity-30 hidden md:inline">•</span>
                 <a href="privacy.html" class="hover:text-primary transition-colors relative group">
                     <span data-i18n="footer_privacy">Privacy Policy</span>
-                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
                 </a>
+                <span class="opacity-30 hidden md:inline">•</span>
                 <a href="terms.html" class="hover:text-primary transition-colors relative group">
                     <span data-i18n="footer_terms">Terms</span>
-                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all group-hover:w-full"></span>
                 </a>
+                <span class="opacity-30 hidden md:inline">•</span>
                 <a href="disclaimer.html" class="text-error/80 hover:text-error transition-colors relative group">
                     <span data-i18n="footer_disclaimer">Medical Disclaimer</span>
-                    <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-error transition-all group-hover:w-full"></span>
                 </a>
             </div>
             
-            <div class="w-full border-t border-outline-variant/20 pt-6 flex justify-center text-center">
-                <p class="text-xs text-on-surface-variant opacity-60 flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[14px]">copyright</span>
+            <div class="w-full border-t border-outline-variant/20 pt-5 flex justify-center text-center">
+                <p class="text-[10px] md:text-xs text-on-surface-variant opacity-60 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[12px]">copyright</span>
                     2026 WardCalc Network. All rights reserved.
                 </p>
             </div>
@@ -765,8 +759,8 @@
     <script src="js/tools.js?v=99999"></script>
     <script src="js/app.js?v=99999"></script>
 
-        <script>
-                // 1. Dark Mode
+            <script>
+        // 1. Dark Mode
         window.toggleTheme = function() {
             document.documentElement.classList.toggle('dark');
             const isDark = document.documentElement.classList.contains('dark');
@@ -781,58 +775,41 @@
         // 2. THE BULLETPROOF TRANSLATION ENGINE
         window.applyTranslations = function(lang) {
             let dict = null;
-            // Safely grab the dictionaries you pasted into the .js files
             if (lang === 'en' && typeof en !== 'undefined') dict = en;
             if (lang === 'de' && typeof de !== 'undefined') dict = de;
             if (lang === 'ru' && typeof ru !== 'undefined') dict = ru;
             if (lang === 'uz' && typeof uz !== 'undefined') dict = uz;
             
-            if (!dict) return; // Stop if dictionary isn't loaded
+            if (!dict) return; 
 
-            // Translate Text
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dict[key]) el.innerHTML = dict[key];
             });
 
-            // Translate Placeholders (like the Search Bar)
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
                 if (dict[key]) el.placeholder = dict[key];
             });
         };
 
-        // 3. Smooth Language Switcher (NO RELOAD NEEDED)
+        // 3. Smooth Language Switcher
         window.changeLang = function(lang) {
             localStorage.setItem('wardcalc_lang', lang);
-            window.applyTranslations(lang); // Instant swap!
+            window.applyTranslations(lang); 
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-                        // APPLY LANGUAGE IMMEDIATELY ON LOAD
+            // APPLY LANGUAGE & THEME IMMEDIATELY ON LOAD
             const savedLang = localStorage.getItem('wardcalc_lang') || 'en';
             window.applyTranslations(savedLang);
 
-            // SET INITIAL THEME ICON
             const themeIcon = document.getElementById('theme-icon');
             if(themeIcon) {
                 themeIcon.innerText = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
             }
 
-            // UI Elements
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const closeSidebarBtn = document.getElementById('close-sidebar-btn');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('mobile-overlay');
-            
-            function toggleSidebar() { 
-                if(sidebar) sidebar.classList.toggle('-translate-x-full'); 
-                if(overlay) overlay.classList.toggle('hidden'); 
-            }
-            if(mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
-            if(closeSidebarBtn) closeSidebarBtn.addEventListener('click', toggleSidebar);
-            if(overlay) overlay.addEventListener('click', toggleSidebar);
-
+            // Emergency Button
             const emergencyBtn = document.getElementById('emergency-toggle');
             if(emergencyBtn) {
                 emergencyBtn.addEventListener('click', () => {
@@ -842,12 +819,12 @@
                 });
             }
 
+            // Search and Filter Logic
             const searchInput = document.getElementById('wardSearch');
             const cards = document.querySelectorAll('.calc-card');
             const noResultsMsg = document.getElementById('noResultsMsg');
             let favorites = JSON.parse(localStorage.getItem('wardcalc_favorites')) || [];
 
-            // Card Entrance Animation
             cards.forEach((card, index) => {
                 card.style.animation = `slideUpFade 0.4s ease forwards ${index * 0.03}s`;
             });
@@ -937,5 +914,6 @@
             updateFavIcons();
         });
     </script>
+
 </body>
 </html>
