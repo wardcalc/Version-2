@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy | WardCalc</title>
+    
+    <script>
+        // Forces dark mode on load if preferred
+        try { if(localStorage.getItem('wardcalc_theme') === 'dark') document.documentElement.classList.add('dark'); } catch(e){}
+    </script>
+
+    <style>
+        /* SYNCHRONIZED CSS ENGINE */
+        :root {
+            --color-background: #f8fafc; --color-surface: #ffffff; --color-surface-variant: #f1f5f9;
+            --color-surface-container: #ffffff; --color-surface-container-high: #f8fafc;
+            --color-on-background: #0f172a; --color-on-surface: #0f172a; --color-on-surface-variant: #475569;
+            --color-outline-variant: #e2e8f0; --color-primary: #4338ca; --color-secondary: #0d9488; --color-error: #dc2626;
+        }
+        html.dark {
+            --color-background: #051424; --color-surface: #051424; --color-surface-variant: #273647;
+            --color-surface-container: #122131; --color-surface-container-high: #1c2b3c;
+            --color-on-background: #d4e4fa; --color-on-surface: #d4e4fa; --color-on-surface-variant: #cbc3d7;
+            --color-outline-variant: #494454; --color-primary: #d0bcff; --color-secondary: #4fdbc8; --color-error: #ffb4ab;
+        }
+        .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05)); background-size: 100% 4px; }
+        html.dark .scanlines { background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1)); }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--color-surface-container); }
+        ::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
+    </style>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: { extend: { colors: {
+              "primary": "var(--color-primary)", "secondary": "var(--color-secondary)", "error": "var(--color-error)", "background": "var(--color-background)", "surface": "var(--color-surface)", "surface-variant": "var(--color-surface-variant)", "surface-container": "var(--color-surface-container)", "surface-container-high": "var(--color-surface-container-high)", "on-background": "var(--color-on-background)", "on-surface": "var(--color-on-surface)", "on-surface-variant": "var(--color-on-surface-variant)", "outline-variant": "var(--color-outline-variant)"
+            }, fontFamily: { "body": ["Space Grotesk", "sans-serif"], "mono": ["JetBrains Mono", "monospace"], "serif": ["Playfair Display", "serif"] } } }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-background text-on-background font-body overflow-x-hidden min-h-screen relative selection:bg-primary selection:text-surface flex flex-col transition-colors duration-500">
+    
+    <div class="scanlines fixed inset-0 pointer-events-none z-0 mix-blend-overlay opacity-50"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[150px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/10 blur-[100px] pointer-events-none z-0"></div>
+
+    <header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 md:px-8 py-4 bg-surface-container/90 backdrop-blur-lg border-b border-outline-variant/30">
+        <a href="index.html" class="flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity">
+            <span class="material-symbols-outlined text-[28px] text-primary">arrow_back</span>
+            <span class="text-xl md:text-3xl font-bold text-primary uppercase tracking-tighter">WardCalc</span>
+        </a>
+        <div class="flex items-center gap-2 md:gap-4">
+            <button onclick="window.toggleTheme()" class="flex items-center justify-center p-1.5 md:p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors border border-transparent hover:border-outline-variant/50">
+                <span id="theme-icon" class="material-symbols-outlined text-[18px]">dark_mode</span>
+            </button>
+            <div id="language-switcher" class="flex items-center gap-1 bg-surface-container-high/40 p-1 rounded-full border border-outline-variant/30 backdrop-blur-md font-mono text-[10px] md:text-xs font-bold">
+                <button onclick="window.changeLang('en')" class="px-2 py-1 md:px-3 md:py-1 rounded-full bg-primary/20 text-primary">EN</button>
+                <button onclick="window.changeLang('de')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">DE</button>
+                <button onclick="window.changeLang('ru')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">RU</button>
+                <button onclick="window.changeLang('uz')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary">UZ</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-16 px-4 md:px-8 z-10 relative flex-1">
+        <div class="max-w-4xl mx-auto w-full flex flex-col items-center">
+            
+            <div class="text-center max-w-3xl mb-12">
+                <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-outline-variant/50 bg-surface-container-high/60 text-on-surface-variant text-[9px] md:text-xs font-mono font-bold tracking-widest uppercase mb-6 shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_var(--color-primary)]"></span>
+                    <span data-i18n="priv_pill">Legal & Compliance</span>
+                </div>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-on-surface mb-3 leading-tight tracking-tight">
+                    <span data-i18n="priv_title">Clinical Data &</span> <br class="hidden md:block" />
+                    <em class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-serif font-bold" data-i18n="priv_highlight">Privacy Policy.</em>
+                </h1>
+                <p class="text-sm md:text-base text-on-surface-variant opacity-90 max-w-2xl mx-auto leading-relaxed mt-4" data-i18n="priv_intro">
+                    Effective Date: May 2026. This comprehensive privacy protocol governs your use of the WardCalc platform. Our foundational principle is the absolute protection of clinical integrity and the uncompromising sovereignty of patient data.
+                </p>
+            </div>
+
+            <div class="w-full bg-surface-container/40 backdrop-blur-md border border-outline-variant/30 rounded-3xl p-6 md:p-12 shadow-sm">
+                
+                <div class="space-y-8 text-sm md:text-base text-on-surface-variant leading-relaxed opacity-90">
+                    
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="priv_h1">1. The Principle of Stateless Architecture & Patient Data Sovereignty</h2>
+                        <p class="mb-4" data-i18n="priv_p1_1">WardCalc was engineered by medical professionals, for medical professionals, to be utilized in high-stakes clinical environments. In the modern healthcare ecosystem, the digitization of medicine has inadvertently led to the rampant, often non-consensual harvesting of Protected Health Information (PHI). We fundamentally reject this paradigm.</p>
+                        <p class="mb-4" data-i18n="priv_p1_2">To ensure absolute compliance with the Health Insurance Portability and Accountability Act (HIPAA), the General Data Protection Regulation (GDPR), and equivalent global medical privacy frameworks, WardCalc operates on a strict "Stateless Architecture." This means that when a physician, nurse, or medical student inputs physiological variables—such as a patient's creatinine levels, Glasgow Coma Scale responses, or APGAR criteria—into our calculators, that data exists solely within the temporary, volatile memory of the user's personal device (RAM).</p>
+                        <p data-i18n="priv_p1_3">At no point is patient data transmitted to, processed by, or stored upon WardCalc servers. The moment the calculator interface is refreshed, closed, or the browser is navigated away, the inputted clinical data is mathematically obliterated. We possess zero capacity to track, aggregate, or reverse-engineer the clinical scenarios or patient demographics for which our platform is utilized. Your patients' data remains entirely within your sovereign clinical environment.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="priv_h2">2. Device-Level Storage and User Preferences</h2>
+                        <p class="mb-4" data-i18n="priv_p2_1">While we rigorously avoid the collection of medical data, the WardCalc application is designed to be highly responsive to the individual practitioner's workflow. To achieve a seamless user experience, we utilize native web storage protocols (specifically, HTML5 LocalStorage) to remember your localized interface preferences.</p>
+                        <p class="mb-4" data-i18n="priv_p2_2">The specific data points stored within your device's local memory are strictly limited to:</p>
+                        <ul class="list-disc pl-6 mb-4 space-y-2 font-mono text-[13px]">
+                            <li data-i18n="priv_li_1"><strong>Linguistic Preference:</strong> The language toggle state (e.g., English, German/Fachsprache, Russian, or Uzbek).</li>
+                            <li data-i18n="priv_li_2"><strong>Visual Theme Matrix:</strong> The active user interface theme selection (Dark Mode vs. Light Mode) to ensure visual comfort during night shifts or brightly lit ward rounds.</li>
+                            <li data-i18n="priv_li_3"><strong>Clinical Favorites:</strong> The specific mathematical tools and scoring systems you have pinned to your personal dashboard for rapid access during emergencies.</li>
+                        </ul>
+                        <p data-i18n="priv_p2_3">It is critical to understand that this preference data is compartmentalized on your specific hardware. It is never synchronized across the cloud, it is not tied to a user account (as WardCalc requires no registration), and we do not possess a centralized database of user preferences. You retain complete control over this data and may eradicate it instantly by clearing your browser's cache and local storage.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="priv_h3">3. Economic Sustainability, Advertising, and Third-Party Cookies</h2>
+                        <p class="mb-4" data-i18n="priv_p3_1">Our core mandate is to ensure that premium, evidence-based computational tools remain 100% free and accessible to medical personnel regardless of their geographic location or institutional funding. To sustain server infrastructure, domain maintenance, and ongoing algorithmic development without erecting subscription paywalls, WardCalc relies on third-party advertising networks, predominantly Google AdSense.</p>
+                        <p class="mb-4" data-i18n="priv_p3_2">Consequently, while WardCalc itself does not track your clinical inputs, our third-party advertising partners utilize cookies and web beacons to serve advertisements based on your prior visits to our website or other websites across the internet. Google's use of advertising cookies enables it and its partners to serve ads to our users based on their browsing history.</p>
+                        <p class="mb-4" data-i18n="priv_p3_3">Please be aware of the following regarding these external protocols:</p>
+                        <ul class="list-disc pl-6 mb-4 space-y-2">
+                            <li data-i18n="priv_li_4">Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website.</li>
+                            <li data-i18n="priv_li_5">The utilization of the DoubleClick cookie enables Google and its authorized partners to serve ads based on users' visit to our sites and/or other sites on the Internet.</li>
+                            <li data-i18n="priv_li_6">Users may categorically opt out of personalized advertising by visiting the Google Ads Settings portal. Alternatively, you may opt out of third-party vendor's use of cookies for personalized advertising by visiting www.aboutads.info.</li>
+                        </ul>
+                        <p data-i18n="priv_p3_4">We strategically place advertising banners in peripheral zones of the application interface to ensure they never occlude clinical data, interrupt emergency workflows, or compromise the visual clarity required for critical medical decision-making.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="priv_h4">4. Server Logs and Cybersecurity Infrastructure</h2>
+                        <p class="mb-4" data-i18n="priv_p4_1">To defend the integrity of the WardCalc platform against malicious actors, Distributed Denial of Service (DDoS) attacks, and unauthorized algorithmic tampering, our hosting providers and Content Delivery Networks (CDNs) automatically collect standard server log information.</p>
+                        <p class="mb-4" data-i18n="priv_p4_2">This infrastructural data includes non-personally identifying metrics such as internet protocol (IP) addresses, browser typologies, internet service provider (ISP) details, referring/exit pages, operating system environments, date/time stamps, and clickstream data. This telemetry is deployed exclusively for aggregate system administration, server load balancing, and threat mitigation.</p>
+                        <p data-i18n="priv_p4_3">We do not link this automatically collected data to any personally identifiable information. In the event of a forensic cybersecurity investigation, these logs may be reviewed to trace the origin of a hostile breach attempt, but they are otherwise subject to routine automated deletion protocols.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="priv_h5">5. International Practitioner Rights (GDPR & CCPA Compliance)</h2>
+                        <p class="mb-4" data-i18n="priv_p5_1">WardCalc serves a deeply international demographic of physicians and medical students, navigating systems from the European Union to Central Asia. We recognize and respect the rigorous data protection frameworks established by global legislative bodies, including the European General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA).</p>
+                        <p class="mb-4" data-i18n="priv_p5_2">Because WardCalc does not require user accounts, does not collect names, and does not process email addresses (unless voluntarily provided through direct communication via our Contact Protocol), the traditional scope of "Right to Access" and "Right to Erasure" (Right to be Forgotten) is naturally fulfilled by our stateless architecture. We literally possess nothing to delete.</p>
+                        <p data-i18n="priv_p5_3">However, regarding the non-personal data collected by our third-party advertising and analytics partners, you retain full sovereign rights to restrict processing by configuring your browser's cookie settings, utilizing ad-blocking extensions, or utilizing privacy-focused browsing environments (such as Incognito or Private modes). Our application is coded to remain fully functional, including core computational and linguistic features, even if you aggressively restrict third-party cookies.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="priv_h6">6. Application to Minors and Non-Clinical Audiences</h2>
+                        <p class="mb-4" data-i18n="priv_p6_1">WardCalc is a highly specialized piece of medical software engineered exclusively for use by certified healthcare professionals, academic medical faculty, and actively enrolled medical students. It is strictly not intended for use by the general public for self-diagnosis, nor is it directed at children under the age of 18.</p>
+                        <p data-i18n="priv_p6_2">We do not knowingly collect, solicit, or maintain any information from individuals under the age of 18. If a parent or guardian becomes aware that a minor has utilized this platform and transmitted any form of communicable data (e.g., via the contact form), we urge immediate contact so that we may enact swift eradication of said data.</p>
+                    </section>
+
+                    <hr class="border-outline-variant/30" />
+
+                    <section>
+                        <h2 class="text-2xl font-bold font-serif text-on-surface mb-4" data-i18n="priv_h7">7. Evolutionary Updates to this Privacy Protocol</h2>
+                        <p class="mb-4" data-i18n="priv_p7_1">As the digital landscape shifts and the WardCalc platform evolves—particularly as we introduce new Progressive Web App (PWA) capabilities, enhanced offline functionalities, and potential Electronic Health Record (EHR) formatting features—this privacy policy will undergo necessary revisions.</p>
+                        <p data-i18n="priv_p7_2">We reserve the right to amend this protocol at any time. Significant shifts in how we handle the minimal data we touch will be reflected immediately on this page, accompanied by a revision of the "Effective Date." We encourage our clinical network to periodically review this document to remain informed regarding our unwavering commitment to data protection.</p>
+                    </section>
+                </div>
+            </div>
+            
+            <div class="mt-16 pt-8 w-full border-t border-outline-variant/30 flex justify-center items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-serif font-bold text-xl border border-primary/30">W</div>
+                <div class="text-left">
+                    <h4 class="font-bold text-on-surface text-lg">WardCalc Administration</h4>
+                    <p class="text-sm font-mono text-on-surface-variant opacity-80 uppercase tracking-widest" data-i18n="stat_est">Established 2026</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-outline-variant/20 bg-surface-container/20 backdrop-blur-md py-6 px-4 md:px-8 mt-auto z-10 relative">
+        <div class="max-w-7xl mx-auto flex justify-center text-center">
+            <div class="text-on-surface-variant text-sm flex items-center gap-2">
+                <span class="material-symbols-outlined text-[16px] text-primary">copyright</span>
+                <span>2026 WardCalc. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/locales/en.js?v=12000"></script>
+    <script src="js/locales/de.js?v=12000"></script>
+    <script src="js/locales/ru.js?v=12000"></script>
+    <script src="js/locales/uz.js?v=12000"></script>
+    <script src="js/tools.js?v=12000"></script>
+    <script src="js/app.js?v=12000"></script>
+</body>
+</html>
