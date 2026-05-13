@@ -1,148 +1,22 @@
 const uz = {
-    /* --- NAVIGATION & GENERAL UI --- */
-    "nav_dashboard": "Boshqaruv paneli",
-    "nav_favorites": "Sevimlilar",
-    "nav_emergency": "SHOSHILINCH",
-    "search_placeholder": "Asboblarni qidirish (masalan, GCS, BMI)...",
-    "hero_pill": "TIBBIYOT TALABASI TOMONIDAN • MUTAXASSISLAR UCHUN YARATILGAN",
-    "hero_title_1": "Klinik asboblar",
-    "hero_title_2": "palata aylanmasi uchun",
-    "hero_subtitle": "4 tilda dalillarga asoslangan kalkulyatorlar va mnemonikalar. Tez, ishonchli va mobil qurilmalarga mos — barchasi bemor yotog'i yonida.",
-    "stat_tools": "Kalkulyatorlar",
-    "stat_langs": "Tillar",
-    "stat_free": "Bepul",
-    "stat_est": "2026-yilda asos solingan",
-    "search_empty_title": "Asboblar topilmadi",
-    "search_empty_desc": "Boshqa kalit so'zlar bilan urinib ko'ring yoki toifani o'zgartiring.",
-
-    /* --- CATEGORIES --- */
-    "cat_all": "Barchasi",
-    "cat_cardio": "Kardiologiya",
-    "cat_pulmo": "Pulmonologiya",
-    "cat_gastro": "Gastroenterologiya",
-    "cat_nephro": "Nefrologiya",
-    "cat_critical": "Reanimatsiya",
-    "cat_surgery": "Xirurgiya",
-    "cat_neuro": "Nevrologiya",
-    "cat_general": "Umumiy va Pediatriya",
-
-    /* --- CLINICAL TOOLS (50) --- */
-    // Cardiology
-    "tool_chads_title": "CHA2DS2-VASc shkalasi", "tool_chads_desc": "Atrial fibrilatsiyada insult xavfini baholash.",
-    "tool_hasbled_title": "HAS-BLED shkalasi", "tool_hasbled_desc": "Atrial fibrilatsiyada yirik qon ketish xavfi.",
-    "tool_heart_title": "HEART shkalasi", "tool_heart_desc": "6 haftalik yirik yurak xuruji xavfi prognozi.",
-    "tool_timi_title": "TIMI xavf shkalasi", "tool_timi_desc": "NSTEMI bemorlarida o'lim xavfi ko'rsatkichi.",
-    "tool_grace_title": "GRACE shkalasi", "tool_grace_desc": "O'tkir koronar sindromda 6 oylik o'lim ehtimoli.",
-    "tool_ascvd_title": "ASCVD xavf bahosi", "tool_ascvd_desc": "Yurak-qon tomir kasalliklarining 10 yillik xavfi.",
-    "tool_framingham_title": "Framingem shkalasi", "tool_framingham_desc": "Yurak ishemik kasalligi rivojlanishining 10 yillik xavfi.",
-    "tool_qtc_title": "QTc kalkulyatori", "tool_qtc_desc": "Bazett formulasi bo'yicha korreksiya qilingan QT intervali.",
+    "nav_dashboard": "Boshqaruv paneli", "nav_favorites": "Sevimlilar", "nav_emergency": "SHOSHILINCH", "search_placeholder": "Asboblarni qidirish (masalan, GCS, BMI)...",
+    "dash_title": "Klinik kalkulyatorlar katalogi", "dash_subtitle": "Toifani tanlang yoki aniq protokolni qidiring.",
+    "cat_all": "Barchasi", "cat_label": "BARCHA KALKULYATORLAR",
+    "hero_pill": "TIBBIYOT TALABASI TOMONIDAN",
+    "hero_title_1": "Klinik asboblar", "hero_title_2": "palata aylanmasi uchun",
+    "hero_subtitle": "4 tilda mnemonikaga ega dalillarga asoslangan kalkulyatorlar. Tez, ishonchli va mobil qurilmalarga mos.",
+    "stat_student": "Talaba tomonidan", "stat_tools": "Kalkulyatorlar", "stat_langs": "Tillar", "stat_free": "Bepul", "stat_est": "2026 yilda tashkil topgan",
+    "footer_about": "Biz haqimizda", "footer_contact": "Aloqa", "footer_privacy": "Maxfiylik siyosati", "footer_terms": "Foydalanish shartlari", "footer_disclaimer": "Tibbiy ogohlantirish",
+    "tool_gcs_title": "Glazgo koma shkalasi (GCS)", "tool_gcs_desc": "Ong darajasini baholash uchun faol nevrologik matritsa.",
+    "tool_apgar_title": "APGAR shkalasi", "tool_apgar_desc": "Tug'ilgandan keyin 1 va 5 daqiqalarda chaqaloqning yashovchanligini tezkor baholash.",
     
-    // Pulmonology
-    "tool_wells_title": "Wells mezonlari (O'YE)", "tool_wells_desc": "O'pka arteriyasi emboliyasining klinik ehtimoli.",
-    "tool_perc_title": "PERC qoidasi", "tool_perc_desc": "Kam xavfli bemorlarda O'YE ni istisno qilish.",
-    "tool_curb_title": "CURB-65 shkalasi", "tool_curb_desc": "Pnevmoniya og'irligi va gospitalizatsiya mezonlari.",
-    "tool_psi_title": "PSI / PORT shkalasi", "tool_psi_desc": "O'limni prognoz qilish uchun pnevmoniya og'irlik indeksi.",
-    "tool_lights_title": "Light mezonlari", "tool_lights_desc": "Ekssudat va transsudat plevra suyuqligini farqlash.",
-    "tool_bode_title": "BODE indeksi", "tool_bode_desc": "O'SOK (COPD) bilan og'rigan bemorlarda yashash davomiyligi.",
+    "about_manifesto": "Klinik manifest", "about_title": "O'rtasidagi ko'prik", "about_highlight": "Darslik va Palata.", "about_genesis": "Loyiha tarixi", "about_student": "Talaba tomonidan yaratilgan", "about_matrix": "Ko'p tilli matritsa", "about_accuracy": "Murosasiz aniqlik", "about_access": "Foydalanish imkoniyati", "about_future": "WardCalc kelajagi", "about_intro": "WardCalc fundamental klinik reallikdan kelib chiqqan: inson miyasi diagnostik fikrlash uchun ajoyib dvigatel, ammo formulalarni eslab qolish uchun juda ishonchsiz qattiq diskdir.", "about_p1": "Auditoriyadan shifoxona palatasiga o'tish tibbiy ta'limdagi eng qiyin jarayonlardan biridir. Vaqt eng qimmat valyutaga aylanadi. O'tkir holatlarda xotiraga shubha qilishga vaqt yo'q. Tibbiyot xodimlariga darhol, dalillarga asoslangan ma'lumotlar kerak.", "about_p2": "WardCalc - bu xuddi shunday palatalarda ishlaydigan bitiruvchi tibbiyot talabasi tomonidan puxta ishlab chiqilgan amaliy klinik vositadir. Har bir piksel ortiqcha narsalardan tozalangan. Faqat yuqori stressli muhitlar uchun optimallashtirilgan sof, tezkor klinik foyda.", "about_p3": "Sog'liqni saqlash globaldir. WardCalc ingliz, nemis, rus va o'zbek tillarini qo'llab-quvvatlaydigan uzluksiz ko'p tilli matritsaga ega birinchi klinik katalogdir.", "about_p4": "Tibbiy dasturiy ta'minotda hisoblash xatosi bemor xavfsizligiga tahdiddir. WardCalc-ga kiritilgan har bir protokol qat'iy ravishda umume'tirof etilgan tibbiy ko'rsatmalarga asoslangan.", "about_p5": "Bemorlar o'limiga bevosita ta'sir qiluvchi vositalar geografik va iqtisodiy tafovutlar bilan cheklanmasligi kerak deb hisoblaymiz. WardCalc-ning asosiy kalkulyatorlari 100% bepul bo'lib qoladi.",
     
-    // Gastroenterology
-    "tool_child_title": "Child-Pugh shkalasi", "tool_child_desc": "Jigar sirrozida prognoz va o'lim xavfi.",
-    "tool_meld_title": "MELD shkalasi", "tool_meld_desc": "Jigar kasalligining terminal bosqichida 3 oylik o'lim xavfi.",
-    "tool_meldna_title": "MELD-Na shkalasi", "tool_meldna_desc": "Jigar transplantatsiyasi uchun natriy bilan sozlangan MELD.",
-    "tool_gbs_title": "Glazgo-Blatchford", "tool_gbs_desc": "Yuqori GI qon ketishida aralashuvlar zarurligi skriningi.",
-    "tool_rockall_title": "Rockall shkalasi", "tool_rockall_desc": "GI qon ketishidan keyingi o'lim xavfi.",
-    "tool_maddrey_title": "Maddrey funksiyasi", "tool_maddrey_desc": "Alkogolli gepatitda steroid davo zarurati va prognoz.",
+    "contact_pill": "Global aloqa markazi", "contact_title": "WardCalc Tarmog'i Bilan", "contact_highlight": "Bog'laning.", "contact_intro": "Tibbiyot - bu hamkorlik ilmi. Klinik fikr-mulohazalar bildirasizmi, institutsional hamkorlik taklif qilasizmi yoki ta'limiy tibbiyot mazmuni bo'yicha hamkorlik qilishni xohlaysizmi, bizning aloqa liniyalarimiz doimo ochiq.", "contact_h1": "Klinik fikr-mulohaza va tekshirish", "contact_p1": "Zamonaviy tibbiyotning yuqori xavfli muhitida dasturiy ta'minotni yakka tartibda ishlab chiqish katta mas'uliyatdir. WardCalc arxitekturasidagi har bir algoritm inson fiziologiyasi bilan ishlashga mo'ljallangan. Ular qat'iy ekspert tekshiruvidan o'tishi kerak.", "contact_p2": "Biz foydalanuvchilarimizni klinik validatorlarning faol tarmog'i sifatida ko'ramiz. Agar siz matematik tafovut yoki eskirgan ma'lumotni sezsangiz, sizning fikringiz biz uchun juda muhim. Tasdiqlangan klinik hisobotdan so'ng bir necha soat ichida mantig'imizni yangilashga va'da beramiz.", "contact_h2": "Akademik va institutsional integratsiya", "contact_p3": "Ma'ruza zali va shifoxona o'rtasidagi tafovutni yengish uchun akademik muassasalar bilan chuqur hamkorlik zarur. Biz WardCalc-ni o'quv dasturlariga kiritish uchun tibbiyot universitetlari bilan hamkorlik qilishga intilamiz.", "contact_p4": "2D-GenMed 21 kabi aniq talabalar guruhlari uchun resurslarni muvofiqlashtirasizmi yoki Prime Diagnostics kabi muassasa bo'ylab diagnostikani standartlashtirishni xohlaysizmi, biz yordam berishga tayyormiz.", "contact_h3": "Lingvistik hamkorlik va FSP tashabbusi", "contact_p5": "Tibbiyot global tildir, ammo uni amaliyotda qo'llash uchun kerak bo'lgan terminologiya chegaralar osha farq qiladi. Yevropa tizimiga tayyorgarlik ko'rayotgan bitiruvchilar uchun C1 darajasida Fachsprache-ni o'zlashtirish klinik zaruratdir.", "contact_p6": "WardCalc til o'rganish vositasi sifatida ham muhim o'rin tutadi. Agar siz hozirda Assistenzarzt bo'lish yo'lida bo'lsangiz, FSP imtihoniga tayyorgarlik ko'rayotgan bo'lsangiz yoki B2/C1 sertifikatiga ega bo'lsangiz, biz bilan hamkorlik qilishga taklif qilamiz.", "contact_h4": "Ta'lim mediasi va hujjatli filmlar", "contact_p7": "Bizning vazifamiz faqat algoritmlar bilan cheklanmaydi. Klinik tibbiyot kelajagini tushunish uchun uning tarixini o'rganish kerak. Biz yuqori sifatli, hujjatli uslubdagi tibbiy ta'lim kontentini ishlab chiqishda kashshofmiz.", "contact_p8": "Virusli sensatsiyadan ko'ra, biz tarixiy aniqlikka e'tibor qaratamiz. Agar siz tibbiyot tarixchisi yoki ijodkor bo'lsangiz, biz global platformalarda tibbiy ta'lim standartini ko'taradigan qo'shma loyihalarni ko'rib chiqishga tayyormiz.", "contact_form_title": "To'g'ridan-to'g'ri so'rov protokoli", "contact_form_desc": "Bog'lanish uchun quyidagi xavfsiz shakldan foydalaning. Klinik jadvallar tufayli javob berish uchun 48 soatgacha vaqt berishingizni so'raymiz.", "contact_label_name": "To'liq ism / Unvon", "contact_ph_name": "Dr. Eshmat Toshmatov", "contact_label_email": "Institutsional elektron pochta", "contact_ph_email": "shifokor@shifoxona.uz", "contact_label_subject": "So'rov turi", "contact_opt_1": "Klinik mantiq bo'yicha fikr-mulohaza", "contact_opt_2": "Institutsional hamkorlik", "contact_opt_3": "Lingvistik/FSP hamkorlik", "contact_opt_4": "Hujjatli film ishlab chiqarish", "contact_opt_5": "Umumiy so'rov", "contact_label_message": "Batafsil xabar", "contact_ph_message": "Iltimos, taklifingiz bo'yicha aniq ma'lumotlarni taqdim eting...", "contact_btn_send": "Xabarni yuborish",
     
-    // Nephrology
-    "tool_egfr_title": "eGFR kalkulyatori", "tool_egfr_desc": "CKD-EPI formulasi bo'yicha buyrak funksiyasini baholash.",
-    "tool_crcl_title": "Kreatinin klirensi", "tool_crcl_desc": "Dori dozalari uchun Cockcroft-Gault formulasi.",
-    "tool_fena_title": "FENa", "tool_fena_desc": "O'tkir buyrak zararlanishi etiologiyasi (natriy ekskretsiyasi).",
-    "tool_feurea_title": "FEUrea", "tool_feurea_desc": "Diuretiklar fonida karbamidning fraksion ekskretsiyasi.",
-    "tool_aniongap_title": "Anion farqi", "tool_aniongap_desc": "Metabolik atsidozni toifalash.",
-    "tool_winters_title": "Winters formulasi", "tool_winters_desc": "Metabolik atsidozda kutilayotgan respirator kompensatsiya.",
-    "tool_calcium_title": "Kalsiy korreksiyasi", "tool_calcium_desc": "Gipoalbuminemiyada haqiqiy kalsiy darajasi.",
-    "tool_sodium_title": "Natriy korreksiyasi", "tool_sodium_desc": "Giperglikemiyada haqiqiy natriy darajasi.",
-    
-    // Critical Care
-    "tool_gcs_title": "Glazgo koma shkalasi (GCS)", "tool_gcs_desc": "Ong darajasini baholash uchun nevrologik matritsa.",
-    "tool_sofa_title": "SOFA shkalasi", "tool_sofa_desc": "Sepsisda a'zolar yetishmovchiligi va o'lim xavfi.",
-    "tool_qsofa_title": "qSOFA shkalasi", "tool_qsofa_desc": "Sepsis mezonlari uchun tezkor prikrovat skriningi.",
-    "tool_apache_title": "APACHE II shkalasi", "tool_apache_desc": "Reanimatsiyada kasallik og'irligi va o'lim prognozi.",
-    "tool_parkland_title": "Parkland formulasi", "tool_parkland_desc": "Kuyishlarda 24 soatlik suyuqlik reanimatsiyasi hajmi.",
-    "tool_ivfluids_title": "Suyuqlik infuziyasi", "tool_ivfluids_desc": "Vena ichiga suyuqlik yuborish uchun 4-2-1 qoidasi.",
-    "tool_nexus_title": "NEXUS mezonlari", "tool_nexus_desc": "Bo'yin umurtqasini KT siz klinik istisno qilish.",
-    "tool_canadian_title": "Kanada KT qoidasi", "tool_canadian_desc": "Yengil bosh miya jarohatlarida KT ga ko'rsatmalar.",
-    
-    // Surgery
-    "tool_alvarado_title": "Alvarado shkalasi", "tool_alvarado_desc": "O'tkir appenditsit rivojlanishining klinik ehtimoli.",
-    "tool_ranson_title": "Ranson mezonlari", "tool_ranson_desc": "O'tkir pankreatitda o'lim xavfi prognozi.",
-    "tool_caprini_title": "Caprini shkalasi", "tool_caprini_desc": "Jarrohlik bemorlarida VTE va DVT xavfini baholash.",
-    "tool_nsqip_title": "NSQIP kalkulyatori", "tool_nsqip_desc": "Operatsiyadan keyingi asoratlarni prognoz qilish.",
-    
-    // Neurology
-    "tool_nihss_title": "NIHSS insult shkalasi", "tool_nihss_desc": "O'tkir miya infarktining og'irlik darajasini o'lchash.",
-    "tool_abcd2_title": "ABCD2 shkalasi", "tool_abcd2_desc": "TIA dan keyingi kunlarda insult xavfi prognozi.",
-    "tool_hunt_title": "Hunt va Hess shkalasi", "tool_hunt_desc": "Subaraknoidal qon ketishida o'lim ehtimoli.",
-    "tool_chalice_title": "CHALICE qoidasi", "tool_chalice_desc": "Bolalar bosh miya jarohatida KT zarurligini aniqlash.",
-    
-    // General & Peds
-    "tool_apgar_title": "APGAR shkalasi", "tool_apgar_desc": "Yangi tug'ilgan chaqaloq holatini baholash (1 va 5 daqiqa).",
-    "tool_holliday_title": "Holliday-Segar formulasi", "tool_holliday_desc": "Bolalar uchun sutkalik suyuqlik va kaloriya ehtiyoji.",
-    "tool_bishop_title": "Bishop shkalasi", "tool_bishop_desc": "Tug'ruqni qo'zg'atish uchun bachadon bo'yni tayyorligi.",
-    "tool_centor_title": "Centor shkalasi", "tool_centor_desc": "A guruhi streptokokkli faringit ehtimoli.",
-    "tool_bmi_title": "TMI va TYY", "tool_bmi_desc": "Tana massasi indeksi va yuzasi (dozalash uchun).",
-    "tool_ecog_title": "ECOG holati", "tool_ecog_desc": "Onkologik bemorlarning funksional holatini baholash.",
+    "priv_pill": "Huquqiy va muvofiqlik", "priv_title": "Klinik ma'lumotlar va", "priv_highlight": "Maxfiylik siyosati.", "priv_intro": "Kuchga kirish sanasi: May 2026 yil. Ushbu keng qamrovli maxfiylik protokoli WardCalc platformasidan foydalanishingizni tartibga soladi. Bizning asosiy tamoyilimiz klinik yaxlitlikni va bemor ma'lumotlarini mutlaq himoya qilishdir.", "priv_h1": "1. Holatsiz arxitektura va bemor ma'lumotlari suvereniteti printsipi", "priv_p1_1": "WardCalc tibbiyot mutaxassislari tomonidan klinik muhitda foydalanish uchun ishlab chiqilgan. Tibbiyotning raqamlashtirilishi ko'pincha himoyalangan sog'liq ma'lumotlarining (PHI) ruxsatsiz yig'ilishiga olib keldi. Biz bu paradigmani tubdan rad etamiz.", "priv_p1_2": "HIPAA va GDPR kabi global qoidalarga mutlaq muvofiqlikni ta'minlash uchun WardCalc \"Holatsiz arxitektura\" asosida ishlaydi. Bizning kalkulyatorlarimizga kiritilgan har qanday ma'lumot faqatgina qurilmangizning vaqtinchalik xotirasida (RAM) mavjud bo'ladi.", "priv_p1_3": "Hech qanday holatda bemor ma'lumotlari WardCalc serverlariga uzatilmaydi, qayta ishlanmaydi yoki saqlanmaydi. Sahifa yangilanishi bilan ma'lumotlar matematik jihatdan yo'q qilinadi. Bemorlaringiz ma'lumotlari to'liq o'zingizda qoladi.", "priv_h2": "2. Qurilma xotirasi va foydalanuvchi afzalliklari", "priv_p2_1": "Bemor ma'lumotlarini yig'ishdan saqlansak-da, ilova foydalanuvchi tajribasini yaxshilash uchun mo'ljallangan. Biz interfeys afzalliklarini saqlash uchun mahalliy xotiradan (HTML5 LocalStorage) foydalanamiz.", "priv_p2_2": "Qurilmangizda saqlanadigan ma'lumotlar quyidagilar bilan chegaralangan:", "priv_li_1": "<strong>Til afzalligi:</strong> Tanlangan til (Ingliz, Nemis, Rus, O'zbek).", "priv_li_2": "<strong>Vizual mavzu:</strong> Tanlangan interfeys mavzusi (Qorong'i yoki Yorug').", "priv_li_3": "<strong>Klinik sevimlilar:</strong> Siz saqlab qo'ygan kalkulyatorlar.", "priv_p2_3": "Bu ma'lumotlar hech qachon bulut bilan sinxronlanmaydi. WardCalc ro'yxatdan o'tishni talab qilmaydi. Brauzer keshini tozalash orqali ularni osongina o'chirishingiz mumkin.", "priv_h3": "3. Iqtisodiy barqarorlik va reklama", "priv_p3_1": "Bizning maqsadimiz premium, dalillarga asoslangan vositalarni barcha tibbiyot xodimlari uchun 100% bepul saqlashdir. Server infratuzilmasini saqlab qolish uchun WardCalc reklama tarmoqlariga, asosan Google AdSense ga tayanadi.", "priv_p3_2": "Biz sizning klinik kiritishlaringizni kuzatmasak ham, reklama hamkorlarimiz cookie-fayllardan foydalanadi.", "priv_p3_3": "Quyidagilardan xabardor bo'ling:", "priv_li_4": "Google va boshqa sotuvchilar cookie-fayllardan foydalanadilar.", "priv_li_5": "DoubleClick cookie-faylidan foydalanish Google ga reklamalarni ko'rsatish imkonini beradi.", "priv_li_6": "Foydalanuvchilar Google Ads Settings orqali moslashtirilgan reklamadan voz kechishlari mumkin.", "priv_p3_4": "Biz reklama bannerlarini shunday joylashtiramizki, ular klinik ma'lumotlarni to'sib qo'ymasin.", "priv_h4": "4. Server jurnallari va kiberxavfsizlik", "priv_p4_1": "DDoS hujumlari va ruxsatsiz buzishlardan himoya qilish uchun xosting provayderlarimiz standart server jurnalini avtomatik yig'adi.", "priv_p4_2": "Bu infratuzilmaviy ma'lumotlarga IP manzillar, brauzer turlari va vaqt tamg'alari kiradi. Ular tizim ma'murchiligi uchun xizmat qiladi.", "priv_p4_3": "Biz ushbu ma'lumotlarni shaxsga oid ma'lumotlar bilan bog'lamaymiz.", "priv_h5": "5. Xalqaro huquqlar (GDPR)", "priv_p5_1": "Biz xalqaro miqyosda ishlaymiz va GDPR kabi qoidalarni hurmat qilamiz.", "priv_p5_2": "WardCalc foydalanuvchi hisoblarini talab qilmagani uchun, o'chirish huquqi bizning arxitekturamiz orqali tabiiy ravishda ta'minlanadi.", "priv_p5_3": "Cookie-fayllar bo'yicha esa siz ularni brauzeringiz orqali cheklash huquqiga egasiz.", "priv_h6": "6. Voyaga yetmaganlar uchun", "priv_p6_1": "WardCalc faqat tibbiyot xodimlari va talabalar uchun mo'ljallangan.", "priv_p6_2": "Biz 18 yoshdan kichik shaxslardan ataylab ma'lumot yig'maymiz.", "priv_h7": "7. Siyosatni yangilash", "priv_p7_1": "Ilovamiz rivojlangani sari, bu siyosat ham yangilanishi mumkin.", "priv_p7_2": "Ushbu protokoldagi har qanday o'zgarishlar shu sahifada e'lon qilinadi.",
 
-    /* --- FOOTER LINKS --- */
-    "footer_about": "Biz haqimizda",
-    "footer_contact": "Aloqa",
-    "footer_privacy": "Maxfiylik",
-    "footer_terms": "Shartlar",
-    "footer_disclaimer": "Rad etish",
+    "terms_pill": "Huquqiy va muvofiqlik", "terms_title": "Foydalanish shartlari va", "terms_highlight": "Klinik kelishuv.", "terms_intro": "Kuchga kirish sanasi: May 2026. WardCalc raqamli platformasiga kirish orqali siz ushbu shartlarga to'liq rozilik bildirasiz.", "terms_h1": "1. Professional qamrov", "terms_p1_1": "WardCalc maxsus klinik hisoblash katalogidir. Ushbu shartlar yuridik kuchga ega shartnoma hisoblanadi.", "terms_p1_2": "Platforma faqat tibbiyot xodimlari uchun mo'ljallangan. U aholi tomonidan o'z-o'ziga tashxis qo'yish uchun mo'ljallanmagan.", "terms_h2": "2. Tibbiy ogohlantirish", "terms_p2_1": "WardCalc avtonom diagnostika dvigateli emas, balki hisoblash yordamchisidir.", "terms_p2_2": "Algoritm natijalari hech qachon rasmiy tibbiy maslahat o'rnini bosa olmaydi. Asosiy mas'uliyat shifokorning klinik qarorida qoladi.", "terms_p2_3": "WardCalc ushbu platformadagi hisob-kitoblar tufayli kelib chiqqan xatolar yoki bemorga yetkazilgan zararlar uchun javobgar bo'lmaydi.", "terms_h3": "3. Intellektual mulk", "terms_p3_1": "Tibbiy formulalar umumiy mulk hisoblanadi.", "terms_p3_2": "Biroq, WardCalc ning arxitekturasi va dizayni to'liq bizning intellektual mulkimizdir. Platformani klonlash qat'iyan man etiladi.", "terms_h4": "4. Ko'p tilli matritsa", "terms_p4_1": "Ko'p tilli funksiya xalqaro bitiruvchilarga yordam berish uchun mo'ljallangan.", "terms_p4_2": "Tarjimalar yordamchi vosita sifatida taqdim etiladi. Shubha tug'ilganda har doim ingliz tilidagi asosiy adabiyotga murojaat qiling.", "terms_h5": "5. Qabul qilinadigan foydalanish", "terms_p5_1": "Foydalanuvchilar server infratuzilmasiga zarar yetkazmaslikka rozi bo'lishadi.", "terms_p5_2": "Avtomatlashtirilgan skriptlardan foydalanish yoki xavfsizlikni buzishga urinish IP bloklanishiga olib keladi.", "terms_h6": "6. Reklama tarmoqlari", "terms_p6_1": "Tizimni bepul saqlash uchun WardCalc uchinchi tomon reklamalaridan foydalanadi.", "terms_p6_2": "Biz tashqi veb-saytlar va ularning tibbiy da'volari ustidan hech qanday nazoratga ega emasmiz.", "terms_h7": "7. \"Qanday bo'lsa shunday\" taqdim etish", "terms_p7_1": "Platforma \"boricha\" taqdim etiladi. Tizimning mutlaqo uzluksiz ishlashiga kafolat bermaymiz.", "terms_p7_2": "Ma'muriyat kalkulyatorlarni oldindan ogohlantirmasdan o'zgartirish yoki to'xtatib qo'yish huquqiga ega.", "terms_h8": "8. Zararni qoplash", "terms_p8_1": "Ushbu platformadan foydalangan holda, siz ma'muriyatni har qanday da'volar yoki sud ishlaridan ozod qilishga rozi bo'lasiz.", "terms_p8_2": "Bu platformadan foydalanish bilan bog'liq har qanday klinik noto'g'ri amaliyot da'volarini o'z ichiga oladi.", "terms_h9": "9. Shartlarni qayta ko'rib chiqish", "terms_p9_1": "Biz ushbu Shartlarni xohlagan vaqtda o'zgartirish huquqini o'zida saqlab qolamiz.",
 
-    /* --- EXTENDED CLINICAL MANIFESTO (ABOUT US) --- */
-    "about_manifesto": "Klinik manifest",
-    "about_title": "WardCalc haqida: Bedside diagnostikasining kelajagi",
-    "about_highlight": "Nazariya va amaliyot.",
-    "about_intro": "WardCalc klinik voqelikdan tug'ilgan: inson miyasi mantiq uchun mukammal, ammo formulalarni yodlash uchun zaifdir.",
-    "about_p1": "WardCalc yordam ko'rsatish joyida ma'lumotlarni qayta ishlashda tub burilishni anglatadi. Buxoro davlat tibbiyot instituti (BSMI) bitiruvchi talabasi tomonidan yaratilgan ushbu platforma shifokorlarning kognitiv yukini kamaytirishga xizmat qiladi. Tibbiy bilimlar har necha oyda ikki baravar ko'payib borayotgan davrda, WardCalc shifokorga formulalarni yodlashga emas, balki bemorga e'tibor qaratishga imkon beradi.",
-    "about_p2": "Arxitektura uchta ustunga asoslangan: Tezlik, Aniqlik va Foydalanish qulayligi. Boshqa ilovalar ro'yxatdan o'tish va reklamalar bilan vaqtni olsa, WardCalc shoshilinch holatlarda va palata aylanmasida bir necha soniya ichida natija berish uchun optimallashtirilgan.",
-    "about_p3": "WardCalc jahon tibbiyot hamjamiyatiga xizmat qiladi. Bizning ko'p tilli tizimimiz (O'zbek, Ingliz, Nemis, Rus) xalqaro tizimlarda ishlayotgan yoki Fachsprachprüfung (FSP) kabi imtihonlarga tayyorlanayotgan shifokorlar uchun mo'ljallangan. Klinik asboblar iqtisodiy to'siqlarsiz, barcha uchun bepul bo'lishi kerak deb hisoblaymiz.",
-
-    /* --- CONTACT & COLLABORATION --- */
-    "contact_pill": "Global aloqa markazi",
-    "contact_title": "WardCalc tarmog'iga",
-    "contact_highlight": "qo'shiling.",
-    "contact_intro": "Tibbiyot — hamkorlik fanidir. Biz klinik fikr-mulohazalar, hamkorlik takliflari va akademik aloqalar uchun doimo ochiqmiz.",
-    "contact_h1": "Klinik qayta aloqa va Tekshiruv",
-    "contact_p1": "Zamonaviy tibbiyotda dasturiy ta'minot doimiy auditga muhtoj. WardCalc ning har bir algoritmi fiziologiya bilan ishlash uchun yaratilgan. Biz foydalanuvchilarimizni faol tekshiruvchilar deb bilamiz. Agar xatolik topsangiz, biz uchun bu eng ustuvor vazifadir.",
-    "contact_h2": "Akademik integratsiya",
-    "contact_p3": "Biz universitetlar va Prime Diagnostics kabi klinikalar bilan WardCalc ni o'quv dasturlariga tatbiq etish bo'yicha hamkorlikni qidirmoqdamiz. 2D-GenMed 21 kabi guruhlar uchun maxsus yechimlarni qo'llab-quvvatlaymiz.",
-    "contact_form_title": "To'g'ridan-to'g'ri so'rov protokoli",
-    "contact_btn_send": "Xabarni yuborish",
-    "contact_label_name": "To'liq ismingiz va unvoningiz",
-    "contact_label_email": "Institutsional elektron pochta",
-    "contact_label_subject": "So'rov turi",
-    "contact_opt_1": "Klinik fikr-mulohaza",
-    "contact_opt_2": "Institutsional hamkorlik",
-    "contact_opt_3": "FSP va til bo'yicha hamkorlik",
-    "contact_opt_4": "Media va hujjatli loyihalar",
-    "contact_opt_5": "Umumiy savollar",
-    "contact_label_message": "Batafsil taklif",
-
-    /* --- MEDICAL DISCLAIMER --- */
-    "disc_pill": "Klinik ogohlantirish",
-    "disc_title": "To'liq",
-    "disc_highlight": "Tibbiy rad etish bildiruvnomasi.",
-    "disc_intro": "2026-yil may oyidan kuchga kirgan. Ushbu hujjat algoritmlar va shifokor mas'uliyati o'rtasidagi huquqiy chegarani belgilaydi.",
-    "disc_h1": "1. Asosiy maqsad va diagnostika emasligi",
-    "disc_p1_1": "WardCalc ma'lumot beruvchi asbobdir va u sertifikatlangan diagnostik tibbiy qurilma EMAS. U FDA yoki EMA tomonidan mustaqil qaror qabul qilish uchun baholanmagan.",
-    "disc_p1_2": "Ma'lumotlar faqat ta'lim maqsadida beriladi. Shifokorning mustaqil klinik xulosasi platformadan foydalanishning majburiy shartidir.",
-    "disc_h2": "2. Shifokor mas'uliyati",
-    "disc_p2_1": "Hech qanday algoritm inson fiziologiyasini to'liq qamrab ololmaydi. Foydalanuvchi har qanday klinik aralashuv uchun 100% javobgardir. Shifoxona protokollariga zid ravishda natijalarga ko'r-ko'rona ergashish mumkin emas.",
-
-    /* --- PRIVACY POLICY --- */
-    "priv_pill": "Huquq va Komplaens",
-    "priv_title": "Klinik ma'lumotlar va",
-    "priv_highlight": "Maxfiylik siyosati.",
-    "priv
+    "disc_pill": "Klinik ogohlantirish", "disc_title": "Keng qamrovli tibbiy", "disc_highlight": "Ogohlantirish.", "disc_intro": "Kuchga kirish sanasi: May 2026. Ushbu hujjat hisoblash algoritmlari va klinik mas'uliyat o'rtasidagi qonuniy chegarani belgilaydi.", "disc_h1": "1. Asosiy maqsad", "disc_p1_1": "WardCalc FDA yoki EMA tomonidan tasdiqlangan diagnostika qurilmasi emas.", "disc_p1_2": "Hech qanday holatda platformaning natijalari qat'iy tibbiy maslahat yoki diagnostika sifatida qabul qilinmasligi kerak.", "disc_h2": "2. Klinik qarorning ustuvorligi", "disc_p2_1": "Tibbiyot raqamli algoritm qamrab ololmaydigan o'zgaruvchilar sintezini talab qiladi.", "disc_p2_2": "Insonning klinik qarorining mutlaq ustuvorligini ortiqcha baholab bo'lmaydi.", "disc_p2_3": "Agar WardCalc natijasi sizning klinik sezgingizga zidd bo'lsa, mahalliy protokollarga tayanishingiz shart.", "disc_h3": "3. Shifokor va bemor munosabatlarining yo'qligi", "disc_p3_1": "WardCalc ga fiziologik parametrlarni kiritish shifokor va bemor munosabatlarini yaratmaydi.", "disc_p3_2": "Biz siz yoki bemorlaringiz oldida hech qanday ishonchli majburiyatni o'z zimmamizga olmaymiz.", "disc_h4": "4. Algoritmlarning xatoga yo'l qo'yishi", "disc_p4_1": "Tibbiyot fani tez rivojlanmoqda. Biz har bir formulaning abadiy to'g'riligiga kafolat bera olmaymiz.", "disc_p4_2": "Dastur kodidagi xatolar yoki yangilanishlardagi kechikishlar ehtimoliy xavflardir.", "disc_p4_3": "Biz ma'lumotlarning xatosizligiga oid barcha kafolatlarni qat'iyan rad etamiz.", "disc_h5": "5. Farmakologik dozalash xavflari", "disc_p5_1": "Farmakologik hisob-kitoblar noto'g'ri bajarilsa, bemorga halokatli zarar yetkazish xavfi yuqori.", "disc_p5_2": "Har bir dozani rasmiy darsliklar bilan mustaqil tekshirish shifokorning vazifasidir.", "disc_p5_3": "WardCalc dori xatolari uchun mutlaqo javobgarlikni o'z zimmamizga olmaydi.", "disc_h6": "6. Lingvistik nuanslar", "disc_p6_1": "Ko'p tilli matritsa xalqaro shifokorlarga yordam berish uchun mo'ljallangan.", "disc_p6_2": "Tarjimalarda asl matnning aniqligi yetishmasligi mumkin. Shubha tug'ilganda ingliz tilidagi standartlardan foydalaning.", "disc_h7": "7. Favqulodda vaziyatlarda texnologiya xatolari", "disc_p7_1": "O'tkir favqulodda vaziyatlarda texnologiya har doim zaifdir.", "disc_p7_2": "WardCalc ga tayanish hayotni saqlab qolish aralashuvlarini kechiktirishiga hech qachon yo'l qo'ymasligingiz kerak.", "disc_h8": "8. Xavfni to'liq qabul qilish", "disc_p8_1": "Platformadan foydalanish orqali siz xavfni to'liq qabul qilishga rasman rozi bo'lasiz.", "disc_p8_2": "Ushbu tovon puli klinik xatolar yoki bemor jarohatlaridan kelib chiqadigan har qanday yuridik to'lovlarni qoplaydi.", "disc_h9": "9. Institutsional muvofiqlik", "disc_p9_1": "Shifokorlar WardCalc dan foydalanish o'z shifoxonalari siyosatiga mos kelishini mustaqil ravishda tekshirishlari kerak.", "disc_p9_2": "Kalkulyatorlarga kirish orqali siz ushbu Tibbiy Ogohlantirish shartlarini to'liq qabul qilasiz."
+};
