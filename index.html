@@ -232,11 +232,6 @@
                 <span id="theme-icon" class="material-symbols-outlined text-[18px]">dark_mode</span>
             </button>
 
-            <button id="emergency-toggle" class="flex items-center gap-1 border border-error/50 text-error bg-error/5 px-2 py-1.5 md:px-4 md:py-1.5 rounded-full transition-all font-mono text-[10px] md:text-xs font-bold cursor-pointer">
-                <span class="material-symbols-outlined text-[16px]">emergency</span>
-                <span data-i18n="nav_emergency" class="hidden md:inline">EMERGENCY</span>
-            </button>
-
             <div id="language-switcher" class="flex items-center gap-1 bg-surface-container-high/40 p-1 rounded-full border border-outline-variant/30 backdrop-blur-md font-mono text-[10px] md:text-xs font-bold">
                 <button onclick="window.changeLang('en')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary transition-colors">EN</button>
                 <button onclick="window.changeLang('de')" class="px-2 py-1 md:px-3 md:py-1 rounded-full text-on-surface-variant hover:text-secondary transition-colors">DE</button>
@@ -890,16 +885,6 @@
             const themeIcon = document.getElementById('theme-icon');
             if(themeIcon) {
                 themeIcon.innerText = document.documentElement.classList.contains('dark') ? 'light_mode' : 'dark_mode';
-            }
-
-            // Emergency Button
-            const emergencyBtn = document.getElementById('emergency-toggle');
-            if(emergencyBtn) {
-                emergencyBtn.addEventListener('click', () => {
-                    document.body.classList.toggle('emergency-active');
-                    emergencyBtn.classList.toggle('bg-error'); emergencyBtn.classList.toggle('text-white');
-                    emergencyBtn.classList.toggle('text-error'); emergencyBtn.classList.toggle('bg-error/5');
-                });
             }
 
             // Search and Filter Logic
