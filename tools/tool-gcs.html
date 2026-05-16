@@ -22,7 +22,6 @@
         .font-serif { font-family: 'Playfair Display', serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
 
-        /* --- THE LIQUID GLASS UI MOAT --- */
         .glass-panel {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(24px);
@@ -37,12 +36,11 @@
             border-color: rgba(255, 255, 255, 0.08);
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.3);
         }
-        /* OLED Night Shift Mode */
+        
         html.dark.oled-mode body { background-color: #000000; }
         html.dark.oled-mode .glass-panel { background: #050505; border-color: #1a1a1a; }
         html.dark.oled-mode .aurora-blob { display: none; } 
 
-        /* --- FSP BILINGUAL HOVER MOAT --- */
         .fsp-hover { position: relative; cursor: help; border-bottom: 1px dashed var(--color-primary); }
         .fsp-hover::after {
             content: attr(data-fsp);
@@ -53,12 +51,27 @@
         }
         .fsp-hover:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        /* Ambient Aurora Background */
+        /* NEW ANIMATIONS */
         @keyframes blob-float {
             0%, 100% { transform: translate(0, 0) scale(1); }
             50% { transform: translate(3vw, -3vh) scale(1.05); }
         }
         .aurora-blob { animation: blob-float 15s ease-in-out infinite; }
+        
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-cascade { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-soft { animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
         
         .hide-section { display: none !important; }
     </style>
@@ -87,11 +100,15 @@
 
     <main class="pt-24 pb-20 px-4 max-w-3xl mx-auto relative z-10">
         
-        <div class="mb-8 flex items-center justify-between">
+        <div class="mb-8 flex items-center justify-between animate-cascade">
             <div>
                 <div class="flex items-center gap-2 mb-2">
-                    <span class="px-2 py-1 rounded bg-error/10 text-error font-mono text-[10px] font-bold tracking-widest uppercase">Neurology</span>
-                    <span class="px-2 py-1 rounded bg-secondary/10 text-secondary font-mono text-[10px] font-bold tracking-widest uppercase" data-fsp="Erwachsene">Adults</span>
+                    <span class="px-2 py-1 rounded flex items-center gap-1 bg-error/10 text-error font-mono text-[10px] font-bold tracking-widest uppercase">
+                        <span class="material-symbols-outlined text-[12px]">neurology</span> Neurology
+                    </span>
+                    <span class="px-2 py-1 rounded flex items-center gap-1 bg-secondary/10 text-secondary font-mono text-[10px] font-bold tracking-widest uppercase" data-fsp="Erwachsene">
+                        <span class="material-symbols-outlined text-[12px]">group</span> Adults
+                    </span>
                 </div>
                 <h1 class="text-3xl font-serif font-bold tracking-tight text-slate-900 dark:text-white" data-i18n="tool_gcs_title">Glasgow Coma Scale</h1>
                 <p class="text-sm text-slate-500 mt-1 fsp-hover" data-fsp="Bewusstseinslage bewerten">Neurological assessment matrix for conscious level.</p>
@@ -100,36 +117,37 @@
                 <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
             </div>
         </div>
-
-        <div class="glass-panel p-6 mb-6 space-y-8">
+        <div class="glass-panel p-6 mb-6 space-y-8 animate-cascade delay-100">
             
-            <div>
-                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 fsp-hover" data-fsp="Augenöffnen (E)">1. Eye Opening (E)</h3>
+            <div class="animate-cascade delay-100">
+                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 flex items-center gap-2 fsp-hover" data-fsp="Augenöffnen (E)">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span> 1. Eye Opening (E)
+                </h3>
                 <div class="grid grid-cols-1 gap-3">
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_e" value="4" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Spontaneous</span>
                             <span class="font-mono text-xs opacity-70">+4</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_e" value="3" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">To sound / speech</span>
                             <span class="font-mono text-xs opacity-70">+3</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_e" value="2" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">To pressure / pain</span>
                             <span class="font-mono text-xs opacity-70">+2</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_e" value="1" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">None</span>
                             <span class="font-mono text-xs opacity-70">+1</span>
                         </div>
@@ -137,40 +155,42 @@
                 </div>
             </div>
 
-            <div>
-                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 fsp-hover" data-fsp="Verbale Antwort (V)">2. Verbal Response (V)</h3>
+            <div class="animate-cascade delay-200">
+                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 flex items-center gap-2 fsp-hover" data-fsp="Verbale Antwort (V)">
+                    <span class="material-symbols-outlined text-[18px]">record_voice_over</span> 2. Verbal Response (V)
+                </h3>
                 <div class="grid grid-cols-1 gap-3">
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="5" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Oriented (Person, place, time)</span>
                             <span class="font-mono text-xs opacity-70">+5</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="4" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Confused conversation</span>
                             <span class="font-mono text-xs opacity-70">+4</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="3" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Inappropriate words</span>
                             <span class="font-mono text-xs opacity-70">+3</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="2" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Incomprehensible sounds</span>
                             <span class="font-mono text-xs opacity-70">+2</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="1" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">None</span>
                             <span class="font-mono text-xs opacity-70">+1</span>
                         </div>
@@ -178,47 +198,49 @@
                 </div>
             </div>
 
-            <div>
-                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 fsp-hover" data-fsp="Motorische Antwort (M)">3. Motor Response (M)</h3>
+            <div class="animate-cascade delay-300">
+                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 flex items-center gap-2 fsp-hover" data-fsp="Motorische Antwort (M)">
+                    <span class="material-symbols-outlined text-[18px]">accessibility_new</span> 3. Motor Response (M)
+                </h3>
                 <div class="grid grid-cols-1 gap-3">
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="6" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Obeys commands</span>
                             <span class="font-mono text-xs opacity-70">+6</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="5" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Localizes to pressure/pain</span>
                             <span class="font-mono text-xs opacity-70">+5</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="4" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Normal flexion (Withdraws)</span>
                             <span class="font-mono text-xs opacity-70">+4</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="3" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Abnormal flexion (Decorticate)</span>
                             <span class="font-mono text-xs opacity-70">+3</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="2" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">Extension (Decerebrate)</span>
                             <span class="font-mono text-xs opacity-70">+2</span>
                         </div>
                     </label>
-                    <label class="relative cursor-pointer block">
+                    <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="1" class="peer sr-only" onchange="calculateGCS()">
-                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98]">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
                             <span class="font-medium text-sm">None</span>
                             <span class="font-mono text-xs opacity-70">+1</span>
                         </div>
@@ -230,7 +252,9 @@
             
             <div class="flex flex-col md:flex-row items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-6 mb-6">
                 <div class="text-center md:text-left mb-4 md:mb-0">
-                    <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-1 fsp-hover" data-fsp="Gesamtpunktzahl">Total Score</h2>
+                    <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-1 flex items-center gap-2 justify-center md:justify-start fsp-hover" data-fsp="Gesamtpunktzahl">
+                        <span class="material-symbols-outlined text-[16px]">calculate</span> Total Score
+                    </h2>
                     <div class="flex items-baseline gap-2 justify-center md:justify-start">
                         <span id="gcs-score-display" class="text-6xl font-serif font-bold text-primary">--</span>
                         <span class="text-xl font-mono text-slate-400">/ 15</span>
@@ -259,31 +283,32 @@
                     <span class="font-bold text-sm text-secondary flex items-center gap-2">
                         <span class="material-symbols-outlined text-[18px]">volunteer_activism</span> Patient & Family Translation
                     </span>
-                    <span class="material-symbols-outlined text-slate-400" id="empathy-icon">expand_more</span>
+                    <span class="material-symbols-outlined text-slate-400 transition-transform duration-300" id="empathy-icon">expand_more</span>
                 </button>
                 <div id="empathy-content" class="p-4 bg-white dark:bg-slate-900 hidden text-sm text-slate-600 dark:text-slate-400 italic"></div>
             </div>
 
             <div>
                 <div class="flex justify-between items-end mb-2">
-                    <h3 class="font-bold text-sm uppercase tracking-wider text-slate-500 fsp-hover" data-fsp="Arztbrief Generator">EHR Hand-off Generator</h3>
+                    <h3 class="font-bold text-sm uppercase tracking-wider text-slate-500 flex items-center gap-1 fsp-hover" data-fsp="Arztbrief Generator">
+                        <span class="material-symbols-outlined text-[16px]">description</span> EHR Hand-off Generator
+                    </h3>
                     <div class="flex gap-2">
                         <button onclick="generateHandoff('en')" class="text-[10px] font-mono font-bold px-2 py-1 bg-slate-200 dark:bg-slate-700 rounded hover:bg-primary hover:text-white transition">EN</button>
                         <button onclick="generateHandoff('de')" class="text-[10px] font-mono font-bold px-2 py-1 bg-slate-200 dark:bg-slate-700 rounded hover:bg-primary hover:text-white transition">DE (FSP)</button>
                     </div>
                 </div>
-                <div class="relative">
-                    <textarea id="handoff-box" class="w-full h-24 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs font-mono text-slate-600 dark:text-slate-400 focus:ring-primary focus:border-primary resize-none" readonly></textarea>
-                    <button onclick="copyHandoff()" class="absolute bottom-3 right-3 bg-primary text-white p-2 rounded-lg shadow-md hover:bg-primary/80 transition flex items-center gap-1 text-xs font-bold">
+                <div class="relative group">
+                    <textarea id="handoff-box" class="w-full h-28 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs font-mono text-slate-600 dark:text-slate-400 focus:ring-primary focus:border-primary resize-none transition-colors" readonly></textarea>
+                    <button onclick="copyHandoff()" class="absolute bottom-3 right-3 bg-primary text-white px-3 py-1.5 rounded-lg shadow-md hover:bg-primary/80 transition-all flex items-center gap-1 text-xs font-bold active:scale-95">
                         <span class="material-symbols-outlined text-[16px]">content_copy</span> Copy
                     </button>
                 </div>
             </div>
         </div>
-
-        <div class="glass-panel p-6 mb-8">
+        <div class="glass-panel p-6 mb-8 animate-cascade delay-300">
             <h2 class="text-xl font-serif font-bold text-slate-800 dark:text-slate-200 border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary">local_library</span> WardCalc Clinical Archives
+                <span class="material-symbols-outlined text-primary text-[24px]">local_library</span> WardCalc Clinical Archives
             </h2>
             
             <div class="flex flex-wrap gap-2 mb-6">
@@ -292,144 +317,185 @@
                 <button onclick="switchTab('osce')" id="tab-osce" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-primary">OSCE Survival</button>
             </div>
 
-            <div id="content-genesis" class="archive-content space-y-6 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                <div>
-                    <h3 class="text-lg font-bold text-primary mb-2 border-b border-primary/20 pb-1 flex items-center gap-2"><span class="material-symbols-outlined text-[20px]">history_edu</span> The Historical Genesis</h3>
-                    <p class="mb-3">Prior to the 1970s, the global medical community lacked a standardized, objective vocabulary to communicate a patient's level of consciousness. Clinicians relied on highly subjective, ambiguous terms such as <em>"stuporous,"</em> <em>"obtunded,"</em> <em>"lethargic,"</em> or <em>"comatose."</em> A patient deemed "stuporous" by a junior resident might be classified entirely differently by an attending neurosurgeon hours later. This lack of a universal metric led to catastrophic delays in recognizing expanding intracranial hemorrhages, ultimately costing lives.</p>
-                    <p>In 1974, two professors of neurosurgery, <span class="font-bold text-slate-900 dark:text-white">Graham Teasdale</span> and <span class="font-bold text-slate-900 dark:text-white">Bryan Jennett</span>, working at the Institute of Neurological Sciences at Southern General Hospital in Glasgow, Scotland, published a seminal paper in <em>The Lancet</em>. They proposed a highly structured, reproducible, mathematically discrete scoring system: the <strong>Glasgow Coma Scale (GCS)</strong>. By breaking down consciousness into three distinct behavioral responses—Eye Opening, Verbal Response, and Motor Response—they created an international standard that remains the foundation of advanced trauma life support (ATLS) today.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-primary mb-2 border-b border-primary/20 pb-1 flex items-center gap-2"><span class="material-symbols-outlined text-[20px]">neurology</span> Neuroanatomical Pathophysiology</h3>
-                    <p class="mb-3">Consciousness is not located in a single "center" of the brain. Instead, clinical consciousness requires the flawless interaction of two major physiological pillars:</p>
-                    <ol class="list-decimal pl-5 space-y-2 mb-3">
-                        <li><strong>The Ascending Reticular Activating System (ARAS):</strong> A complex network of neurons located in the upper pons, midbrain, and diencephalon. The ARAS is fundamentally responsible for <em>arousal</em> and wakefulness.</li>
-                        <li><strong>The Cerebral Cortex:</strong> The highly folded outer layer of the brain (both hemispheres), which is responsible for <em>awareness</em>, high-level cognition, and executing complex commands.</li>
+            <div id="content-genesis" class="archive-content space-y-8 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                
+                <section>
+                    <h3 class="text-lg font-bold text-primary mb-2 border-b border-primary/20 pb-1 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px]">history_edu</span> The Historical Genesis
+                    </h3>
+                    <p class="mb-3">Prior to 1974, the global medical community lacked a standardized, objective vocabulary to communicate a patient's level of consciousness. Clinicians relied on highly subjective, ambiguous terms such as <em>"stuporous,"</em> <em>"obtunded,"</em> <em>"lethargic,"</em> or <em>"comatose."</em> A patient deemed "stuporous" by a junior resident might be classified entirely differently by an attending neurosurgeon hours later. This lack of a universal metric led to catastrophic delays in recognizing expanding intracranial hemorrhages, ultimately costing lives.</p>
+                    <p>In response, neurosurgery professors <span class="font-bold text-slate-900 dark:text-white">Graham Teasdale</span> and <span class="font-bold text-slate-900 dark:text-white">Bryan Jennett</span> at the Institute of Neurological Sciences in Glasgow, Scotland, published a seminal paper in <em>The Lancet</em>. They proposed a highly structured, reproducible, mathematically discrete scoring system: the <strong>Glasgow Coma Scale (GCS)</strong>. By fractionating consciousness into three distinct behavioral vectors—Eye Opening, Verbal Response, and Motor Response—they created an international standard that remains the absolute foundation of Advanced Trauma Life Support (ATLS).</p>
+                </section>
+
+                <section>
+                    <h3 class="text-lg font-bold text-primary mb-2 border-b border-primary/20 pb-1 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px]">neurology</span> Advanced Neuroanatomical Pathophysiology
+                    </h3>
+                    <p class="mb-3">Consciousness is not localized to a singular anatomical "center." Clinically, consciousness requires the flawless, high-speed interaction of two major physiological pillars:</p>
+                    <ol class="list-decimal pl-5 space-y-3 mb-4">
+                        <li><strong>The Ascending Reticular Activating System (ARAS):</strong> A highly complex network of neurons originating in the pontine tegmentum and midbrain, projecting diffusely through the intralaminar nuclei of the thalamus to the cerebral cortex. The ARAS is fundamentally responsible for <em>arousal</em> (wakefulness) and is heavily dependent on neurotransmitters like acetylcholine and norepinephrine.</li>
+                        <li><strong>The Cerebral Hemispheres:</strong> The highly folded outer cortex is responsible for <em>awareness</em>, high-level cognition, language synthesis, and executing complex, multi-step motor commands.</li>
                     </ol>
-                    <p class="mb-3">The GCS is an elegant, non-invasive way to physically test these deep neurological structures:</p>
-                    <ul class="list-disc pl-5 space-y-2 mb-3">
-                        <li><strong>Eye Opening (E)</strong> acts as a direct proxy for ARAS integrity. Spontaneous eye opening indicates that the brainstem arousal mechanisms are functioning.</li>
-                        <li><strong>Verbal Response (V)</strong> tests the complex integration of the cerebral cortex, specifically the language centers (Broca's and Wernicke's areas), memory, and orientation.</li>
-                        <li><strong>Motor Response (M)</strong> tests the descending motor tracts (corticospinal tracts) and is the most sensitive predictor of severe neurological outcome.</li>
+                    <p class="mb-3">The GCS is an elegant, non-invasive method to physically interrogate these deep neurological structures:</p>
+                    <ul class="list-disc pl-5 space-y-2 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <li><strong>Eye Opening (E):</strong> Acts as a direct proxy for ARAS and brainstem integrity. Spontaneous eye opening indicates that the basal arousal mechanisms in the midbrain are intact, even if the cortex is severely damaged (as seen in persistent vegetative states).</li>
+                        <li><strong>Verbal Response (V):</strong> Interrogates the complex integration of the cerebral cortex, specifically testing the dominant hemisphere's language centers (Broca's for expression, Wernicke's for comprehension), alongside hippocampal memory recall and spatial orientation.</li>
+                        <li><strong>Motor Response (M):</strong> Tests the descending motor tracts (specifically the corticospinal tract). Because the motor pathways traverse the entire neuraxis—from the motor cortex, through the internal capsule, down the brainstem, and into the spinal cord—it is the single most sensitive predictor of severe neurological morbidity.</li>
                     </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-primary mb-2 border-b border-primary/20 pb-1 flex items-center gap-2"><span class="material-symbols-outlined text-[20px]">trending_down</span> Intracranial Pressure & Herniation</h3>
-                    <p class="mb-3">The ultimate utility of the GCS on the ward is to track the trajectory of Intracranial Pressure (ICP). According to the Monroe-Kellie doctrine, the skull is a rigid box containing brain tissue, blood, and cerebrospinal fluid. If an expanding mass (like an epidural hematoma) occurs, pressure rapidly builds.</p>
-                    <p class="mb-3">Cerebral Perfusion Pressure (CPP) dictates blood flow to the brain and is defined mathematically as: <strong>CPP = MAP - ICP</strong></p>
-                    <p>As ICP rises, CPP drops, leading to cerebral ischemia. The brain responds by pushing downward toward the foramen magnum (Herniation). As tissue compresses the midbrain, the patient loses the ability to obey commands, progressing to abnormal flexion (decorticate posturing, indicating red nucleus damage) and eventually extension (decerebrate posturing, indicating severe lower brainstem damage). <strong>A drop in the GCS of 2 or more points is a neurosurgical emergency indicating active herniation.</strong></p>
-                </div>
-            </div>
+                </section>
 
-            <div id="content-mnemonic" class="archive-content hidden space-y-6">
-                <div class="bg-primary/5 dark:bg-primary/10 p-5 rounded-2xl border border-primary/20">
-                    <h3 class="font-bold text-xl text-slate-800 dark:text-slate-200 mb-2">The "EVM 4-5-6" Framework</h3>
-                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-5">To execute flawless bedside calculations, you must immediately recall the maximum score ceilings. Use the following visual association matrix:</p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
-                            <div class="flex items-center gap-3 mb-2">
-                                <span class="w-10 h-10 rounded-lg bg-primary/20 text-primary flex items-center justify-center font-bold font-mono text-2xl">E</span>
-                                <strong class="text-lg text-slate-800 dark:text-slate-200">Max 4</strong>
+                <section>
+                    <h3 class="text-lg font-bold text-primary mb-2 border-b border-primary/20 pb-1 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[20px]">trending_down</span> Intracranial Pressure (ICP) & Herniation Syndromes
+                    </h3>
+                    <p class="mb-3">The ultimate utility of serial GCS tracking on the ward is to detect the silent, deadly trajectory of rising Intracranial Pressure (ICP). According to the <strong>Monro-Kellie doctrine</strong>, the adult cranial vault is a rigid, fixed-volume box containing brain tissue (80%), arterial/venous blood (10%), and cerebrospinal fluid (10%).</p>
+                    <p class="mb-3">Normal ICP ranges from <strong>5 to 15 mmHg</strong>. If an expanding space-occupying lesion occurs (e.g., an epidural hematoma from a middle meningeal artery laceration), the compensatory mechanisms (displacing CSF into the spinal canal) are rapidly exhausted. Pressure then builds exponentially.</p>
+                    <p class="mb-3">Cerebral Perfusion Pressure (CPP), the pressure gradient driving oxygenated blood into the brain, is defined mathematically as:</p>
+                    <div class="bg-primary/10 p-4 rounded-xl text-center font-mono font-bold text-lg mb-3 border border-primary/20 text-primary">
+                        CPP = MAP - ICP
+                    </div>
+                    <p class="mb-3">As ICP rises, CPP dangerously drops, leading to global cerebral ischemia. The brain's physiological response to this ischemia is to trigger a massive sympathetic surge, resulting in <strong>Cushing's Triad</strong>: profound hypertension, reflex bradycardia, and irregular respirations.</p>
+                    <p>Simultaneously, the physical mass effect forces brain tissue downward across the tentorium cerebelli. In <strong>Uncal Herniation</strong>, the medial temporal lobe compresses the midbrain and cranial nerve III (causing a "blown," dilated pupil). As compression progresses caudally down the brainstem, the patient loses cortical function (GCS Motor drops to 3 - decorticate), then midbrain function (GCS Motor drops to 2 - decerebrate), and finally medullary function (apnea and death). <strong>A drop in the GCS of 2 or more points is an absolute neurosurgical emergency requiring immediate CT imaging and osmotherapy (Mannitol/Hypertonic Saline).</strong></p>
+                </section>
+            </div>
+            <div id="content-mnemonic" class="archive-content hidden space-y-8">
+                
+                <section class="bg-primary/5 dark:bg-primary/10 p-6 rounded-2xl border border-primary/20">
+                    <h3 class="font-bold text-xl text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[24px]">psychology</span> The "EVM 4-5-6" Framework
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-6">To execute flawless bedside calculations during high-stress resuscitations, you must immediately recall the maximum score ceilings. Use this visual association matrix:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 hover:border-primary/50 transition-colors">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="w-12 h-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold font-mono text-2xl shadow-inner">E</span>
+                                <strong class="text-xl text-slate-800 dark:text-slate-200">Max 4</strong>
                             </div>
-                            <p class="text-xs text-slate-500">The word <strong>EYES</strong> contains exactly 4 letters. Therefore, max eye score is 4.</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">The word <strong>EYES</strong> contains exactly 4 letters. Therefore, the maximum eye score is always 4.</p>
                         </div>
-                        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
-                            <div class="flex items-center gap-3 mb-2">
-                                <span class="w-10 h-10 rounded-lg bg-secondary/20 text-secondary flex items-center justify-center font-bold font-mono text-2xl">V</span>
-                                <strong class="text-lg text-slate-800 dark:text-slate-200">Max 5</strong>
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 hover:border-primary/50 transition-colors">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="w-12 h-12 rounded-xl bg-secondary/20 text-secondary flex items-center justify-center font-bold font-mono text-2xl shadow-inner">V</span>
+                                <strong class="text-xl text-slate-800 dark:text-slate-200">Max 5</strong>
                             </div>
-                            <p class="text-xs text-slate-500">The letter <strong>V</strong> represents the Roman Numeral for 5. Therefore, max verbal is 5.</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">The letter <strong>V</strong> represents the Roman Numeral for 5. Therefore, the maximum verbal score is 5.</p>
                         </div>
-                        <div class="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700">
-                            <div class="flex items-center gap-3 mb-2">
-                                <span class="w-10 h-10 rounded-lg bg-error/20 text-error flex items-center justify-center font-bold font-mono text-2xl">M</span>
-                                <strong class="text-lg text-slate-800 dark:text-slate-200">Max 6</strong>
+                        <div class="bg-white dark:bg-slate-800 p-5 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 hover:border-primary/50 transition-colors">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="w-12 h-12 rounded-xl bg-error/20 text-error flex items-center justify-center font-bold font-mono text-2xl shadow-inner">M</span>
+                                <strong class="text-xl text-slate-800 dark:text-slate-200">Max 6</strong>
                             </div>
-                            <p class="text-xs text-slate-500">A high-performance <strong>MOTOR</strong> uses a V6 engine (6 cylinders). Therefore, max motor is 6.</p>
+                            <p class="text-xs text-slate-500 leading-relaxed">A high-performance <strong>MOTOR</strong> uses a V6 engine (6 cylinders). Therefore, the max motor score is 6.</p>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-error mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-[20px]">gavel</span> Strict Clinical Rules & Documentation Pitfalls</h3>
-                    <p class="text-sm text-slate-700 dark:text-slate-300 mb-4">The GCS is frequently miscalculated due to confounding physical trauma. Adhere strictly to these rules:</p>
-                    <ul class="space-y-4 text-sm text-slate-700 dark:text-slate-300">
-                        <li class="flex gap-3">
-                            <span class="material-symbols-outlined text-error mt-0.5 text-[18px]">emergency</span>
+                </section>
+
+                <section>
+                    <h3 class="text-lg font-bold text-error mb-4 flex items-center gap-2 border-b border-error/20 pb-2">
+                        <span class="material-symbols-outlined text-[22px]">gavel</span> Strict Clinical Rules & FSP Documentation Pitfalls
+                    </h3>
+                    <p class="text-sm text-slate-700 dark:text-slate-300 mb-5">The GCS is frequently miscalculated by junior clinicians due to confounding physical trauma or metabolic states. Adhere strictly to these documentation rules to avoid critical triage errors:</p>
+                    
+                    <ul class="space-y-6 text-sm text-slate-700 dark:text-slate-300">
+                        <li class="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <span class="material-symbols-outlined text-error text-[24px]">emergency</span>
                             <div>
-                                <strong class="text-slate-900 dark:text-white block fsp-hover" data-fsp="Endotracheale Intubation">1. The Intubated Patient (Airway Confounder)</strong>
-                                An endotracheal tube physically passes through the vocal cords, rendering speech impossible. <strong>Never</strong> assume a patient "would be" oriented if the tube was removed. Score Verbal as 1 and document with a 'T'. Example: <span class="font-mono bg-slate-100 dark:bg-slate-800 px-1 rounded">E4 V1T M6</span>.
+                                <strong class="text-slate-900 dark:text-white block mb-1 text-base fsp-hover" data-fsp="Endotracheale Intubation">1. The Intubated Patient (Airway Confounder)</strong>
+                                An endotracheal tube physically passes through the vocal cords, rendering phonation impossible. <strong>Never</strong> guess or assume a patient "would be" oriented if the tube was removed. You must strictly score the Verbal response as 1, and document it with a 'T' (Tube). Example: <span class="font-mono bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 px-2 py-0.5 rounded text-primary shadow-sm">E4 V1T M6</span>.
                             </div>
                         </li>
-                        <li class="flex gap-3">
-                            <span class="material-symbols-outlined text-error mt-0.5 text-[18px]">visibility_off</span>
+                        <li class="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <span class="material-symbols-outlined text-error text-[24px]">visibility_off</span>
                             <div>
-                                <strong class="text-slate-900 dark:text-white block fsp-hover" data-fsp="Periorbitales Hämatom">2. Severe Facial Trauma (Visual Confounder)</strong>
-                                Massive maxillofacial trauma resulting in severe periorbital edema forces the eyelids shut. Score Eye response as 1 and document with a 'C' (Closed). Example: <span class="font-mono bg-slate-100 dark:bg-slate-800 px-1 rounded">E1C V5 M6</span>.
+                                <strong class="text-slate-900 dark:text-white block mb-1 text-base fsp-hover" data-fsp="Periorbitales Hämatom">2. Severe Facial Trauma (Visual Confounder)</strong>
+                                If a patient sustains massive maxillofacial trauma (e.g., Le Fort fractures) resulting in severe periorbital edema that forces the eyelids shut, they physically cannot open their eyes to stimuli. Score the Eye response as 1, and document it with a 'C' (Closed). Example: <span class="font-mono bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 px-2 py-0.5 rounded text-primary shadow-sm">E1C V5 M6</span>.
                             </div>
                         </li>
-                        <li class="flex gap-3">
-                            <span class="material-symbols-outlined text-error mt-0.5 text-[18px]">wheelchair_pickup</span>
+                        <li class="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <span class="material-symbols-outlined text-error text-[24px]">accessibility</span>
                             <div>
-                                <strong class="text-slate-900 dark:text-white block">3. Spinal Cord Transection (Motor Confounder)</strong>
-                                If a patient severs their cervical spine, they are paralyzed below the neck. Pinching a toe will yield a Motor score of 1, falsely implying brain damage. You must test motor function above the level of injury (e.g., test cranial nerves).
+                                <strong class="text-slate-900 dark:text-white block mb-1 text-base">3. Decorticate vs. Decerebrate (Anatomical Localization)</strong>
+                                Abnormal posturing is a dire sign of descending brainstem damage.
+                                <ul class="list-disc pl-5 mt-2 space-y-1 text-xs">
+                                    <li><strong class="fsp-hover text-slate-800 dark:text-slate-200" data-fsp="Beugesynergismus">Decorticate Posturing (Abnormal Flexion - M3):</strong> Indicates damage above the red nucleus (e.g., thalamic or massive cortical damage). The rubrospinal tract remains intact, causing flexion of the upper extremities.</li>
+                                    <li><strong class="fsp-hover text-slate-800 dark:text-slate-200" data-fsp="Strecksynergismus">Decerebrate Posturing (Extension - M2):</strong> Indicates damage <em>below</em> the red nucleus (midbrain/pons level). The rubrospinal tract is severed, leaving the vestibulospinal tract unopposed, causing rigid extension of all extremities. This carries a significantly worse prognosis.</li>
+                                </ul>
                             </div>
                         </li>
-                        <li class="flex gap-3">
-                            <span class="material-symbols-outlined text-error mt-0.5 text-[18px]">record_voice_over</span>
+                        <li class="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                            <span class="material-symbols-outlined text-error text-[24px]">record_voice_over</span>
                             <div>
-                                <strong class="text-slate-900 dark:text-white block fsp-hover" data-fsp="Aphasie nach Schlaganfall">4. The Aphasic Stroke Patient</strong>
-                                A patient with a middle cerebral artery (MCA) infarction may suffer from expressive (Broca's) aphasia. They may be awake and attempting to communicate, but only incomprehensible sounds emerge. While this gives a Verbal score of 2, the GCS is poor for isolated focal deficits. Always supplement with the NIHSS.
+                                <strong class="text-slate-900 dark:text-white block mb-1 text-base fsp-hover" data-fsp="Aphasie nach Schlaganfall">4. The Aphasic Stroke Patient</strong>
+                                A patient with a dominant middle cerebral artery (MCA) infarction may suffer from expressive (Broca's) aphasia. They may be fully awake, alert, and attempting to communicate, but only incomprehensible sounds emerge. While this forces a Verbal score of 2, the GCS is a poor tool for isolated focal deficits. Always supplement the GCS with the NIH Stroke Scale (NIHSS) in acute stroke scenarios.
                             </div>
                         </li>
                     </ul>
-                </div>
+                </section>
             </div>
-
             <div id="content-osce" class="archive-content hidden space-y-6">
-                <div class="mb-4">
-                    <h3 class="font-bold text-lg text-slate-800 dark:text-slate-200">Clinical Vignette Simulator</h3>
-                    <p class="text-sm text-slate-500">Test your rapid diagnostic recall against these high-yield board-style scenarios.</p>
+                
+                <div class="mb-6 border-b border-slate-200 dark:border-slate-700 pb-4">
+                    <h3 class="font-bold text-xl text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-[24px]">school</span> Clinical Vignette Simulator
+                    </h3>
+                    <p class="text-sm text-slate-500 mt-1">Test your rapid diagnostic recall and anatomical localization against these high-yield board-style scenarios.</p>
                 </div>
-                <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="font-bold text-primary font-mono text-sm">CASE 01: TRAUMA BAY</span>
-                        <span class="px-2 py-0.5 bg-error/10 text-error rounded text-[10px] font-bold uppercase tracking-widest">Hard</span>
+
+                <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="font-bold text-primary font-mono text-sm tracking-wider">CASE 01: TRAUMA BAY</span>
+                        <span class="px-3 py-1 bg-error/10 text-error rounded-full text-[10px] font-bold uppercase tracking-widest border border-error/20">Hard</span>
                     </div>
-                    <div class="text-sm text-slate-700 dark:text-slate-300 font-medium mb-4 italic border-l-2 border-primary/40 pl-3 py-1">
-                        "A 24-year-old male arrives via EMS after a high-speed motorcycle crash. He does not open his eyes spontaneously, but when you vigorously apply a sternal rub, his eyes snap open. He is groaning continuously but making no recognizable words. Upon applying pressure to his supraorbital nerve, both arms rigidly flex inward across his chest."
+                    <div class="text-sm text-slate-700 dark:text-slate-300 font-medium mb-5 italic border-l-4 border-primary pl-4 py-2 bg-slate-50 dark:bg-slate-900/50 rounded-r-lg">
+                        "A 24-year-old male arrives via EMS after a high-speed motorcycle crash (unhelmeted). He does not open his eyes spontaneously, but when you vigorously apply a sternal rub, his eyes snap open. He is groaning continuously but making no recognizable words. Upon applying pressure to his supraorbital nerve, both arms rigidly flex inward across his chest."
                     </div>
-                    <button onclick="document.getElementById('osce-ans-1').classList.remove('hidden'); this.classList.add('hidden')" class="w-full py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg font-bold text-sm transition hover:bg-slate-200 dark:hover:bg-slate-600">Reveal Calculation</button>
-                    <div id="osce-ans-1" class="hidden mt-3 pt-3 border-t border-slate-200 dark:border-slate-700 text-sm">
-                        <p class="font-bold text-error mb-2 text-lg">GCS = 7 (Severe TBI)</p>
-                        <ul class="text-slate-600 dark:text-slate-400 space-y-1 mb-2">
-                            <li><strong>E2:</strong> Opens eyes to pressure (sternal rub).</li>
-                            <li><strong>V2:</strong> Incomprehensible sounds (groaning).</li>
-                            <li><strong>M3:</strong> Abnormal flexion (decorticate posturing indicates profound cortical/thalamic damage).</li>
+                    <button onclick="document.getElementById('osce-ans-1').classList.remove('hidden'); this.classList.add('hidden')" class="w-full py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm transition hover:bg-slate-200 dark:hover:bg-slate-600 flex justify-center items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">visibility</span> Reveal Calculation & Pathology
+                    </button>
+                    
+                    <div id="osce-ans-1" class="hidden mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 text-sm animate-cascade">
+                        <p class="font-bold text-error mb-3 text-xl flex items-center gap-2">
+                            <span class="material-symbols-outlined">warning</span> GCS = 7 (Severe TBI)
+                        </p>
+                        <ul class="text-slate-600 dark:text-slate-400 space-y-2 mb-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">E2:</strong> Opens eyes to pressure (sternal rub).</li>
+                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">V2:</strong> Incomprehensible sounds (groaning).</li>
+                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">M3:</strong> Abnormal flexion (decorticate posturing). This specific motor response localizes the lesion <em>above</em> the red nucleus, indicating profound cortical, subcortical, or diencephalic damage while preserving the rubrospinal tract.</li>
                         </ul>
-                        <p class="font-bold text-primary text-xs uppercase bg-primary/10 p-2 rounded inline-block">Action: Intubate immediately. Secure airway.</p>
+                        <p class="font-bold text-primary text-xs uppercase bg-primary/10 p-3 rounded-lg border border-primary/20 inline-flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[16px]">airway</span> Action: Intubate immediately. Secure airway. Obtain stat non-contrast CT Head.
+                        </p>
                     </div>
                 </div>
-                <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="font-bold text-primary font-mono text-sm">CASE 02: TOXICOLOGY</span>
-                        <span class="px-2 py-0.5 bg-amber-500/10 text-amber-500 rounded text-[10px] font-bold uppercase tracking-widest">Medium</span>
+
+                <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="font-bold text-amber-600 font-mono text-sm tracking-wider">CASE 02: TOXICOLOGY</span>
+                        <span class="px-3 py-1 bg-amber-500/10 text-amber-600 rounded-full text-[10px] font-bold uppercase tracking-widest border border-amber-500/20">Medium</span>
                     </div>
-                    <div class="text-sm text-slate-700 dark:text-slate-300 font-medium mb-4 italic border-l-2 border-primary/40 pl-3 py-1">
+                    <div class="text-sm text-slate-700 dark:text-slate-300 font-medium mb-5 italic border-l-4 border-amber-500 pl-4 py-2 bg-slate-50 dark:bg-slate-900/50 rounded-r-lg">
                         "A 55-year-old female is found unresponsive surrounded by empty pill bottles. In the ER, she keeps her eyes closed until you loudly call her name. She looks at you and says, 'The purple elephants are dancing in the kitchen.' When you ask her to squeeze your fingers, she grabs your hand and pushes it away aggressively."
                     </div>
-                    <button onclick="document.getElementById('osce-ans-2').classList.remove('hidden'); this.classList.add('hidden')" class="w-full py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg font-bold text-sm transition hover:bg-slate-200 dark:hover:bg-slate-600">Reveal Calculation</button>
-                    <div id="osce-ans-2" class="hidden mt-3 pt-3 border-t border-slate-200 dark:border-slate-700 text-sm">
-                        <p class="font-bold text-amber-500 mb-2 text-lg">GCS = 11 (Moderate Injury / Encephalopathy)</p>
-                        <ul class="text-slate-600 dark:text-slate-400 space-y-1 mb-2">
-                            <li><strong>E3:</strong> Opens eyes to speech (calling her name).</li>
-                            <li><strong>V3:</strong> Inappropriate words (talking about elephants).</li>
-                            <li><strong>M5:</strong> Localizes to pain/stimulus (crossing the midline to push hand away).</li>
+                    <button onclick="document.getElementById('osce-ans-2').classList.remove('hidden'); this.classList.add('hidden')" class="w-full py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm transition hover:bg-slate-200 dark:hover:bg-slate-600 flex justify-center items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">visibility</span> Reveal Calculation & Pathology
+                    </button>
+                    
+                    <div id="osce-ans-2" class="hidden mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 text-sm animate-cascade">
+                        <p class="font-bold text-amber-600 mb-3 text-xl flex items-center gap-2">
+                            <span class="material-symbols-outlined">science</span> GCS = 11 (Moderate / Toxic Encephalopathy)
+                        </p>
+                        <ul class="text-slate-600 dark:text-slate-400 space-y-2 mb-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">E3:</strong> Opens eyes to speech (calling her name).</li>
+                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">V3:</strong> Inappropriate words (talking about elephants, not forming a conversational response).</li>
+                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">M5:</strong> Localizes to pain/stimulus (crossing the midline to push your hand away implies the motor cortex and descending tracts are intact enough to map spatial coordinates).</li>
                         </ul>
-                        <p class="font-bold text-primary text-xs uppercase bg-primary/10 p-2 rounded inline-block">Action: Administer Naloxone, order stat tox screen.</p>
+                        <p class="font-bold text-amber-600 text-xs uppercase bg-amber-500/10 p-3 rounded-lg border border-amber-500/20 inline-flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[16px]">vaccines</span> Action: Administer Naloxone, order stat tox screen, protect airway if GCS drops.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-
         <script>
             function calculateGCS() {
                 const e = document.querySelector('input[name="gcs_e"]:checked');
@@ -444,7 +510,12 @@
                     card.classList.remove('hide-section');
                     setTimeout(() => { card.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none'); }, 10);
 
-                    document.getElementById('gcs-score-display').innerText = score;
+                    // Animate the score numbers
+                    const scoreDisplay = document.getElementById('gcs-score-display');
+                    scoreDisplay.innerText = score;
+                    scoreDisplay.classList.add('scale-125');
+                    setTimeout(() => scoreDisplay.classList.remove('scale-125'), 200);
+
                     const percent = ((score - 3) / 12) * 100;
                     document.getElementById('gcs-thermometer').style.width = `${percent}%`;
 
@@ -458,24 +529,24 @@
                     if (score <= 8) {
                         severityText = "Severe Head Injury"; colorClass = "text-error";
                         thermometer.className = "absolute top-0 left-0 h-full bg-error transition-all duration-1000 ease-out";
-                        decisionOutput.className = "bg-error/5 border-l-4 border-error p-4 rounded-r-xl text-sm font-medium leading-relaxed";
-                        actionPlan = "<strong>CRITICAL:</strong> GCS ≤ 8 indicates inability to protect airway. <br>1. Prepare for immediate endotracheal intubation.<br>2. Urgent non-contrast CT Head.<br>3. Stat Neurosurgery consult.";
-                        empathyText = `Their score is ${score}. This indicates a deep state of unconsciousness. Because they cannot protect their own breathing, we need to place a breathing tube to keep them safe while we get urgent scans of their brain.`;
+                        decisionOutput.className = "bg-error/5 border-l-4 border-error p-5 rounded-r-xl text-sm font-medium leading-relaxed animate-pulse-soft";
+                        actionPlan = "<strong class='text-error text-base flex items-center gap-1 mb-2'><span class='material-symbols-outlined'>warning</span> CRITICAL: AIRWAY COMPROMISED</strong> GCS ≤ 8 indicates inability to protect airway. <br><br>1. Prepare for immediate endotracheal intubation (RSI).<br>2. Elevate head of bed to 30° to decrease ICP.<br>3. Urgent non-contrast CT Head to rule out hematoma.<br>4. Stat Neurosurgery consult.";
+                        empathyText = `Their score is ${score} out of 15. This indicates a deep state of unconsciousness. Because they cannot protect their own breathing right now, we need to place a breathing tube to keep their lungs safe. We are rushing them to a brain scan to see exactly what is causing this.`;
                     } else if (score >= 9 && score <= 12) {
                         severityText = "Moderate Head Injury"; colorClass = "text-amber-500";
                         thermometer.className = "absolute top-0 left-0 h-full bg-amber-500 transition-all duration-1000 ease-out";
-                        decisionOutput.className = "bg-amber-500/5 border-l-4 border-amber-500 p-4 rounded-r-xl text-sm font-medium leading-relaxed";
-                        actionPlan = "<strong>WARNING:</strong> High risk of deterioration.<br>1. Urgent non-contrast CT Head indicated.<br>2. Admit for close neuro-observation.<br>3. Re-evaluate GCS every 30-60 minutes.";
-                        empathyText = `Their score is ${score}. This means they have suffered a moderate injury. They are confused and not fully awake. We are going to do a brain scan to ensure there is no bleeding and watch them very closely in the hospital.`;
+                        decisionOutput.className = "bg-amber-500/5 border-l-4 border-amber-500 p-5 rounded-r-xl text-sm font-medium leading-relaxed";
+                        actionPlan = "<strong class='text-amber-600 text-base flex items-center gap-1 mb-2'><span class='material-symbols-outlined'>error</span> WARNING: DETERIORATION RISK</strong> High risk of neurological decline. <br><br>1. Urgent non-contrast CT Head indicated.<br>2. Admit to ICU or step-down unit for close neuro-observation.<br>3. Re-evaluate GCS every 30-60 minutes.";
+                        empathyText = `Their score is ${score} out of 15. This means they have suffered a moderate injury. They are confused and not fully awake right now. We are going to do a brain scan to ensure there is no internal bleeding, and we will watch them very closely in the hospital overnight.`;
                     } else {
                         severityText = "Mild Head Injury"; colorClass = "text-secondary";
                         thermometer.className = "absolute top-0 left-0 h-full bg-secondary transition-all duration-1000 ease-out";
-                        decisionOutput.className = "bg-secondary/5 border-l-4 border-secondary p-4 rounded-r-xl text-sm font-medium leading-relaxed";
-                        actionPlan = "<strong>STANDARD:</strong> Low risk, but requires vigilance.<br>1. CT Head only if Canadian CT Head criteria are met (e.g., vomiting, age >65).<br>2. Observe or discharge with strict head injury warnings.";
-                        empathyText = `Their score is ${score}. This is a reassuring score indicating a mild injury or concussion. They are awake and responding, but we will still evaluate them to ensure it is safe for them to go home.`;
+                        decisionOutput.className = "bg-secondary/5 border-l-4 border-secondary p-5 rounded-r-xl text-sm font-medium leading-relaxed";
+                        actionPlan = "<strong class='text-secondary text-base flex items-center gap-1 mb-2'><span class='material-symbols-outlined'>check_circle</span> STANDARD CARE</strong> Low risk, but requires clinical vigilance. <br><br>1. Apply Canadian CT Head criteria (e.g., age >65, vomiting, dangerous mechanism) to determine if imaging is needed.<br>2. Observe for 4-6 hours or discharge with strict head injury warnings and a reliable companion.";
+                        empathyText = `Their score is ${score} out of 15. This is a reassuring score indicating a mild injury or concussion. They are awake and responding appropriately. We will evaluate them for a little while longer to ensure it is completely safe for them to go home.`;
                     }
 
-                    severityDisplay.innerText = severityText; severityDisplay.className = `text-lg font-bold mt-1 ${colorClass}`;
+                    severityDisplay.innerText = severityText; severityDisplay.className = `text-lg font-bold mt-1 ${colorClass} transition-colors`;
                     svgIcon.className = `w-16 h-16 transition-colors duration-500 ${colorClass}`;
                     decisionOutput.innerHTML = actionPlan; document.getElementById('empathy-content').innerText = empathyText;
                     generateHandoff('en');
@@ -493,7 +564,7 @@
                 const mText = m.nextElementSibling.querySelector('span').innerText.toLowerCase();
                 
                 let note = lang === 'de' ? 
-                    `NEUROLOGISCHER STATUS (FSP Arztbrief):\nDer Patient präsentiert sich mit einem GCS von ${score}/15 (E${e.value} V${v.value} M${m.value}).\nAugenöffnen: ${e.value} Punkte.\nVerbale Antwort: ${v.value} Punkte.\nMotorische Antwort: ${m.value} Punkte.\n\nKlinische Beurteilung: ${score <= 8 ? "Schweres Schädel-Hirn-Trauma (SHT). Intubationsbereitschaft und sofortiges CCT indiziert." : score <= 12 ? "Mittelschweres SHT. CCT und enge Überwachung indiziert." : "Leichtes SHT. Überwachung nach klinischem Ermessen."}` : 
+                    `NEUROLOGISCHER STATUS (FSP Arztbrief):\nDer Patient präsentiert sich mit einem GCS von ${score}/15 (E${e.value} V${v.value} M${m.value}).\nAugenöffnen: ${e.value} Punkte (${eText}).\nVerbale Antwort: ${v.value} Punkte (${vText}).\nMotorische Antwort: ${m.value} Punkte (${mText}).\n\nKlinische Beurteilung: ${score <= 8 ? "Schweres Schädel-Hirn-Trauma (SHT). Intubationsbereitschaft und sofortiges CCT indiziert." : score <= 12 ? "Mittelschweres SHT. CCT und enge Überwachung indiziert." : "Leichtes SHT. Überwachung nach klinischem Ermessen."}` : 
                     `NEUROLOGICAL ASSESSMENT:\nPatient assessed with a Glasgow Coma Scale (GCS) of ${score}/15.\nSubscores: Eyes: ${e.value} (${eText}), Verbal: ${v.value} (${vText}), Motor: ${m.value} (${mText}).\n\nPlan: ${score <= 8 ? "Severe TBI. Prepare for definitive airway management (intubation) and stat CT Head." : score <= 12 ? "Moderate TBI. Obtain CT Head and admit for close serial neuro checks." : "Mild TBI. Routine neuro checks."}`;
                 document.getElementById('handoff-box').value = note;
             }
@@ -513,7 +584,9 @@
                     btn.classList.remove('bg-primary', 'text-white', 'shadow-md');
                     btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-500');
                 });
-                document.getElementById('content-' + tabId).classList.remove('hidden');
+                const content = document.getElementById('content-' + tabId);
+                content.classList.remove('hidden');
+                content.classList.add('animate-cascade'); // Re-trigger animation on tab switch
                 const activeBtn = document.getElementById('tab-' + tabId);
                 activeBtn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-500');
                 activeBtn.classList.add('bg-primary', 'text-white', 'shadow-md');
@@ -549,15 +622,21 @@
             function changeLang(lang) { alert(`Language engine switched to: ${lang.toUpperCase()}.`); }
         </script>
     </main>
-    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg py-8 mt-12 relative z-10">
+    
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg py-10 mt-12 relative z-10">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <div class="inline-flex items-center justify-center p-2 rounded-xl bg-slate-100 dark:bg-slate-800 mb-4">
-                <span class="font-serif font-bold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">W</span>
+            <div class="inline-flex items-center justify-center p-3 rounded-2xl bg-slate-100 dark:bg-slate-800 mb-5 shadow-inner">
+                <span class="font-serif font-bold text-xl text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">W</span>
             </div>
-            <p class="text-xs text-slate-500 font-medium tracking-wide mb-2">BUILT BY A MEDICAL STUDENT • FOR MEDICAL PROFESSIONALS</p>
-            <p class="text-[10px] text-slate-400 max-w-xl mx-auto mb-4 leading-relaxed">
-                <strong class="text-error">CLINICAL WARNING:</strong> WardCalc is a cognitive aid. Do not use for definitive diagnosis. Always defer to independent clinical judgment and local hospital protocols.
+            <p class="text-xs text-slate-500 font-bold tracking-widest mb-3 uppercase">BUILT BY A MEDICAL STUDENT • FOR MEDICAL PROFESSIONALS</p>
+            <p class="text-[11px] text-slate-400 max-w-2xl mx-auto mb-6 leading-relaxed bg-slate-50 dark:bg-slate-800/30 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                <strong class="text-error flex justify-center items-center gap-1 mb-1"><span class="material-symbols-outlined text-[14px]">warning</span> CLINICAL WARNING</strong> WardCalc is an educational and cognitive aid. Do not use for definitive bedside diagnosis or to direct critical interventions. Always defer to independent clinical judgment, verified pharmacological compendiums, and localized institutional protocols.
             </p>
+            <div class="flex justify-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                <a href="../privacy.html" class="hover:text-primary transition">Privacy Policy</a>
+                <a href="../terms.html" class="hover:text-primary transition">Terms of Service</a>
+                <a href="../disclaimer.html" class="hover:text-primary transition">Disclaimer</a>
+            </div>
         </div>
     </footer>
 </body>
