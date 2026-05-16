@@ -496,7 +496,7 @@
                 </div>
             </div>
         </div>
-        <script>
+                <script>
             function calculateGCS() {
                 const e = document.querySelector('input[name="gcs_e"]:checked');
                 const v = document.querySelector('input[name="gcs_v"]:checked');
@@ -510,7 +510,6 @@
                     card.classList.remove('hide-section');
                     setTimeout(() => { card.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none'); }, 10);
 
-                    // Animate the score numbers
                     const scoreDisplay = document.getElementById('gcs-score-display');
                     scoreDisplay.innerText = score;
                     scoreDisplay.classList.add('scale-125');
@@ -519,36 +518,180 @@
                     const percent = ((score - 3) / 12) * 100;
                     document.getElementById('gcs-thermometer').style.width = `${percent}%`;
 
+                    const clinicalData = {
+                        3: {
+                            category: "Severe TBI", color: "text-error", bgClass: "bg-error",
+                            severityText: "Deep Coma / Brain Death Protocol",
+                            comaRisk: "CRITICAL: 100% Coma. Absent Brainstem Reflexes.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> A GCS of 3 indicates total flaccidity and absence of all cortical and brainstem arousal mechanisms. This is the lowest possible score and represents either profound, end-stage herniation (medullary compression), massive bilateral cortical destruction, or profound toxicological/metabolic suppression.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Definitive Airway:</strong> Immediate Endotracheal Intubation (RSI) is mandatory. The patient has zero airway protection reflexes (gag/cough absent).<br>
+                            2. <strong>Hemodynamic Support:</strong> Maintain Cerebral Perfusion Pressure (CPP) > 60-70 mmHg. Use vasopressors (e.g., Norepinephrine) if hypotensive to prevent secondary ischemic brain injury.<br>
+                            3. <strong>Osmotherapy:</strong> If pupillary asymmetry is present (indicating herniation), administer Mannitol (1 g/kg IV) or Hypertonic Saline (3%) immediately.<br>
+                            4. <strong>Stat Imaging:</strong> Non-contrast CT Head to identify reversible causes (e.g., massive epidural/subdural hematoma).<br>
+                            5. <strong>Neurosurgical Consult:</strong> Stat evaluation for emergent decompressive craniectomy or external ventricular drain (EVD) placement.<br>
+                            6. <strong>Brain Death Protocol:</strong> If imaging is catastrophic and sedation is cleared, begin formal brain death testing.`
+                        },
+                        4: {
+                            category: "Severe TBI", color: "text-error", bgClass: "bg-error",
+                            severityText: "Deep Coma (Decerebrate)",
+                            comaRisk: "CRITICAL: Deep Coma. Brainstem Compromise.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> A GCS of 4 typically involves eye/verbal scores of 1, and a motor score of 2 (Decerebrate Extension). This specifically localizes the neurological lesion <em>below</em> the red nucleus, at the level of the midbrain or upper pons. The rubrospinal tract is severed, leaving the vestibulospinal tract unopposed, causing rigid extension.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Airway Protection:</strong> Intubate immediately (GCS ≤ 8 rule). Ventilate to maintain PaCO2 between 35-40 mmHg to control cerebral blood volume.<br>
+                            2. <strong>ICP Management:</strong> Elevate the head of the bed to 30 degrees to promote venous drainage via the jugular veins. Ensure the cervical collar is not overly tight.<br>
+                            3. <strong>Neuroimaging:</strong> Stat CT Head to rule out uncal or central transtentorial herniation.<br>
+                            4. <strong>Sedation/Analgesia:</strong> Utilize short-acting agents (e.g., Propofol, Fentanyl) to blunt sympathetic surges during nursing care, which can spike intracranial pressure.<br>
+                            5. <strong>Consultation:</strong> Emergent Neurosurgical and ICU consultation for invasive intracranial pressure (ICP) monitoring.`
+                        },
+                        5: {
+                            category: "Severe TBI", color: "text-error", bgClass: "bg-error",
+                            severityText: "Coma (Decorticate)",
+                            comaRisk: "HIGH DANGER: Coma. Severe Cortical Damage.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> A GCS of 5 often presents as abnormal flexion (Decorticate posturing, M3). This localizes the damage <em>above</em> the red nucleus (thalamic, internal capsule, or massive bilateral cortical lesions). While marginally better than extension, it still indicates profound intracranial pathology and impending herniation.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Airway Securance:</strong> Immediate intubation. A GCS of 5 cannot protect against aspiration.<br>
+                            2. <strong>Seizure Prophylaxis:</strong> Initiate prophylactic antiepileptics (e.g., Levetiracetam or Phenytoin) as post-traumatic seizures will drastically increase cerebral metabolic demand and ICP.<br>
+                            3. <strong>Targeted Temperature Management:</strong> Maintain strict normothermia. Fever aggressively increases cerebral metabolism and worsens ischemic injury.<br>
+                            4. <strong>Stat CT Head:</strong> Rapid transport to the scanner accompanied by an airway-capable physician and emergency resuscitation medications.<br>
+                            5. <strong>EVD Placement:</strong> Prepare for possible External Ventricular Drain placement by neurosurgery to monitor ICP and drain cerebrospinal fluid.`
+                        },
+                        6: {
+                            category: "Severe TBI", color: "text-error", bgClass: "bg-error",
+                            severityText: "Coma (Non-Verbal)",
+                            comaRisk: "HIGH DANGER: Coma. High Herniation Risk.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> A GCS of 6 typically indicates a patient who may withdraw from pain (M4) but makes no comprehensible sounds and does not open their eyes. This suggests severe diffuse axonal injury (DAI), large space-occupying lesions, or profound toxic/metabolic encephalopathy suppressing the reticular activating system.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>The "GCS Less Than 8, Intubate" Rule:</strong> This patient requires definitive airway management. Prepare for Rapid Sequence Intubation (RSI) using agents that do not drastically spike ICP (e.g., Etomidate, Rocuronium).<br>
+                            2. <strong>Reversal Agents:</strong> If the etiology is unclear, aggressively rule out reversible metabolic/toxic causes. Check point-of-care blood glucose. Administer Naloxone (for opioid overdose) and Thiamine/Dextrose.<br>
+                            3. <strong>Neuro-Vigilance:</strong> Perform frequent pupillary checks using a pupillometer if available. A unilateral fixed and dilated pupil in this state indicates active uncal herniation.<br>
+                            4. <strong>Imaging & Admission:</strong> Stat CT Head without contrast. Mandatory admission to the Neuro-Intensive Care Unit.`
+                        },
+                        7: {
+                            category: "Severe TBI", color: "text-error", bgClass: "bg-error",
+                            severityText: "Severe Encephalopathy / Coma Borderline",
+                            comaRisk: "DANGER: Coma threshold. Airway reflexes failing.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> A GCS of 7 is the critical threshold right at the edge of the standard "coma" definition. These patients may localize to pain (M5) but suffer from severe cortical suppression (E1, V1). They are entirely dependent on clinical intervention to survive the next 24 hours.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Airway:</strong> Intubation is generally indicated. If intubation is deferred (e.g., rapidly reversing toxicological cause), the patient must be monitored 1-to-1 with continuous capnography and pulse oximetry.<br>
+                            2. <strong>Hemodynamic Targets:</strong> Avoid hypoxia (SpO2 < 92%) and hypotension (SBP < 90 mmHg) at all costs. A single episode of hypotension in a Severe TBI patient doubles the mortality rate.<br>
+                            3. <strong>Arterial Line Placement:</strong> Place an invasive arterial line for continuous, beat-to-beat blood pressure monitoring to ensure adequate Cerebral Perfusion Pressure (CPP).<br>
+                            4. <strong>Toxicology:</strong> Send a comprehensive urine drug screen, blood alcohol level, salicylate, and acetaminophen levels.`
+                        },
+                        8: {
+                            category: "Severe TBI", color: "text-error", bgClass: "bg-error",
+                            severityText: "Stupor / Severe Injury",
+                            comaRisk: "MODERATE DANGER: High risk of slipping into Coma.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> GCS 8 is historically the universal threshold for defining a "coma" and mandating intubation. The patient is stuporous, only arousable by vigorous and repeated noxious stimuli. The cortex is failing to process high-level sensory input.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Intubation Mandate:</strong> "GCS 8, Intubate." The gag reflex is likely compromised, putting the patient at massive risk for aspiration pneumonitis and subsequent ARDS. Secure the airway.<br>
+                            2. <strong>Cervical Spine Precautions:</strong> Until cleared by CT imaging, assume the patient has an unstable cervical spine fracture. Maintain rigid cervical collar immobilization during intubation (use manual in-line stabilization).<br>
+                            3. <strong>Coagulation Reversal:</strong> Check PT/INR and PTT immediately. If the patient is on anticoagulants (e.g., Warfarin, DOACs) and has intracranial bleeding on CT, administer reversal agents (PCC, Andexanet alfa, Vitamin K) immediately.<br>
+                            4. <strong>Surgical Triage:</strong> Escalate to the attending trauma surgeon and neurosurgeon for potential operative intervention.`
+                        },
+                        9: {
+                            category: "Moderate TBI", color: "text-amber-500", bgClass: "bg-amber-500",
+                            severityText: "Moderate Head Injury",
+                            comaRisk: "ELEVATED: Significant Obtundation. Monitoring required.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> GCS 9 marks the transition into "Moderate" brain injury. The patient is obtunded. They can obey commands or localize pain, but cognitive function, memory, and sustained attention are severely impaired. The brain is swollen, and compliance within the skull is dropping rapidly.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Airway:</strong> Intubation may not be strictly mandatory, but readiness is crucial. Have suction, a bag-valve-mask, and RSI medications drawn up at the bedside.<br>
+                            2. <strong>Serial Neurological Exams:</strong> The greatest danger here is delayed hematoma expansion. Perform strict neuro checks every 30 to 60 minutes. A drop to GCS 8 or lower necessitates immediate rescanning and intubation.<br>
+                            3. <strong>Imaging:</strong> Urgent non-contrast CT Head. If negative, but the clinical picture doesn't match, consider an MRI Brain to evaluate for Diffuse Axonal Injury (DAI) once stable.<br>
+                            4. <strong>Admission:</strong> Mandatory ICU or High-Dependency Unit (HDU) admission. Do not admit to a general medical floor.`
+                        },
+                        10: {
+                            category: "Moderate TBI", color: "text-amber-500", bgClass: "bg-amber-500",
+                            severityText: "Moderate Encephalopathy",
+                            comaRisk: "MODERATE: Delirious or heavily lethargic.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> A GCS of 10 represents a patient who is likely opening their eyes to sound, confused, and localizing pain (E3, V3, M4). Cortical processing is fragmented. This is commonly seen in subarachnoid hemorrhages, moderate concussions, or severe systemic infections causing encephalopathy.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Diagnostic Workup:</strong> Beyond the CT Head, aggressively evaluate for infectious or metabolic causes if trauma is ruled out. Order a complete metabolic panel, ammonia level, ABG, blood cultures, and consider a lumbar puncture (if CT shows no mass effect).<br>
+                            2. <strong>Fall/Agitation Precautions:</strong> These patients are often delirious, combative, and confused. Implement strict fall precautions. Avoid physical restraints if possible, as pulling against them can spike ICP. Use a low-bed and 1-to-1 nursing "sitter."<br>
+                            3. <strong>Pain Control:</strong> Provide adequate analgesia using short-acting, reversible opioids (e.g., Fentanyl) to allow for accurate serial neurological examinations.<br>
+                            4. <strong>Consults:</strong> Trauma or Neurology consult depending on the mechanism of injury.`
+                        },
+                        11: {
+                            category: "Moderate TBI", color: "text-amber-500", bgClass: "bg-amber-500",
+                            severityText: "Lethargy / Confusion",
+                            comaRisk: "LOW: Not in a coma, but neurologically impaired.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> GCS 11 indicates mild to moderate lethargy. The patient is awake but cognitively slow, confused, and may require repeated prompting to follow commands. The Ascending Reticular Activating System (ARAS) is functioning, but cortical integration is suppressed.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Observation:</strong> Admit to a step-down unit with neurological monitoring capabilities. Re-evaluate GCS every 1 to 2 hours.<br>
+                            2. <strong>Imaging Protocol:</strong> Obtain a baseline CT Head. If the patient is intoxicated (alcohol/drugs), do not assume the altered mental status is purely toxicological. Always scan to rule out a subdural hematoma, which is common in chronic alcoholics due to cerebral atrophy and falls.<br>
+                            3. <strong>Medication Review:</strong> Withhold all non-essential sedating medications (benzodiazepines, sleep aids, antihistamines) to prevent artificial lowering of the GCS.<br>
+                            4. <strong>Family Integration:</strong> Involve the family to establish the patient's baseline mental status. Is this confusion new, or do they have underlying dementia?`
+                        },
+                        12: {
+                            category: "Moderate TBI", color: "text-amber-500", bgClass: "bg-amber-500",
+                            severityText: "Mild Alteration of Consciousness",
+                            comaRisk: "VERY LOW: Alert but confused.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> GCS 12 is the upper border of moderate brain injury. The patient is likely opening eyes spontaneously, obeying commands perfectly, but is disoriented to time or place (E4, V4, M4 or E3, V4, M5).<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Rule Out Hypoxia/Hypoglycemia:</strong> The two most common, instantly reversible causes of mild confusion are low blood sugar and low oxygen. Check a fingerstick glucose and SpO2 immediately before proceeding to expensive imaging.<br>
+                            2. <strong>CT Imaging:</strong> Apply the Canadian CT Head Rule. Given the altered mental status (GCS < 15 at 2 hours post-injury), a CT Head is strictly indicated to rule out hemorrhage.<br>
+                            3. <strong>Observation:</strong> Admit for 24-hour observation. Monitor for "lucid intervals"—a classic presentation of an epidural hematoma where the patient initially appears fine but rapidly deteriorates hours later.<br>
+                            4. <strong>Re-orientation:</strong> Employ frequent, gentle verbal re-orientation to time and place.`
+                        },
+                        13: {
+                            category: "Mild TBI", color: "text-secondary", bgClass: "bg-secondary",
+                            severityText: "Mild Concussion / Mild Confusion",
+                            comaRisk: "NONE: Awake, minor cognitive deficit.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> GCS 13 marks the entry into "Mild" traumatic brain injury. The patient is awake, obeying commands, but exhibits mild confusion or inappropriate word choices. The gross neuroanatomy is intact, but functional neuronal networking is temporarily disrupted (concussive syndrome).<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Thorough Neurological Exam:</strong> Perform a complete cranial nerve, sensory, motor, and cerebellar exam to rule out subtle focal deficits (e.g., pronator drift, asymmetrical reflexes).<br>
+                            2. <strong>Imaging Decision:</strong> A CT Head is usually warranted, particularly if the patient is older than 65, on anticoagulants, or has experienced a dangerous mechanism of injury (e.g., fall from >3 feet).<br>
+                            3. <strong>Discharge Planning:</strong> If the CT is entirely negative and the patient returns to a GCS of 15 after a few hours of observation, they may be discharged.<br>
+                            4. <strong>Discharge Instructions:</strong> Provide strict written "head injury warnings" to a reliable family member, instructing them to return immediately if vomiting, worsening headache, or unequal pupils develop.`
+                        },
+                        14: {
+                            category: "Mild TBI", color: "text-secondary", bgClass: "bg-secondary",
+                            severityText: "Slight Disorientation",
+                            comaRisk: "NONE: Fully awake, slight confusion.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> GCS 14 represents a nearly perfect neurological state. The patient loses a single point, almost always in the Verbal category (Confused conversation, V4). They know who they are, but might be unsure of the exact date or the hospital they are in. This is extremely common acutely after minor trauma, seizures (post-ictal state), or syncope.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Observation:</strong> Serial neuro checks every 2-4 hours. Expect the patient to return to a GCS of 15 as the acute stress or post-ictal phase resolves.<br>
+                            2. <strong>Clinical Clearance:</strong> If the GCS remains 14, investigate other causes: Is the patient sleep-deprived? Do they have a baseline cognitive impairment or mild dementia? Are there language barriers affecting the verbal score?<br>
+                            3. <strong>Pain Management:</strong> Treat associated injuries or headaches with non-narcotic analgesics (e.g., Acetaminophen) to avoid further clouding their sensorium.<br>
+                            4. <strong>Discharge:</strong> Safe for discharge if imaging is negative (or not indicated) and a reliable caretaker is present.`
+                        },
+                        15: {
+                            category: "Normal", color: "text-secondary", bgClass: "bg-secondary",
+                            severityText: "Neurologically Intact",
+                            comaRisk: "NONE: Completely normal consciousness.",
+                            plan: `<strong>PATHOPHYSIOLOGY:</strong> GCS 15 is a perfectly intact, normal neurological exam. The Ascending Reticular Activating System (ARAS) is providing full arousal, and the cerebral cortex is flawlessly processing language, spatial awareness, and complex motor commands.<br><br>
+                            <strong>ACTION PLAN:</strong><br>
+                            1. <strong>Clinical Confirmation:</strong> Ensure that the score is truly 15. The patient must be oriented to person, place, time, AND situation. They must obey complex commands (not just reflexively withdraw from pain).<br>
+                            2. <strong>Determine Imaging Needs:</strong> A GCS of 15 does <em>not</em> mean the patient is immune from internal injury. Apply the Canadian CT Head Rule or the PECARN rule (for pediatrics) to determine if a scan is still needed based on the mechanism of injury or symptoms like vomiting or amnesia.<br>
+                            3. <strong>Concussion Protocol:</strong> If the patient suffered head trauma but is GCS 15, counsel them on Post-Concussion Syndrome. Advise cognitive rest (limit screen time, reading, bright lights) for 24-48 hours.<br>
+                            4. <strong>Discharge:</strong> Discharge with standard return precautions.`
+                        }
+                    };
+
+                    const data = clinicalData[score];
                     const severityDisplay = document.getElementById('gcs-severity-display');
                     const decisionOutput = document.getElementById('decision-engine-output');
                     const svgIcon = document.getElementById('dynamic-svg');
                     const thermometer = document.getElementById('gcs-thermometer');
 
-                    let severityText = "", actionPlan = "", colorClass = "", empathyText = "";
+                    severityDisplay.innerText = data.severityText; 
+                    severityDisplay.className = `text-lg font-bold mt-1 ${data.color} transition-colors`;
+                    
+                    thermometer.className = `absolute top-0 left-0 h-full ${data.bgClass} transition-all duration-1000 ease-out`;
+                    
+                    decisionOutput.className = `${data.bgClass}/5 border-l-4 border-${data.color.split('-')[1]} p-5 rounded-r-xl text-sm font-medium leading-relaxed`;
+                    decisionOutput.innerHTML = `<div class="mb-3 p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm">
+                                                    <strong class="${data.color} text-[13px] uppercase tracking-wider flex items-center gap-1">
+                                                        <span class="material-symbols-outlined text-[16px]">vital_signs</span> COMA DANGER INDEX:
+                                                    </strong>
+                                                    <span class="text-slate-700 dark:text-slate-300 font-medium">${data.comaRisk}</span>
+                                                </div>
+                                                ${data.plan}`;
 
-                    if (score <= 8) {
-                        severityText = "Severe Head Injury"; colorClass = "text-error";
-                        thermometer.className = "absolute top-0 left-0 h-full bg-error transition-all duration-1000 ease-out";
-                        decisionOutput.className = "bg-error/5 border-l-4 border-error p-5 rounded-r-xl text-sm font-medium leading-relaxed animate-pulse-soft";
-                        actionPlan = "<strong class='text-error text-base flex items-center gap-1 mb-2'><span class='material-symbols-outlined'>warning</span> CRITICAL: AIRWAY COMPROMISED</strong> GCS ≤ 8 indicates inability to protect airway. <br><br>1. Prepare for immediate endotracheal intubation (RSI).<br>2. Elevate head of bed to 30° to decrease ICP.<br>3. Urgent non-contrast CT Head to rule out hematoma.<br>4. Stat Neurosurgery consult.";
-                        empathyText = `Their score is ${score} out of 15. This indicates a deep state of unconsciousness. Because they cannot protect their own breathing right now, we need to place a breathing tube to keep their lungs safe. We are rushing them to a brain scan to see exactly what is causing this.`;
-                    } else if (score >= 9 && score <= 12) {
-                        severityText = "Moderate Head Injury"; colorClass = "text-amber-500";
-                        thermometer.className = "absolute top-0 left-0 h-full bg-amber-500 transition-all duration-1000 ease-out";
-                        decisionOutput.className = "bg-amber-500/5 border-l-4 border-amber-500 p-5 rounded-r-xl text-sm font-medium leading-relaxed";
-                        actionPlan = "<strong class='text-amber-600 text-base flex items-center gap-1 mb-2'><span class='material-symbols-outlined'>error</span> WARNING: DETERIORATION RISK</strong> High risk of neurological decline. <br><br>1. Urgent non-contrast CT Head indicated.<br>2. Admit to ICU or step-down unit for close neuro-observation.<br>3. Re-evaluate GCS every 30-60 minutes.";
-                        empathyText = `Their score is ${score} out of 15. This means they have suffered a moderate injury. They are confused and not fully awake right now. We are going to do a brain scan to ensure there is no internal bleeding, and we will watch them very closely in the hospital overnight.`;
-                    } else {
-                        severityText = "Mild Head Injury"; colorClass = "text-secondary";
-                        thermometer.className = "absolute top-0 left-0 h-full bg-secondary transition-all duration-1000 ease-out";
-                        decisionOutput.className = "bg-secondary/5 border-l-4 border-secondary p-5 rounded-r-xl text-sm font-medium leading-relaxed";
-                        actionPlan = "<strong class='text-secondary text-base flex items-center gap-1 mb-2'><span class='material-symbols-outlined'>check_circle</span> STANDARD CARE</strong> Low risk, but requires clinical vigilance. <br><br>1. Apply Canadian CT Head criteria (e.g., age >65, vomiting, dangerous mechanism) to determine if imaging is needed.<br>2. Observe for 4-6 hours or discharge with strict head injury warnings and a reliable companion.";
-                        empathyText = `Their score is ${score} out of 15. This is a reassuring score indicating a mild injury or concussion. They are awake and responding appropriately. We will evaluate them for a little while longer to ensure it is completely safe for them to go home.`;
-                    }
-
-                    severityDisplay.innerText = severityText; severityDisplay.className = `text-lg font-bold mt-1 ${colorClass} transition-colors`;
-                    svgIcon.className = `w-16 h-16 transition-colors duration-500 ${colorClass}`;
-                    decisionOutput.innerHTML = actionPlan; document.getElementById('empathy-content').innerText = empathyText;
+                    svgIcon.className = `w-16 h-16 transition-colors duration-500 ${data.color}`;
+                    
+                    document.getElementById('empathy-content').innerText = `Their score is ${score} out of 15. ${data.severityText}. Our medical team is following strict protocols for this exact number.`;
+                    
                     generateHandoff('en');
                 }
             }
@@ -586,7 +729,7 @@
                 });
                 const content = document.getElementById('content-' + tabId);
                 content.classList.remove('hidden');
-                content.classList.add('animate-cascade'); // Re-trigger animation on tab switch
+                content.classList.add('animate-cascade');
                 const activeBtn = document.getElementById('tab-' + tabId);
                 activeBtn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-500');
                 activeBtn.classList.add('bg-primary', 'text-white', 'shadow-md');
@@ -621,6 +764,7 @@
             
             function changeLang(lang) { alert(`Language engine switched to: ${lang.toUpperCase()}.`); }
         </script>
+
     </main>
     
     <footer class="border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg py-10 mt-12 relative z-10">
