@@ -668,7 +668,11 @@
                         }
                     };
 
-                    const data = clinicalData[score];
+                                        let data;
+                    if(currentLang === 'ru') data = clinicalData_RU[score];
+                    else if(currentLang === 'de') data = clinicalData_DE[score];
+                    // else if(currentLang === 'uz') data = clinicalData_UZ[score]; // We will add UZ next!
+                    else data = clinicalData[score]; // Default English
                     const severityDisplay = document.getElementById('gcs-severity-display');
                     const decisionOutput = document.getElementById('decision-engine-output');
                     const svgIcon = document.getElementById('dynamic-svg');
@@ -762,7 +766,26 @@
                 if (localStorage.getItem('wardcalc_oled') === 'true') document.documentElement.classList.add('oled-mode');
             });
             
-            function changeLang(lang) { alert(`Language engine switched to: ${lang.toUpperCase()}.`); }
+                        // --- GLOBAL LANGUAGE STATE ---
+            let currentLang = 'en';
+
+            function changeLang(lang) {
+                currentLang = lang;
+                
+                // Visual feedback for the buttons
+                const buttons = document.querySelectorAll('#language-switcher button');
+                buttons.forEach(btn => {
+                    btn.classList.remove('bg-primary/20', 'text-primary');
+                    btn.classList.add('text-slate-500');
+                    if(btn.innerText.toLowerCase() === lang) {
+                        btn.classList.remove('text-slate-500');
+                        btn.classList.add('bg-primary/20', 'text-primary');
+                    }
+                });
+
+                // Re-run the calculation to immediately translate the active output
+                calculateGCS();
+            }
         </script>
 
     </main>
