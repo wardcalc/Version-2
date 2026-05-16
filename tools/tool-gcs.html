@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GCS | WardCalc Clinical Directory</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M10,50 L30,90 L50,20 L70,80 L90,50' fill='none' stroke='%234338ca' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: { extend: { colors: { "primary": "#4338ca", "secondary": "#0d9488", "error": "#e11d48", "surface": "#ffffff", "surface-dark": "#0f172a" } } }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <style>
+        :root { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* --- THE LIQUID GLASS UI MOAT --- */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(128, 128, 128, 0.15);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+            border-radius: 1.5rem;
+            transition: all 0.4s ease;
+        }
+        html.dark .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.3);
+        }
+        /* OLED Night Shift Mode */
+        html.dark.oled-mode body { background-color: #000000; }
+        html.dark.oled-mode .glass-panel { background: #050505; border-color: #1a1a1a; }
+        html.dark.oled-mode .aurora-blob { display: none; } /* Turn off lights for pure black */
+
+        /* --- FSP BILINGUAL HOVER MOAT --- */
+        .fsp-hover { position: relative; cursor: help; border-bottom: 1px dashed var(--color-primary); }
+        .fsp-hover::after {
+            content: attr(data-fsp);
+            position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%) translateY(5px);
+            background: var(--color-primary); color: #fff; padding: 4px 10px; border-radius: 6px;
+            font-size: 11px; font-weight: 700; opacity: 0; pointer-events: none; transition: all 0.2s ease;
+            white-space: nowrap; box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3); z-index: 50;
+        }
+        .fsp-hover:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* --- INPUT TOGGLES (HAPTIC FEEL) --- */
+        .input-radio:checked + label {
+            background: var(--color-primary); color: white; border-color: var(--color-primary);
+            transform: scale(0.98); box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Ambient Aurora Background */
+        @keyframes blob-float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(3vw, -3vh) scale(1.05); }
+        }
+        .aurora-blob { animation: blob-float 15s ease-in-out infinite; }
+        
+        /* Utility */
+        .hide-section { display: none !important; }
+    </style>
+</head>
+<body class="bg-[#f8fafc] dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 min-h-screen relative selection:bg-primary selection:text-white transition-colors duration-500">
+
+    <div class="fixed inset-0 pointer-events-none z-0 bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] dark:from-[#051424] dark:to-[#122131]"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[60vw] h-[60vw] max-w-[800px] rounded-full bg-[#4338ca] opacity-15 blur-[120px] pointer-events-none z-0 aurora-blob mix-blend-multiply dark:mix-blend-screen dark:opacity-10"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] max-w-[600px] rounded-full bg-[#0d9488] opacity-15 blur-[100px] pointer-events-none z-0 aurora-blob mix-blend-multiply dark:mix-blend-screen dark:opacity-10" style="animation-delay: -5s;"></div>
+
+    <header class="fixed top-0 w-full z-50 px-4 py-4 glass-panel !rounded-none !border-x-0 !border-t-0 flex justify-between items-center">
+        <a href="index.html" class="flex items-center gap-2 text-slate-500 hover:text-primary transition-colors font-bold text-sm tracking-wide">
+            <span class="material-symbols-outlined text-[20px]">arrow_back_ios</span> DASHBOARD
+        </a>
+        <div class="flex items-center gap-3">
+            <button onclick="toggleOLED()" class="p-1.5 rounded-full hover:bg-slate-500/10 transition text-xs font-mono font-bold text-slate-400" title="Night Shift Mode">OLED</button>
+            <button onclick="toggleTheme()" class="p-1.5 rounded-full hover:bg-slate-500/10 transition"><span id="theme-icon" class="material-symbols-outlined text-[18px]">dark_mode</span></button>
+            <div id="language-switcher" class="flex gap-1 bg-slate-500/10 p-1 rounded-full font-mono text-[10px] font-bold">
+                <button onclick="changeLang('en')" class="px-2 py-1 rounded-full text-slate-500 hover:text-primary transition">EN</button>
+                <button onclick="changeLang('de')" class="px-2 py-1 rounded-full text-slate-500 hover:text-primary transition">DE</button>
+                <button onclick="changeLang('ru')" class="px-2 py-1 rounded-full text-slate-500 hover:text-primary transition">RU</button>
+               <button onclick="changeLang('uz')" class="px-2 py-1 rounded-full text-slate-500 hover:text-primary transition">UZ</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-20 px-4 max-w-3xl mx-auto relative z-10">
+        
+        <div class="mb-8 flex items-center justify-between">
+            <div>
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="px-2 py-1 rounded bg-error/10 text-error font-mono text-[10px] font-bold tracking-widest uppercase">Neurology</span>
+                    <span class="px-2 py-1 rounded bg-secondary/10 text-secondary font-mono text-[10px] font-bold tracking-widest uppercase" data-fsp="Erwachsene">Adults</span>
+                </div>
+                <h1 class="text-3xl font-serif font-bold tracking-tight text-slate-900 dark:text-white" data-i18n="tool_gcs_title">Glasgow Coma Scale</h1>
+                <p class="text-sm text-slate-500 mt-1 fsp-hover" data-fsp="Bewusstseinslage bewerten">Neurological assessment matrix for conscious level.</p>
+            </div>
+            <div id="dynamic-svg" class="w-16 h-16 text-slate-300 dark:text-slate-600 transition-colors duration-500">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+        </div>
+
+        <div class="glass-panel p-6 mb-6 space-y-8">
+            
+            <div>
+                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 fsp-hover" data-fsp="Augenöffnen (E)">1. Eye Opening (E)</h3>
+                <div class="grid grid-cols-1 gap-2">
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_e" value="4" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Spontaneous</span>
+                            <span class="font-mono text-xs opacity-50">+4</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_e" value="3" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">To sound / speech</span>
+                            <span class="font-mono text-xs opacity-50">+3</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_e" value="2" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">To pressure / pain</span>
+                            <span class="font-mono text-xs opacity-50">+2</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_e" value="1" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">None</span>
+                            <span class="font-mono text-xs opacity-50">+1</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 fsp-hover" data-fsp="Verbale Antwort (V)">2. Verbal Response (V)</h3>
+                <div class="grid grid-cols-1 gap-2">
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_v" value="5" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Oriented (Person, place, time)</span>
+                            <span class="font-mono text-xs opacity-50">+5</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_v" value="4" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Confused conversation</span>
+                            <span class="font-mono text-xs opacity-50">+4</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_v" value="3" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Inappropriate words</span>
+                            <span class="font-mono text-xs opacity-50">+3</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_v" value="2" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Incomprehensible sounds</span>
+                            <span class="font-mono text-xs opacity-50">+2</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_v" value="1" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">None</span>
+                            <span class="font-mono text-xs opacity-50">+1</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 fsp-hover" data-fsp="Motorische Antwort (M)">3. Motor Response (M)</h3>
+                <div class="grid grid-cols-1 gap-2">
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_m" value="6" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Obeys commands</span>
+                            <span class="font-mono text-xs opacity-50">+6</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_m" value="5" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Localizes to pressure/pain</span>
+                            <span class="font-mono text-xs opacity-50">+5</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_m" value="4" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Normal flexion (Withdraws)</span>
+                            <span class="font-mono text-xs opacity-50">+4</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_m" value="3" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Abnormal flexion (Decorticate)</span>
+                            <span class="font-mono text-xs opacity-50">+3</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_m" value="2" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">Extension (Decerebrate)</span>
+                            <span class="font-mono text-xs opacity-50">+2</span>
+                        </div>
+                    </label>
+                    <label class="relative cursor-pointer">
+                        <input type="radio" name="gcs_m" value="1" class="input-radio peer sr-only" onchange="calculateGCS()">
+                        <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition flex justify-between items-center">
+                            <span class="font-medium text-sm">None</span>
+                            <span class="font-mono text-xs opacity-50">+1</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            
+        </div>
+        <div id="result-card" class="glass-panel p-6 mb-8 transform transition-all duration-700 opacity-0 translate-y-8 pointer-events-none hide-section">
+            
+            <div class="flex flex-col md:flex-row items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-6 mb-6">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-1 fsp-hover" data-fsp="Gesamtpunktzahl">Total Score</h2>
+                    <div class="flex items-baseline gap-2 justify-center md:justify-start">
+                        <span id="gcs-score-display" class="text-6xl font-serif font-bold text-primary">--</span>
+                        <span class="text-xl font-mono text-slate-400">/ 15</span>
+                    </div>
+                    <p id="gcs-severity-display" class="text-lg font-bold mt-1 text-slate-800 dark:text-slate-200">Awaiting Input...</p>
+                </div>
+                
+                <div class="w-full md:w-1/2 bg-slate-100 dark:bg-slate-800 rounded-full h-4 overflow-hidden relative shadow-inner">
+                    <div id="gcs-thermometer" class="absolute top-0 left-0 h-full w-0 bg-primary transition-all duration-1000 ease-out"></div>
+                    <div class="absolute top-0 left-[53%] h-full w-0.5 bg-white/50 z-10"></div> <div class="absolute top-0 left-[86%] h-full w-0.5 bg-white/50 z-10"></div> </div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="font-bold text-sm uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">account_tree</span> Clinical Action Plan
+                </h3>
+                <div id="decision-engine-output" class="bg-primary/5 border-l-4 border-primary p-4 rounded-r-xl text-sm font-medium leading-relaxed">
+                    Select all three parameters (E, V, M) to generate the algorithmic action plan.
+                </div>
+            </div>
+
+            <div class="mb-6 bg-error/5 border border-error/20 rounded-xl p-4">
+                <h3 class="font-bold text-xs uppercase tracking-wider text-error mb-2 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[16px]">warning</span> Clinical Pitfalls & Red Flags
+                </h3>
+                <ul class="text-xs text-error/80 space-y-1 list-disc pl-4">
+                    <li class="fsp-hover" data-fsp="Intubation: Notiere V1t"><strong>Intubated Patients:</strong> Cannot speak. Score Verbal as 1 and document as "V1t" (tube).</li>
+                    <li><strong>Eye Swelling:</strong> If eyes cannot open due to severe periorbital edema, score as 1 and document as "E1c" (closed).</li>
+                    <li><strong>Spinal Cord Injury:</strong> May falsely lower the Motor score. Test cranial nerve motor responses if spinal injury is suspected.</li>
+                </ul>
+            </div>
+
+            <div class="mb-6 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                <button onclick="toggleEmpathyMode()" class="w-full bg-slate-50 dark:bg-slate-800/50 p-3 flex justify-between items-center hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <span class="font-bold text-sm text-secondary flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">volunteer_activism</span> Patient & Family Translation
+                    </span>
+                    <span class="material-symbols-outlined text-slate-400" id="empathy-icon">expand_more</span>
+                </button>
+                <div id="empathy-content" class="p-4 bg-white dark:bg-slate-900 hidden text-sm text-slate-600 dark:text-slate-400 italic">
+                    </div>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-end mb-2">
+                    <h3 class="font-bold text-sm uppercase tracking-wider text-slate-500 fsp-hover" data-fsp="Arztbrief Generator">EHR Hand-off Generator</h3>
+                    <div class="flex gap-2">
+                        <button onclick="generateHandoff('en')" class="text-[10px] font-mono font-bold px-2 py-1 bg-slate-200 dark:bg-slate-700 rounded hover:bg-primary hover:text-white transition">EN</button>
+                        <button onclick="generateHandoff('de')" class="text-[10px] font-mono font-bold px-2 py-1 bg-slate-200 dark:bg-slate-700 rounded hover:bg-primary hover:text-white transition">DE (FSP)</button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <textarea id="handoff-box" class="w-full h-24 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs font-mono text-slate-600 dark:text-slate-400 focus:ring-primary focus:border-primary resize-none" readonly>Calculate score to generate hand-off note...</textarea>
+                    <button onclick="copyHandoff()" class="absolute bottom-3 right-3 bg-primary text-white p-2 rounded-lg shadow-md hover:bg-primary/80 transition flex items-center gap-1 text-xs font-bold">
+                        <span class="material-symbols-outlined text-[16px]">content_copy</span> Copy
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div class="glass-panel p-6 mb-8">
+            <h2 class="text-xl font-serif font-bold text-slate-800 dark:text-slate-200 border-b border-slate-200 dark:border-slate-700 pb-3 mb-4">WardCalc Clinical Archives</h2>
+            
+            <div class="flex flex-wrap gap-2 mb-6">
+                <button onclick="switchTab('genesis')" id="tab-genesis" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-primary text-white shadow-md">Genesis & Patho</button>
+                <button onclick="switchTab('mnemonic')" id="tab-mnemonic" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-primary">Mnemonic Engine</button>
+                <button onclick="switchTab('osce')" id="tab-osce" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-primary">OSCE Survival</button>
+            </div>
+
+            <div id="content-genesis" class="archive-content space-y-4 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                <p><strong class="text-primary fsp-hover" data-fsp="Historischer Kontext">Historical Context:</strong> The Glasgow Coma Scale (GCS) was developed in 1974 by neurosurgery professors <span class="font-semibold text-slate-800 dark:text-slate-200">Graham Teasdale</span> and <span class="font-semibold text-slate-800 dark:text-slate-200">Bryan Jennett</span> at the Institute of Neurological Sciences at Southern General Hospital in Glasgow, Scotland. Prior to its invention, there was no standardized global method to communicate a patient's level of consciousness, leading to catastrophic delays in neurosurgical triage. The GCS revolutionized global trauma care by providing a reliable, objective, and reproducible mathematical framework.</p>
+                
+                <p><strong class="text-primary fsp-hover" data-fsp="Pathophysiologie">Pathophysiology of Consciousness:</strong> Human consciousness relies fundamentally on two physiological pillars: an intact cerebral cortex (responsible for awareness) and an operational <span class="font-semibold text-slate-800 dark:text-slate-200 fsp-hover" data-fsp="Aufsteigendes retikuläres Aktivierungssystem">Ascending Reticular Activating System (ARAS)</span> located in the brainstem (responsible for arousal). The GCS is specifically designed to test these pathways. Eye opening primarily tests the ARAS. Verbal and motor responses evaluate the functional integrity of the cerebral cortex and the descending motor tracts.</p>
+                
+                <p><strong class="text-primary">Clinical Trajectory:</strong> A drop of 2 or more points in the GCS is a highly sensitive indicator of expanding intracranial pathology (e.g., epidural hematoma, cerebral edema) and demands immediate neuroimaging (CT Head) and re-evaluation of airway security.</p>
+            </div>
+
+            <div id="content-mnemonic" class="archive-content hidden space-y-4">
+                <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <h3 class="font-bold text-lg text-slate-800 dark:text-slate-200 mb-2">The "EVM 4-5-6" Rule</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">To survive ward rounds, memorize the maximum scores for each category using this visual mapping:</p>
+                    
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span class="w-8 h-8 rounded bg-primary/20 text-primary flex items-center justify-center font-bold font-mono text-lg flex-shrink-0">E</span>
+                            <div>
+                                <strong class="text-sm text-slate-800 dark:text-slate-200">Eyes = 4 Points</strong>
+                                <p class="text-xs text-slate-500 mt-1">"Eyes" has exactly <span class="font-bold">4</span> letters. Max score is 4.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-8 h-8 rounded bg-secondary/20 text-secondary flex items-center justify-center font-bold font-mono text-lg flex-shrink-0">V</span>
+                            <div>
+                                <strong class="text-sm text-slate-800 dark:text-slate-200">Verbal = 5 Points</strong>
+                                <p class="text-xs text-slate-500 mt-1">The roman numeral "<span class="font-bold">V</span>" stands for 5. Max score is 5.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-8 h-8 rounded bg-error/20 text-error flex items-center justify-center font-bold font-mono text-lg flex-shrink-0">M</span>
+                            <div>
+                                <strong class="text-sm text-slate-800 dark:text-slate-200">Motor = 6 Points</strong>
+                                <p class="text-xs text-slate-500 mt-1">A "Motor" uses a <span class="font-bold">6</span>-cylinder engine. Max score is 6.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="content-osce" class="archive-content hidden">
+                <div class="bg-primary/5 border border-primary/20 rounded-xl p-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-primary flex items-center gap-2"><span class="material-symbols-outlined">school</span> Clinical Vignette Simulator</h3>
+                        <span class="px-2 py-1 bg-primary text-white rounded text-[10px] font-bold uppercase tracking-widest">Hard</span>
+                    </div>
+                    
+                    <div id="osce-question" class="text-sm text-slate-700 dark:text-slate-300 font-medium mb-4 italic border-l-2 border-primary/40 pl-3 py-1">
+                        "A 24-year-old male is brought to the ER after a motorcycle crash. He only opens his eyes when you aggressively rub his sternum. He is moaning and making incomprehensible sounds. When you pinch his trapezius, his arms abnormally flex inward toward his chest."
+                    </div>
+                    
+                    <button onclick="revealOSCE()" id="osce-btn" class="w-full py-2 bg-slate-800 dark:bg-slate-200 text-white dark:text-slate-900 rounded-lg font-bold text-sm transition hover:scale-[1.02]">Reveal GCS Score</button>
+                    
+                    <div id="osce-answer" class="hidden mt-4 p-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 text-sm">
+                        <p class="font-bold text-error mb-2 text-lg">GCS = 7 (Severe TBI)</p>
+                        <ul class="text-slate-600 dark:text-slate-400 space-y-1">
+                            <li><strong>E2:</strong> Opens eyes to pain (sternal rub).</li>
+                            <li><strong>V2:</strong> Incomprehensible sounds (moaning).</li>
+                            <li><strong>M3:</strong> Abnormal flexion (decorticate posturing).</li>
+                        </ul>
+                        <p class="mt-3 font-bold text-primary text-xs uppercase">Action: Intubate immediately (GCS < 8).</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <script>
+            // --- 1. CORE CALCULATION & MORPHING UI ---
+            function calculateGCS() {
+                const e = document.querySelector('input[name="gcs_e"]:checked');
+                const v = document.querySelector('input[name="gcs_v"]:checked');
+                const m = document.querySelector('input[name="gcs_m"]:checked');
+
+                // Trigger Haptic Feedback (Physical snapping feel)
+                if (navigator.vibrate) navigator.vibrate(15);
+
+                // Only proceed if all three are selected
+                if (e && v && m) {
+                    const score = parseInt(e.value) + parseInt(v.value) + parseInt(m.value);
+                    
+                    // Reveal the Result Card smoothly (The Morphing UI)
+                    const card = document.getElementById('result-card');
+                    card.classList.remove('hide-section');
+                    // Tiny delay to allow display:block to render before transitioning opacity
+                    setTimeout(() => {
+                        card.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
+                    }, 10);
+
+                    // Update Score Display
+                    document.getElementById('gcs-score-display').innerText = score;
+
+                    // Update Thermometer (Score range: 3 to 15)
+                    const percent = ((score - 3) / 12) * 100;
+                    document.getElementById('gcs-thermometer').style.width = `${percent}%`;
+
+                    // Clinical Decision Engine & Severity Logic
+                    const severityDisplay = document.getElementById('gcs-severity-display');
+                    const decisionOutput = document.getElementById('decision-engine-output');
+                    const svgIcon = document.getElementById('dynamic-svg');
+                    const thermometer = document.getElementById('gcs-thermometer');
+
+                    let severityText = "";
+                    let actionPlan = "";
+                    let colorClass = "";
+                    let empathyText = "";
+
+                    if (score <= 8) {
+                        severityText = "Severe Head Injury";
+                        colorClass = "text-error";
+                        thermometer.className = "absolute top-0 left-0 h-full bg-error transition-all duration-1000 ease-out";
+                        decisionOutput.className = "bg-error/5 border-l-4 border-error p-4 rounded-r-xl text-sm font-medium leading-relaxed";
+                        actionPlan = "<strong>CRITICAL:</strong> GCS ≤ 8 indicates inability to protect airway. <br>1. Prepare for immediate endotracheal intubation.<br>2. Urgent non-contrast CT Head.<br>3. Stat Neurosurgery consult.";
+                        empathyText = `Their score is ${score}. This indicates a deep state of unconsciousness. Because they cannot protect their own breathing, we need to place a breathing tube to keep them safe while we get urgent scans of their brain.`;
+                    } else if (score >= 9 && score <= 12) {
+                        severityText = "Moderate Head Injury";
+                        colorClass = "text-amber-500";
+                        thermometer.className = "absolute top-0 left-0 h-full bg-amber-500 transition-all duration-1000 ease-out";
+                        decisionOutput.className = "bg-amber-500/5 border-l-4 border-amber-500 p-4 rounded-r-xl text-sm font-medium leading-relaxed";
+                        actionPlan = "<strong>WARNING:</strong> High risk of deterioration.<br>1. Urgent non-contrast CT Head indicated.<br>2. Admit for close neuro-observation.<br>3. Re-evaluate GCS every 30-60 minutes.";
+                        empathyText = `Their score is ${score}. This means they have suffered a moderate injury. They are confused and not fully awake. We are going to do a brain scan to ensure there is no bleeding and watch them very closely in the hospital.`;
+                    } else {
+                        severityText = "Mild Head Injury";
+                        colorClass = "text-secondary";
+                        thermometer.className = "absolute top-0 left-0 h-full bg-secondary transition-all duration-1000 ease-out";
+                        decisionOutput.className = "bg-secondary/5 border-l-4 border-secondary p-4 rounded-r-xl text-sm font-medium leading-relaxed";
+                        actionPlan = "<strong>STANDARD:</strong> Low risk, but requires vigilance.<br>1. CT Head only if Canadian CT Head criteria are met (e.g., vomiting, age >65).<br>2. Observe or discharge with strict head injury warnings.";
+                        empathyText = `Their score is ${score}. This is a reassuring score indicating a mild injury or concussion. They are awake and responding, but we will still evaluate them to ensure it is safe for them to go home.`;
+                    }
+
+                    severityDisplay.innerText = severityText;
+                    severityDisplay.className = `text-lg font-bold mt-1 ${colorClass}`;
+                    svgIcon.className = `w-16 h-16 transition-colors duration-500 ${colorClass}`;
+                    decisionOutput.innerHTML = actionPlan;
+                    document.getElementById('empathy-content').innerText = empathyText;
+                    
+                    // Auto-generate English note by default
+                    generateHandoff('en');
+                }
+            }
+
+            // --- 2. THE ARZTBRIEF / EHR HAND-OFF GENERATOR ---
+            function generateHandoff(lang) {
+                const e = document.querySelector('input[name="gcs_e"]:checked');
+                const v = document.querySelector('input[name="gcs_v"]:checked');
+                const m = document.querySelector('input[name="gcs_m"]:checked');
+                
+                if(!e || !v || !m) return; // Prevent generating if incomplete
+
+                const score = parseInt(e.value) + parseInt(v.value) + parseInt(m.value);
+                const eText = e.nextElementSibling.querySelector('span').innerText.toLowerCase();
+                const vText = v.nextElementSibling.querySelector('span').innerText.toLowerCase();
+                const mText = m.nextElementSibling.querySelector('span').innerText.toLowerCase();
+
+                let note = "";
+                if (lang === 'de') {
+                    note = `NEUROLOGISCHER STATUS (FSP Arztbrief):\nDer Patient präsentiert sich mit einem GCS von ${score}/15 (E${e.value} V${v.value} M${m.value}).\nAugenöffnen: ${e.value} Punkte.\nVerbale Antwort: ${v.value} Punkte.\nMotorische Antwort: ${m.value} Punkte.\n\nKlinische Beurteilung: ${score <= 8 ? "Schweres Schädel-Hirn-Trauma (SHT). Intubationsbereitschaft und sofortiges CCT indiziert." : score <= 12 ? "Mittelschweres SHT. CCT und enge Überwachung indiziert." : "Leichtes SHT. Überwachung nach klinischem Ermessen."}`;
+                } else {
+                    note = `NEUROLOGICAL ASSESSMENT:\nPatient assessed with a Glasgow Coma Scale (GCS) of ${score}/15.\nSubscores: Eyes: ${e.value} (${eText}), Verbal: ${v.value} (${vText}), Motor: ${m.value} (${mText}).\n\nPlan: ${score <= 8 ? "Severe TBI. Prepare for definitive airway management (intubation) and stat CT Head." : score <= 12 ? "Moderate TBI. Obtain CT Head and admit for close serial neuro checks." : "Mild TBI. Routine neuro checks, apply Canadian CT head rules to determine imaging needs."}`;
+                }
+
+                document.getElementById('handoff-box').value = note;
+            }
+
+            function copyHandoff() {
+                const copyText = document.getElementById("handoff-box");
+                copyText.select();
+                navigator.clipboard.writeText(copyText.value);
+                // Visual feedback
+                const btn = event.currentTarget;
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check</span> Copied`;
+                btn.classList.replace('bg-primary', 'bg-secondary');
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.classList.replace('bg-secondary', 'bg-primary');
+                }, 2000);
+            }
+
+            // --- 3. EDUCATIONAL TAB NAVIGATION ---
+            function switchTab(tabId) {
+                // Hide all contents
+                document.querySelectorAll('.archive-content').forEach(el => el.classList.add('hidden'));
+                // Reset all buttons
+                document.querySelectorAll('[id^="tab-"]').forEach(btn => {
+                    btn.classList.remove('bg-primary', 'text-white', 'shadow-md');
+                    btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-500');
+                });
+                // Show active content
+                document.getElementById('content-' + tabId).classList.remove('hidden');
+                // Highlight active button
+                const activeBtn = document.getElementById('tab-' + tabId);
+                activeBtn.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-500');
+                activeBtn.classList.add('bg-primary', 'text-white', 'shadow-md');
+            }
+
+            // --- 4. OSCE SIMULATOR REVEAL ---
+            function revealOSCE() {
+                document.getElementById('osce-answer').classList.remove('hidden');
+                document.getElementById('osce-btn').classList.add('hidden');
+            }
+
+            // --- 5. EMPATHY MODE TOGGLE ---
+            function toggleEmpathyMode() {
+                const content = document.getElementById('empathy-content');
+                const icon = document.getElementById('empathy-icon');
+                content.classList.toggle('hidden');
+                icon.innerText = content.classList.contains('hidden') ? 'expand_more' : 'expand_less';
+            }
+
+            // --- 6. THEME & OLED CONTROLS (Stateless LocalStorage) ---
+            function toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                localStorage.setItem('wardcalc_theme', isDark ? 'dark' : 'light');
+                document.getElementById('theme-icon').innerText = isDark ? 'light_mode' : 'dark_mode';
+            }
+
+            function toggleOLED() {
+                if(!document.documentElement.classList.contains('dark')) {
+                    toggleTheme(); // Force dark mode first if in light mode
+                }
+                document.documentElement.classList.toggle('oled-mode');
+                const isOLED = document.documentElement.classList.contains('oled-mode');
+                localStorage.setItem('wardcalc_oled', isOLED ? 'true' : 'false');
+            }
+
+            // Load saved preferences on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                if (localStorage.getItem('wardcalc_theme') === 'dark' || (!('wardcalc_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                    document.getElementById('theme-icon').innerText = 'light_mode';
+                }
+                if (localStorage.getItem('wardcalc_oled') === 'true') {
+                    document.documentElement.classList.add('oled-mode');
+                }
+            });
+            
+            // Dummy language switcher for UI feedback
+            function changeLang(lang) {
+                alert(`Language engine switched to: ${lang.toUpperCase()}. (Requires dictionary file to apply globally)`);
+            }
+        </script>
+    </main>
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg py-8 mt-12 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="inline-flex items-center justify-center p-2 rounded-xl bg-slate-100 dark:bg-slate-800 mb-4">
+                <span class="font-serif font-bold text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary">W</span>
+            </div>
+            <p class="text-xs text-slate-500 font-medium tracking-wide mb-2">BUILT BY A MEDICAL STUDENT • FOR MEDICAL PROFESSIONALS</p>
+            <p class="text-[10px] text-slate-400 max-w-xl mx-auto mb-4 leading-relaxed">
+                <strong class="text-error">CLINICAL WARNING:</strong> WardCalc is a cognitive aid. Do not use for definitive diagnosis. Always defer to independent clinical judgment and local hospital protocols.
+            </p>
+            <div class="flex justify-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                <a href="#" class="hover:text-primary transition">Privacy</a>
+                <a href="#" class="hover:text-primary transition">Terms</a>
+                <a href="#" class="hover:text-primary transition">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
