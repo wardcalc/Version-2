@@ -36,10 +36,6 @@
             border-color: rgba(255, 255, 255, 0.08);
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.3);
         }
-        
-        html.dark.oled-mode body { background-color: #000000; }
-        html.dark.oled-mode .glass-panel { background: #050505; border-color: #1a1a1a; }
-        html.dark.oled-mode .aurora-blob { display: none; } 
 
         .fsp-hover { position: relative; cursor: help; border-bottom: 1px dashed var(--color-primary); }
         .fsp-hover::after {
@@ -51,7 +47,6 @@
         }
         .fsp-hover:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        /* NEW ANIMATIONS */
         @keyframes blob-float {
             0%, 100% { transform: translate(0, 0) scale(1); }
             50% { transform: translate(3vw, -3vh) scale(1.05); }
@@ -87,7 +82,6 @@
             <span class="material-symbols-outlined text-[20px]">arrow_back_ios</span> DASHBOARD
         </a>
         <div class="flex items-center gap-3">
-            <button onclick="toggleOLED()" class="p-1.5 rounded-full hover:bg-slate-500/10 transition text-xs font-mono font-bold text-slate-400" title="Night Shift Mode">OLED</button>
             <button onclick="toggleTheme()" class="p-1.5 rounded-full hover:bg-slate-500/10 transition"><span id="theme-icon" class="material-symbols-outlined text-[18px]">dark_mode</span></button>
             <div id="language-switcher" class="flex gap-1 bg-slate-500/10 p-1 rounded-full font-mono text-[10px] font-bold">
                 <button onclick="changeLang('en')" class="px-2 py-1 rounded-full text-slate-500 hover:text-primary transition">EN</button>
@@ -99,19 +93,18 @@
     </header>
 
     <main class="pt-24 pb-20 px-4 max-w-3xl mx-auto relative z-10">
-        
         <div class="mb-8 flex items-center justify-between animate-cascade">
             <div>
                 <div class="flex items-center gap-2 mb-2">
-                    <span class="px-2 py-1 rounded flex items-center gap-1 bg-error/10 text-error font-mono text-[10px] font-bold tracking-widest uppercase">
+                    <span class="px-2 py-1 rounded flex items-center gap-1 bg-error/10 text-error font-mono text-[10px] font-bold tracking-widest uppercase" data-i18n="cat_neuro">
                         <span class="material-symbols-outlined text-[12px]">neurology</span> Neurology
                     </span>
-                    <span class="px-2 py-1 rounded flex items-center gap-1 bg-secondary/10 text-secondary font-mono text-[10px] font-bold tracking-widest uppercase" data-fsp="Erwachsene">
+                    <span class="px-2 py-1 rounded flex items-center gap-1 bg-secondary/10 text-secondary font-mono text-[10px] font-bold tracking-widest uppercase" data-fsp="Erwachsene" data-i18n="cat_adults">
                         <span class="material-symbols-outlined text-[12px]">group</span> Adults
                     </span>
                 </div>
-                <h1 class="text-3xl font-serif font-bold tracking-tight text-slate-900 dark:text-white" data-i18n="tool_gcs_title">Glasgow Coma Scale</h1>
-                <p class="text-sm text-slate-500 mt-1 fsp-hover" data-fsp="Bewusstseinslage bewerten">Neurological assessment matrix for conscious level.</p>
+                <h1 class="text-3xl font-serif font-bold tracking-tight text-slate-900 dark:text-white" data-i18n="gcs_title">Glasgow Coma Scale</h1>
+                <p class="text-sm text-slate-500 mt-1 fsp-hover" data-fsp="Bewusstseinslage bewerten" data-i18n="gcs_desc">Neurological assessment matrix for conscious level.</p>
             </div>
             <div id="dynamic-svg" class="w-16 h-16 text-slate-300 dark:text-slate-600 transition-colors duration-500">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="w-full h-full"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
@@ -120,35 +113,35 @@
         <div class="glass-panel p-6 mb-6 space-y-8 animate-cascade delay-100">
             
             <div class="animate-cascade delay-100">
-                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 flex items-center gap-2 fsp-hover" data-fsp="Augenöffnen (E)">
+                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 flex items-center gap-2 fsp-hover" data-fsp="Augenöffnen (E)" data-i18n="gcs_e_title">
                     <span class="material-symbols-outlined text-[18px]">visibility</span> 1. Eye Opening (E)
                 </h3>
                 <div class="grid grid-cols-1 gap-3">
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_e" value="4" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Spontaneous</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_e_4">Spontaneous</span>
                             <span class="font-mono text-xs opacity-70">+4</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_e" value="3" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">To sound / speech</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_e_3">To sound / speech</span>
                             <span class="font-mono text-xs opacity-70">+3</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_e" value="2" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">To pressure / pain</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_e_2">To pressure / pain</span>
                             <span class="font-mono text-xs opacity-70">+2</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_e" value="1" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">None</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_e_1">None</span>
                             <span class="font-mono text-xs opacity-70">+1</span>
                         </div>
                     </label>
@@ -156,42 +149,42 @@
             </div>
 
             <div class="animate-cascade delay-200">
-                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 flex items-center gap-2 fsp-hover" data-fsp="Verbale Antwort (V)">
+                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 flex items-center gap-2 fsp-hover" data-fsp="Verbale Antwort (V)" data-i18n="gcs_v_title">
                     <span class="material-symbols-outlined text-[18px]">record_voice_over</span> 2. Verbal Response (V)
                 </h3>
                 <div class="grid grid-cols-1 gap-3">
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="5" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Oriented (Person, place, time)</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_v_5">Oriented (Person, place, time)</span>
                             <span class="font-mono text-xs opacity-70">+5</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="4" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Confused conversation</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_v_4">Confused conversation</span>
                             <span class="font-mono text-xs opacity-70">+4</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="3" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Inappropriate words</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_v_3">Inappropriate words</span>
                             <span class="font-mono text-xs opacity-70">+3</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="2" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Incomprehensible sounds</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_v_2">Incomprehensible sounds</span>
                             <span class="font-mono text-xs opacity-70">+2</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_v" value="1" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">None</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_v_1">None</span>
                             <span class="font-mono text-xs opacity-70">+1</span>
                         </div>
                     </label>
@@ -199,49 +192,49 @@
             </div>
 
             <div class="animate-cascade delay-300">
-                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 flex items-center gap-2 fsp-hover" data-fsp="Motorische Antwort (M)">
+                <h3 class="font-bold text-sm uppercase tracking-wider text-primary mb-3 flex items-center gap-2 fsp-hover" data-fsp="Motorische Antwort (M)" data-i18n="gcs_m_title">
                     <span class="material-symbols-outlined text-[18px]">accessibility_new</span> 3. Motor Response (M)
                 </h3>
                 <div class="grid grid-cols-1 gap-3">
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="6" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Obeys commands</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_m_6">Obeys commands</span>
                             <span class="font-mono text-xs opacity-70">+6</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="5" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Localizes to pressure/pain</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_m_5">Localizes to pressure/pain</span>
                             <span class="font-mono text-xs opacity-70">+5</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="4" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Normal flexion (Withdraws)</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_m_4">Normal flexion (Withdraws)</span>
                             <span class="font-mono text-xs opacity-70">+4</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="3" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Abnormal flexion (Decorticate)</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_m_3">Abnormal flexion (Decorticate)</span>
                             <span class="font-mono text-xs opacity-70">+3</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="2" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">Extension (Decerebrate)</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_m_2">Extension (Decerebrate)</span>
                             <span class="font-mono text-xs opacity-70">+2</span>
                         </div>
                     </label>
                     <label class="relative cursor-pointer block group">
                         <input type="radio" name="gcs_m" value="1" class="peer sr-only" onchange="calculateGCS()">
                         <div class="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 peer-checked:bg-primary peer-checked:border-primary peer-checked:text-white transition-all duration-200 flex justify-between items-center shadow-sm peer-checked:shadow-inner peer-checked:scale-[0.98] group-hover:border-primary/50">
-                            <span class="font-medium text-sm">None</span>
+                            <span class="font-medium text-sm" data-i18n="gcs_m_1">None</span>
                             <span class="font-mono text-xs opacity-70">+1</span>
                         </div>
                     </label>
@@ -252,14 +245,14 @@
             
             <div class="flex flex-col md:flex-row items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-6 mb-6">
                 <div class="text-center md:text-left mb-4 md:mb-0">
-                    <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-1 flex items-center gap-2 justify-center md:justify-start fsp-hover" data-fsp="Gesamtpunktzahl">
+                    <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-1 flex items-center gap-2 justify-center md:justify-start fsp-hover" data-fsp="Gesamtpunktzahl" data-i18n="ui_total">
                         <span class="material-symbols-outlined text-[16px]">calculate</span> Total Score
                     </h2>
                     <div class="flex items-baseline gap-2 justify-center md:justify-start">
                         <span id="gcs-score-display" class="text-6xl font-serif font-bold text-primary">--</span>
                         <span class="text-xl font-mono text-slate-400">/ 15</span>
                     </div>
-                    <p id="gcs-severity-display" class="text-lg font-bold mt-1 text-slate-800 dark:text-slate-200">Awaiting Input...</p>
+                    <p id="gcs-severity-display" class="text-lg font-bold mt-1 text-slate-800 dark:text-slate-200" data-i18n="ui_awaiting">Awaiting Input...</p>
                 </div>
                 
                 <div class="w-full md:w-1/2 bg-slate-100 dark:bg-slate-800 rounded-full h-4 overflow-hidden relative shadow-inner">
@@ -270,17 +263,17 @@
             </div>
 
             <div class="mb-6">
-                <h3 class="font-bold text-sm uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2">
+                <h3 class="font-bold text-sm uppercase tracking-wider text-slate-500 mb-2 flex items-center gap-2" data-i18n="ui_plan">
                     <span class="material-symbols-outlined text-[18px]">account_tree</span> Clinical Action Plan
                 </h3>
-                <div id="decision-engine-output" class="bg-primary/5 border-l-4 border-primary p-4 rounded-r-xl text-sm font-medium leading-relaxed">
+                <div id="decision-engine-output" class="bg-primary/5 border-l-4 border-primary p-4 rounded-r-xl text-sm font-medium leading-relaxed" data-i18n="ui_select">
                     Select all three parameters (E, V, M) to generate the algorithmic action plan.
                 </div>
             </div>
 
             <div class="mb-6 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
                 <button onclick="toggleEmpathyMode()" class="w-full bg-slate-50 dark:bg-slate-800/50 p-3 flex justify-between items-center hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-                    <span class="font-bold text-sm text-secondary flex items-center gap-2">
+                    <span class="font-bold text-sm text-secondary flex items-center gap-2" data-i18n="ui_empathy">
                         <span class="material-symbols-outlined text-[18px]">volunteer_activism</span> Patient & Family Translation
                     </span>
                     <span class="material-symbols-outlined text-slate-400 transition-transform duration-300" id="empathy-icon">expand_more</span>
@@ -290,7 +283,7 @@
 
             <div>
                 <div class="flex justify-between items-end mb-2">
-                    <h3 class="font-bold text-sm uppercase tracking-wider text-slate-500 flex items-center gap-1 fsp-hover" data-fsp="Arztbrief Generator">
+                    <h3 class="font-bold text-sm uppercase tracking-wider text-slate-500 flex items-center gap-1 fsp-hover" data-fsp="Arztbrief Generator" data-i18n="ui_handoff">
                         <span class="material-symbols-outlined text-[16px]">description</span> EHR Hand-off Generator
                     </h3>
                     <div class="flex gap-2">
@@ -306,19 +299,19 @@
                 </div>
             </div>
         </div>
+        
         <div class="glass-panel p-6 mb-8 animate-cascade delay-300">
-            <h2 class="text-xl font-serif font-bold text-slate-800 dark:text-slate-200 border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center gap-2">
+            <h2 class="text-xl font-serif font-bold text-slate-800 dark:text-slate-200 border-b border-slate-200 dark:border-slate-700 pb-3 mb-4 flex items-center gap-2" data-i18n="ui_archives">
                 <span class="material-symbols-outlined text-primary text-[24px]">local_library</span> WardCalc Clinical Archives
             </h2>
             
             <div class="flex flex-wrap gap-2 mb-6">
-                <button onclick="switchTab('genesis')" id="tab-genesis" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-primary text-white shadow-md">Genesis & Patho</button>
-                <button onclick="switchTab('mnemonic')" id="tab-mnemonic" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-primary">Mnemonic Engine</button>
-                <button onclick="switchTab('osce')" id="tab-osce" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-primary">OSCE Survival</button>
+                <button onclick="switchTab('genesis')" id="tab-genesis" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-primary text-white shadow-md" data-i18n="tab_gen">Genesis & Patho</button>
+                <button onclick="switchTab('mnemonic')" id="tab-mnemonic" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-primary" data-i18n="tab_mnem">Mnemonic Engine</button>
+                <button onclick="switchTab('osce')" id="tab-osce" class="px-4 py-2 rounded-full text-xs font-bold font-mono transition-all bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-primary" data-i18n="tab_osce">OSCE Survival</button>
             </div>
 
             <div id="content-genesis" class="archive-content space-y-8 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                
                 <section>
                     <h3 class="text-lg font-bold text-primary mb-2 border-b border-primary/20 pb-1 flex items-center gap-2">
                         <span class="material-symbols-outlined text-[20px]">history_edu</span> The Historical Genesis
@@ -338,28 +331,25 @@
                     </ol>
                     <p class="mb-3">The GCS is an elegant, non-invasive method to physically interrogate these deep neurological structures:</p>
                     <ul class="list-disc pl-5 space-y-2 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
-                        <li><strong>Eye Opening (E):</strong> Acts as a direct proxy for ARAS and brainstem integrity. Spontaneous eye opening indicates that the basal arousal mechanisms in the midbrain are intact, even if the cortex is severely damaged (as seen in persistent vegetative states).</li>
-                        <li><strong>Verbal Response (V):</strong> Interrogates the complex integration of the cerebral cortex, specifically testing the dominant hemisphere's language centers (Broca's for expression, Wernicke's for comprehension), alongside hippocampal memory recall and spatial orientation.</li>
-                        <li><strong>Motor Response (M):</strong> Tests the descending motor tracts (specifically the corticospinal tract). Because the motor pathways traverse the entire neuraxis—from the motor cortex, through the internal capsule, down the brainstem, and into the spinal cord—it is the single most sensitive predictor of severe neurological morbidity.</li>
+                        <li><strong>Eye Opening (E):</strong> Acts as a direct proxy for ARAS and brainstem integrity. Spontaneous eye opening indicates that the basal arousal mechanisms in the midbrain are intact, even if the cortex is severely damaged.</li>
+                        <li><strong>Verbal Response (V):</strong> Interrogates the complex integration of the cerebral cortex, specifically testing the dominant hemisphere's language centers (Broca's and Wernicke's), alongside hippocampal memory recall.</li>
+                        <li><strong>Motor Response (M):</strong> Tests the descending motor tracts (specifically the corticospinal tract). Because the motor pathways traverse the entire neuraxis, it is the single most sensitive predictor of severe neurological morbidity.</li>
                     </ul>
                 </section>
-
                 <section>
                     <h3 class="text-lg font-bold text-primary mb-2 border-b border-primary/20 pb-1 flex items-center gap-2">
                         <span class="material-symbols-outlined text-[20px]">trending_down</span> Intracranial Pressure (ICP) & Herniation Syndromes
                     </h3>
                     <p class="mb-3">The ultimate utility of serial GCS tracking on the ward is to detect the silent, deadly trajectory of rising Intracranial Pressure (ICP). According to the <strong>Monro-Kellie doctrine</strong>, the adult cranial vault is a rigid, fixed-volume box containing brain tissue (80%), arterial/venous blood (10%), and cerebrospinal fluid (10%).</p>
-                    <p class="mb-3">Normal ICP ranges from <strong>5 to 15 mmHg</strong>. If an expanding space-occupying lesion occurs (e.g., an epidural hematoma from a middle meningeal artery laceration), the compensatory mechanisms (displacing CSF into the spinal canal) are rapidly exhausted. Pressure then builds exponentially.</p>
                     <p class="mb-3">Cerebral Perfusion Pressure (CPP), the pressure gradient driving oxygenated blood into the brain, is defined mathematically as:</p>
                     <div class="bg-primary/10 p-4 rounded-xl text-center font-mono font-bold text-lg mb-3 border border-primary/20 text-primary">
                         CPP = MAP - ICP
                     </div>
-                    <p class="mb-3">As ICP rises, CPP dangerously drops, leading to global cerebral ischemia. The brain's physiological response to this ischemia is to trigger a massive sympathetic surge, resulting in <strong>Cushing's Triad</strong>: profound hypertension, reflex bradycardia, and irregular respirations.</p>
-                    <p>Simultaneously, the physical mass effect forces brain tissue downward across the tentorium cerebelli. In <strong>Uncal Herniation</strong>, the medial temporal lobe compresses the midbrain and cranial nerve III (causing a "blown," dilated pupil). As compression progresses caudally down the brainstem, the patient loses cortical function (GCS Motor drops to 3 - decorticate), then midbrain function (GCS Motor drops to 2 - decerebrate), and finally medullary function (apnea and death). <strong>A drop in the GCS of 2 or more points is an absolute neurosurgical emergency requiring immediate CT imaging and osmotherapy (Mannitol/Hypertonic Saline).</strong></p>
+                    <p>As ICP rises, CPP dangerously drops, leading to global cerebral ischemia. The brain's physiological response to this ischemia is to trigger a massive sympathetic surge, resulting in <strong>Cushing's Triad</strong>: profound hypertension, reflex bradycardia, and irregular respirations. <strong>A drop in the GCS of 2 or more points is an absolute neurosurgical emergency requiring immediate CT imaging and osmotherapy (Mannitol/Hypertonic Saline).</strong></p>
                 </section>
             </div>
+            
             <div id="content-mnemonic" class="archive-content hidden space-y-8">
-                
                 <section class="bg-primary/5 dark:bg-primary/10 p-6 rounded-2xl border border-primary/20">
                     <h3 class="font-bold text-xl text-slate-800 dark:text-slate-200 mb-2 flex items-center gap-2">
                         <span class="material-symbols-outlined text-[24px]">psychology</span> The "EVM 4-5-6" Framework
@@ -389,13 +379,10 @@
                         </div>
                     </div>
                 </section>
-
                 <section>
                     <h3 class="text-lg font-bold text-error mb-4 flex items-center gap-2 border-b border-error/20 pb-2">
                         <span class="material-symbols-outlined text-[22px]">gavel</span> Strict Clinical Rules & FSP Documentation Pitfalls
                     </h3>
-                    <p class="text-sm text-slate-700 dark:text-slate-300 mb-5">The GCS is frequently miscalculated by junior clinicians due to confounding physical trauma or metabolic states. Adhere strictly to these documentation rules to avoid critical triage errors:</p>
-                    
                     <ul class="space-y-6 text-sm text-slate-700 dark:text-slate-300">
                         <li class="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
                             <span class="material-symbols-outlined text-error text-[24px]">emergency</span>
@@ -408,39 +395,20 @@
                             <span class="material-symbols-outlined text-error text-[24px]">visibility_off</span>
                             <div>
                                 <strong class="text-slate-900 dark:text-white block mb-1 text-base fsp-hover" data-fsp="Periorbitales Hämatom">2. Severe Facial Trauma (Visual Confounder)</strong>
-                                If a patient sustains massive maxillofacial trauma (e.g., Le Fort fractures) resulting in severe periorbital edema that forces the eyelids shut, they physically cannot open their eyes to stimuli. Score the Eye response as 1, and document it with a 'C' (Closed). Example: <span class="font-mono bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 px-2 py-0.5 rounded text-primary shadow-sm">E1C V5 M6</span>.
-                            </div>
-                        </li>
-                        <li class="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
-                            <span class="material-symbols-outlined text-error text-[24px]">accessibility</span>
-                            <div>
-                                <strong class="text-slate-900 dark:text-white block mb-1 text-base">3. Decorticate vs. Decerebrate (Anatomical Localization)</strong>
-                                Abnormal posturing is a dire sign of descending brainstem damage.
-                                <ul class="list-disc pl-5 mt-2 space-y-1 text-xs">
-                                    <li><strong class="fsp-hover text-slate-800 dark:text-slate-200" data-fsp="Beugesynergismus">Decorticate Posturing (Abnormal Flexion - M3):</strong> Indicates damage above the red nucleus (e.g., thalamic or massive cortical damage). The rubrospinal tract remains intact, causing flexion of the upper extremities.</li>
-                                    <li><strong class="fsp-hover text-slate-800 dark:text-slate-200" data-fsp="Strecksynergismus">Decerebrate Posturing (Extension - M2):</strong> Indicates damage <em>below</em> the red nucleus (midbrain/pons level). The rubrospinal tract is severed, leaving the vestibulospinal tract unopposed, causing rigid extension of all extremities. This carries a significantly worse prognosis.</li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
-                            <span class="material-symbols-outlined text-error text-[24px]">record_voice_over</span>
-                            <div>
-                                <strong class="text-slate-900 dark:text-white block mb-1 text-base fsp-hover" data-fsp="Aphasie nach Schlaganfall">4. The Aphasic Stroke Patient</strong>
-                                A patient with a dominant middle cerebral artery (MCA) infarction may suffer from expressive (Broca's) aphasia. They may be fully awake, alert, and attempting to communicate, but only incomprehensible sounds emerge. While this forces a Verbal score of 2, the GCS is a poor tool for isolated focal deficits. Always supplement the GCS with the NIH Stroke Scale (NIHSS) in acute stroke scenarios.
+                                If a patient sustains massive maxillofacial trauma resulting in severe periorbital edema that forces the eyelids shut, score the Eye response as 1, and document it with a 'C' (Closed). Example: <span class="font-mono bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 px-2 py-0.5 rounded text-primary shadow-sm">E1C V5 M6</span>.
                             </div>
                         </li>
                     </ul>
                 </section>
             </div>
+            
             <div id="content-osce" class="archive-content hidden space-y-6">
-                
                 <div class="mb-6 border-b border-slate-200 dark:border-slate-700 pb-4">
                     <h3 class="font-bold text-xl text-slate-800 dark:text-slate-200 flex items-center gap-2">
                         <span class="material-symbols-outlined text-primary text-[24px]">school</span> Clinical Vignette Simulator
                     </h3>
                     <p class="text-sm text-slate-500 mt-1">Test your rapid diagnostic recall and anatomical localization against these high-yield board-style scenarios.</p>
                 </div>
-
                 <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                     <div class="flex justify-between items-center mb-4">
                         <span class="font-bold text-primary font-mono text-sm tracking-wider">CASE 01: TRAUMA BAY</span>
@@ -452,57 +420,61 @@
                     <button onclick="document.getElementById('osce-ans-1').classList.remove('hidden'); this.classList.add('hidden')" class="w-full py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm transition hover:bg-slate-200 dark:hover:bg-slate-600 flex justify-center items-center gap-2">
                         <span class="material-symbols-outlined text-[18px]">visibility</span> Reveal Calculation & Pathology
                     </button>
-                    
                     <div id="osce-ans-1" class="hidden mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 text-sm animate-cascade">
-                        <p class="font-bold text-error mb-3 text-xl flex items-center gap-2">
-                            <span class="material-symbols-outlined">warning</span> GCS = 7 (Severe TBI)
-                        </p>
-                        <ul class="text-slate-600 dark:text-slate-400 space-y-2 mb-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">E2:</strong> Opens eyes to pressure (sternal rub).</li>
-                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">V2:</strong> Incomprehensible sounds (groaning).</li>
-                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">M3:</strong> Abnormal flexion (decorticate posturing). This specific motor response localizes the lesion <em>above</em> the red nucleus, indicating profound cortical, subcortical, or diencephalic damage while preserving the rubrospinal tract.</li>
-                        </ul>
+                        <p class="font-bold text-error mb-3 text-xl flex items-center gap-2"><span class="material-symbols-outlined">warning</span> GCS = 7 (Severe TBI)</p>
                         <p class="font-bold text-primary text-xs uppercase bg-primary/10 p-3 rounded-lg border border-primary/20 inline-flex items-center gap-2">
                             <span class="material-symbols-outlined text-[16px]">airway</span> Action: Intubate immediately. Secure airway. Obtain stat non-contrast CT Head.
                         </p>
                     </div>
                 </div>
-
-                <div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="font-bold text-amber-600 font-mono text-sm tracking-wider">CASE 02: TOXICOLOGY</span>
-                        <span class="px-3 py-1 bg-amber-500/10 text-amber-600 rounded-full text-[10px] font-bold uppercase tracking-widest border border-amber-500/20">Medium</span>
-                    </div>
-                    <div class="text-sm text-slate-700 dark:text-slate-300 font-medium mb-5 italic border-l-4 border-amber-500 pl-4 py-2 bg-slate-50 dark:bg-slate-900/50 rounded-r-lg">
-                        "A 55-year-old female is found unresponsive surrounded by empty pill bottles. In the ER, she keeps her eyes closed until you loudly call her name. She looks at you and says, 'The purple elephants are dancing in the kitchen.' When you ask her to squeeze your fingers, she grabs your hand and pushes it away aggressively."
-                    </div>
-                    <button onclick="document.getElementById('osce-ans-2').classList.remove('hidden'); this.classList.add('hidden')" class="w-full py-3 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm transition hover:bg-slate-200 dark:hover:bg-slate-600 flex justify-center items-center gap-2">
-                        <span class="material-symbols-outlined text-[18px]">visibility</span> Reveal Calculation & Pathology
-                    </button>
-                    
-                    <div id="osce-ans-2" class="hidden mt-4 pt-4 border-t border-slate-200 dark:border-slate-700 text-sm animate-cascade">
-                        <p class="font-bold text-amber-600 mb-3 text-xl flex items-center gap-2">
-                            <span class="material-symbols-outlined">science</span> GCS = 11 (Moderate / Toxic Encephalopathy)
-                        </p>
-                        <ul class="text-slate-600 dark:text-slate-400 space-y-2 mb-4 bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">E3:</strong> Opens eyes to speech (calling her name).</li>
-                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">V3:</strong> Inappropriate words (talking about elephants, not forming a conversational response).</li>
-                            <li class="flex gap-2"><strong class="text-slate-800 dark:text-slate-200 min-w-[30px]">M5:</strong> Localizes to pain/stimulus (crossing the midline to push your hand away implies the motor cortex and descending tracts are intact enough to map spatial coordinates).</li>
-                        </ul>
-                        <p class="font-bold text-amber-600 text-xs uppercase bg-amber-500/10 p-3 rounded-lg border border-amber-500/20 inline-flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[16px]">vaccines</span> Action: Administer Naloxone, order stat tox screen, protect airway if GCS drops.
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
-                       <script>
+        <script>
             // --- GLOBAL LANGUAGE STATE ---
             let currentLang = 'en';
 
-            // --- THE MASSIVE MULTILINGUAL CLINICAL DICTIONARIES ---
-            
-            // 1. ENGLISH (EN)
+            // --- 1. UI DICTIONARIES ---
+            const uiDict_EN = {
+                "cat_neuro": "Neurology", "cat_adults": "Adults", "gcs_title": "Glasgow Coma Scale", "gcs_desc": "Neurological assessment matrix for conscious level.",
+                "gcs_e_title": "1. Eye Opening (E)", "gcs_e_4": "Spontaneous", "gcs_e_3": "To sound / speech", "gcs_e_2": "To pressure / pain", "gcs_e_1": "None",
+                "gcs_v_title": "2. Verbal Response (V)", "gcs_v_5": "Oriented (Person, place, time)", "gcs_v_4": "Confused conversation", "gcs_v_3": "Inappropriate words", "gcs_v_2": "Incomprehensible sounds", "gcs_v_1": "None",
+                "gcs_m_title": "3. Motor Response (M)", "gcs_m_6": "Obeys commands", "gcs_m_5": "Localizes to pressure/pain", "gcs_m_4": "Normal flexion (Withdraws)", "gcs_m_3": "Abnormal flexion (Decorticate)", "gcs_m_2": "Extension (Decerebrate)", "gcs_m_1": "None",
+                "ui_total": "Total Score", "ui_awaiting": "Awaiting Input...", "ui_plan": "Clinical Action Plan", "ui_select": "Select all three parameters (E, V, M) to generate the algorithmic action plan.",
+                "ui_empathy": "Patient & Family Translation", "ui_handoff": "EHR Hand-off Generator", "ui_archives": "WardCalc Clinical Archives",
+                "tab_gen": "Genesis & Patho", "tab_mnem": "Mnemonic Engine", "tab_osce": "OSCE Survival"
+            };
+
+            const uiDict_DE = {
+                "cat_neuro": "Neurologie", "cat_adults": "Erwachsene", "gcs_title": "Glasgow Coma Scale", "gcs_desc": "Neurologische Beurteilungsmatrix für die Bewusstseinslage.",
+                "gcs_e_title": "1. Augenöffnen (E)", "gcs_e_4": "Spontan", "gcs_e_3": "Auf Ansprache", "gcs_e_2": "Auf Schmerzreiz", "gcs_e_1": "Keine Reaktion",
+                "gcs_v_title": "2. Verbale Antwort (V)", "gcs_v_5": "Orientiert (Person, Ort, Zeit)", "gcs_v_4": "Desorientiert / Verwirrt", "gcs_v_3": "Inadäquate Worte", "gcs_v_2": "Unverständliche Laute", "gcs_v_1": "Keine Reaktion",
+                "gcs_m_title": "3. Motorische Antwort (M)", "gcs_m_6": "Befolgt Aufforderungen", "gcs_m_5": "Gezielte Schmerzabwehr", "gcs_m_4": "Ungezielte Schmerzabwehr", "gcs_m_3": "Beugesynergismus", "gcs_m_2": "Strecksynergismus", "gcs_m_1": "Keine Reaktion",
+                "ui_total": "Gesamtpunktzahl", "ui_awaiting": "Warte auf Eingabe...", "ui_plan": "Klinischer Aktionsplan", "ui_select": "Wählen Sie alle drei Parameter (E, V, M) aus, um den Plan zu generieren.",
+                "ui_empathy": "Patienten- & Angehörigenübersetzung", "ui_handoff": "EHR Arztbrief Generator", "ui_archives": "WardCalc Klinische Archive",
+                "tab_gen": "Genesis & Patho", "tab_mnem": "Mnemotechnik", "tab_osce": "OSCE Simulation"
+            };
+
+            const uiDict_RU = {
+                "cat_neuro": "Неврология", "cat_adults": "Взрослые", "gcs_title": "Шкала Комы Глазго (ШКГ)", "gcs_desc": "Неврологическая матрица оценки уровня сознания.",
+                "gcs_e_title": "1. Открывание глаз (E)", "gcs_e_4": "Спонтанное", "gcs_e_3": "На звук / голос", "gcs_e_2": "На давление / боль", "gcs_e_1": "Отсутствует",
+                "gcs_v_title": "2. Речевой ответ (V)", "gcs_v_5": "Ориентирован (личность, место, время)", "gcs_v_4": "Спутанная речь", "gcs_v_3": "Неадекватные слова", "gcs_v_2": "Нечленораздельные звуки", "gcs_v_1": "Отсутствует",
+                "gcs_m_title": "3. Двигательный ответ (M)", "gcs_m_6": "Выполняет команды", "gcs_m_5": "Локализует боль", "gcs_m_4": "Нормальное сгибание", "gcs_m_3": "Патологическое сгибание", "gcs_m_2": "Разгибание (Децеребрация)", "gcs_m_1": "Отсутствует",
+                "ui_total": "Общий балл", "ui_awaiting": "Ожидание ввода...", "ui_plan": "Клинический алгоритм", "ui_select": "Выберите все три параметра (E, V, M) для генерации плана.",
+                "ui_empathy": "Перевод для семьи", "ui_handoff": "Генератор мед. записей", "ui_archives": "Клинические архивы WardCalc",
+                "tab_gen": "Генезис и Патофизиология", "tab_mnem": "Мнемоника", "tab_osce": "OSCE Симулятор"
+            };
+
+            const uiDict_UZ = {
+                "cat_neuro": "Nevrologiya", "cat_adults": "Kattalar", "gcs_title": "Glazgo Koma Shkalasi", "gcs_desc": "Es-hush darajasini baholash nevrologik matritsasi.",
+                "gcs_e_title": "1. Ko'zlarni ochish (E)", "gcs_e_4": "O'z-o'zidan", "gcs_e_3": "Ovozga / nutqqa", "gcs_e_2": "Og'riqqa / bosimga", "gcs_e_1": "Yo'q",
+                "gcs_v_title": "2. Nutq reaksiyasi (V)", "gcs_v_5": "Mo'ljal oladi (shaxs, joy, vaqt)", "gcs_v_4": "Chalkash nutq", "gcs_v_3": "Noto'g'ri so'zlar", "gcs_v_2": "Tushunarsiz tovushlar", "gcs_v_1": "Yo'q",
+                "gcs_m_title": "3. Harakat reaksiyasi (M)", "gcs_m_6": "Buyruqlarni bajaradi", "gcs_m_5": "Og'riqni aniqlaydi", "gcs_m_4": "Oddiy bukilish (qochish)", "gcs_m_3": "Anormal bukilish (Dekortikatsiya)", "gcs_m_2": "Yozilish (Detserebratsiya)", "gcs_m_1": "Yo'q",
+                "ui_total": "Umumiy ball", "ui_awaiting": "Kiritish kutilmoqda...", "ui_plan": "Klinik harakatlar rejasi", "ui_select": "Harakat rejasini yaratish uchun barcha uchta (E, V, M) parametrni tanlang.",
+                "ui_empathy": "Bemor va oila uchun tarjima", "ui_handoff": "EHR ma'lumotnoma generatori", "ui_archives": "WardCalc Klinik Arxivlari",
+                "tab_gen": "Ibtido va Patofiziologiya", "tab_mnem": "Mnemonika", "tab_osce": "OSCE Simulyatori"
+            };
+
+            // --- 2. CLINICAL DICTIONARIES ---
             const clinicalData_EN = {
                 3: { category: "Severe TBI", color: "text-error", bgClass: "bg-error", severityText: "Deep Coma / Brain Death Protocol", comaRisk: "CRITICAL: 100% Coma. Absent Brainstem Reflexes.",
                     plan: "<strong>PATHOPHYSIOLOGY:</strong> GCS 3 indicates total flaccidity and absence of all cortical and brainstem arousal mechanisms.<br><br><strong>ACTION PLAN:</strong><br>1. <strong>Airway:</strong> Immediate Endotracheal Intubation (RSI) mandatory.<br>2. <strong>Hemodynamics:</strong> Maintain CPP > 60-70 mmHg.<br>3. <strong>Osmotherapy:</strong> Administer Mannitol/Hypertonic Saline if pupils asymmetrical.<br>4. <strong>Imaging:</strong> Stat non-contrast CT Head." },
@@ -532,102 +504,60 @@
                     plan: "<strong>PATHOPHYSIOLOGY:</strong> Perfectly intact ARAS and cerebral cortex processing.<br><br><strong>ACTION PLAN:</strong><br>1. <strong>Confirm:</strong> Ensure oriented to person, place, time, AND situation.<br>2. <strong>Concussion Protocol:</strong> Advise cognitive rest for 24-48 hours.<br>3. <strong>Discharge:</strong> Discharge with standard head injury return precautions." }
             };
 
-            // 2. GERMAN (DE) - Fachsprache
             const clinicalData_DE = {
-                3: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Tiefes Koma / Hirntod", comaRisk: "KRITISCH: 100% Koma. Fehlende Hirnstammreflexe.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Vollständige Schlaffheit, Fehlen kortikaler und hirnstammbedingter Arousal-Mechanismen.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Sofortige Intubation (RSI).<br>2. <strong>Kreislauf:</strong> CPP > 60-70 mmHg halten.<br>3. <strong>Osmotherapie:</strong> Mannitol/NaCl 3% bei Pupillenasymmetrie.<br>4. <strong>Bildgebung:</strong> Nativ-CCT sofort." },
-                4: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Tiefes Koma (Dezerebration)", comaRisk: "KRITISCH: Koma. Hirnstammkompression.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Strecksynergismus lokalisiert Läsion unterhalb des Nucleus ruber.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Intubation. PaCO2 35-40 mmHg.<br>2. <strong>Lagerung:</strong> Oberkörperhochverlagerung 30°.<br>3. <strong>CCT:</strong> Ausschluss transtentorielle Herniation." },
-                5: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Koma (Dekortikation)", comaRisk: "HOHE GEFAHR: Schwere kortikale Schädigung.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Beugesynergismus lokalisiert Schaden oberhalb des Nucleus ruber.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Sofortige Intubation.<br>2. <strong>Krämpfe:</strong> Anfallsprophylaxe (Levetiracetam).<br>3. <strong>Temperatur:</strong> Strikte Normothermie." },
-                6: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Koma (Non-verbal)", comaRisk: "HOHE GEFAHR: Hohes Einklemmungsrisiko.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Entzieht auf Schmerz, aber non-verbal. Verdacht auf DAI.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Intubation (GCS ≤ 8).<br>2. <strong>Antidote:</strong> Naloxon, Glukose erwägen.<br>3. <strong>Neuro:</strong> Häufige Pupillenkontrollen." },
-                7: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Schwere Enzephalopathie", comaRisk: "GEFAHR: Komagrenze.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Kritische Schwelle. Schwere kortikale Suppression.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Intubation indiziert.<br>2. <strong>Ziele:</strong> Hypoxie/Hypotonie absolut vermeiden.<br>3. <strong>Monitoring:</strong> Arterielle Blutdruckmessung." },
-                8: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Stupor", comaRisk: "MÄSSIGE GEFAHR: Risiko für Koma.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Koma-Schwelle. Kortex verarbeitet keine komplexen Signale.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Intubation zum Aspirationsschutz.<br>2. <strong>HWS:</strong> Strikte Immobilisation (Stifneck).<br>3. <strong>Gerinnung:</strong> Ggf. Antagonisierung." },
-                9: { category: "Mittelschweres SHT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Mittelschweres SHT", comaRisk: "ERHÖHT: Signifikante Obtundation.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Somnolent bis soporös. Kognition stark beeinträchtigt.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Neuro-Check:</strong> Alle 30-60 Min.<br>2. <strong>Bildgebung:</strong> Dringendes Nativ-CCT.<br>3. <strong>Aufnahme:</strong> ITS oder IMC zwingend." },
-                10: { category: "Mittelschweres SHT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Mittelschwere Enzephalopathie", comaRisk: "MÄSSIG: Delirant/lethargisch.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Fragmentierte Verarbeitung (SAB, Sepsis).<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Diagnostik:</strong> Labor, BGA, ggf. Lumbalpunktion.<br>2. <strong>Sicherheit:</strong> Sturzprophylaxe, Fixierung vermeiden.<br>3. <strong>Schmerz:</strong> Kurzwirksame Opioide." },
-                11: { category: "Mittelschweres SHT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Lethargie", comaRisk: "GERING: Neurologisch beeinträchtigt.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> ARAS intakt, aber kortikale Integration unterdrückt.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>CCT:</strong> Ausschluss Subduralhämatom.<br>2. <strong>Medikation:</strong> Sedativa absetzen.<br>3. <strong>Anamnese:</strong> Fremdanamnese bzgl. Demenz." },
-                12: { category: "Mittelschweres SHT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Leichte Bewusstseinsstörung", comaRisk: "SEHR GERING: Verwirrt.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Obere Grenze mittelschweres SHT. Desorientiert.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Ausschluss:</strong> Hypoglykämie/Hypoxie.<br>2. <strong>CCT:</strong> Nach Canadian CT Head Rule.<br>3. <strong>Aufnahme:</strong> 24h Überwachung (freies Intervall)." },
-                13: { category: "Leichtes SHT", color: "text-secondary", bgClass: "bg-secondary", severityText: "Leichte Commotio", comaRisk: "KEINES: Wach, leichtes Defizit.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Leichte Verwirrtheit. Funktionelle Vernetzung gestört.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Status:</strong> Kompletter Neuro-Status.<br>2. <strong>CCT:</strong> Wenn >65J oder Antikoagulation.<br>3. <strong>Entlassung:</strong> Mit Aufklärung möglich." },
-                14: { category: "Leichtes SHT", color: "text-secondary", bgClass: "bg-secondary", severityText: "Leichte Desorientiertheit", comaRisk: "KEINES: Vollständig wach.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Fast perfekt. Punktverlust meist verbal (postiktal).<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Beobachtung:</strong> Neuro-Checks alle 2-4h.<br>2. <strong>Analgesie:</strong> Nicht-narkotische Schmerzmittel.<br>3. <strong>Entlassung:</strong> Sicher bei Betreuung." },
-                15: { category: "Normal", color: "text-secondary", bgClass: "bg-secondary", severityText: "Neurologisch unauffällig", comaRisk: "KEINES: Normales Bewusstsein.",
-                    plan: "<strong>PATHOPHYSIOLOGIE:</strong> Perfekt intakter Status.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Bestätigung:</strong> Komplett orientiert.<br>2. <strong>Protokoll:</strong> Kognitive Schonung 24-48h.<br>3. <strong>Entlassung:</strong> Mit Standard-Warnhinweisen." }
+                3: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Tiefes Koma / Hirntod", comaRisk: "KRITISCH: 100% Koma. Fehlende Hirnstammreflexe.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Vollständige Schlaffheit.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Sofortige Intubation (RSI).<br>2. <strong>Kreislauf:</strong> CPP > 60-70 mmHg halten.<br>3. <strong>Osmotherapie:</strong> Mannitol/NaCl 3% bei Pupillenasymmetrie.<br>4. <strong>Bildgebung:</strong> Nativ-CCT sofort." },
+                4: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Tiefes Koma (Dezerebration)", comaRisk: "KRITISCH: Koma. Hirnstammkompression.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Strecksynergismus lokalisiert Läsion unterhalb des Nucleus ruber.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Intubation. PaCO2 35-40 mmHg.<br>2. <strong>Lagerung:</strong> Oberkörperhochverlagerung 30°.<br>3. <strong>CCT:</strong> Ausschluss transtentorielle Herniation." },
+                5: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Koma (Dekortikation)", comaRisk: "HOHE GEFAHR: Schwere kortikale Schädigung.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Beugesynergismus lokalisiert Schaden oberhalb des Nucleus ruber.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Sofortige Intubation.<br>2. <strong>Krämpfe:</strong> Anfallsprophylaxe (Levetiracetam).<br>3. <strong>Temperatur:</strong> Strikte Normothermie." },
+                6: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Koma (Non-verbal)", comaRisk: "HOHE GEFAHR: Hohes Einklemmungsrisiko.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Entzieht auf Schmerz, aber non-verbal. Verdacht auf DAI.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Intubation (GCS ≤ 8).<br>2. <strong>Antidote:</strong> Naloxon, Glukose erwägen.<br>3. <strong>Neuro:</strong> Häufige Pupillenkontrollen." },
+                7: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Schwere Enzephalopathie", comaRisk: "GEFAHR: Komagrenze.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Kritische Schwelle. Schwere kortikale Suppression.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Intubation indiziert.<br>2. <strong>Ziele:</strong> Hypoxie/Hypotonie absolut vermeiden.<br>3. <strong>Monitoring:</strong> Arterielle Blutdruckmessung." },
+                8: { category: "Schweres SHT", color: "text-error", bgClass: "bg-error", severityText: "Stupor", comaRisk: "MÄSSIGE GEFAHR: Risiko für Koma.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Koma-Schwelle. Kortex verarbeitet keine komplexen Signale.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Atemwege:</strong> Intubation zum Aspirationsschutz.<br>2. <strong>HWS:</strong> Strikte Immobilisation (Stifneck).<br>3. <strong>Gerinnung:</strong> Ggf. Antagonisierung." },
+                9: { category: "Mittelschweres SHT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Mittelschweres SHT", comaRisk: "ERHÖHT: Signifikante Obtundation.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Somnolent bis soporös. Kognition stark beeinträchtigt.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Neuro-Check:</strong> Alle 30-60 Min.<br>2. <strong>Bildgebung:</strong> Dringendes Nativ-CCT.<br>3. <strong>Aufnahme:</strong> ITS oder IMC zwingend." },
+                10: { category: "Mittelschweres SHT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Mittelschwere Enzephalopathie", comaRisk: "MÄSSIG: Delirant/lethargisch.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Fragmentierte Verarbeitung (SAB, Sepsis).<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Diagnostik:</strong> Labor, BGA, ggf. Lumbalpunktion.<br>2. <strong>Sicherheit:</strong> Sturzprophylaxe, Fixierung vermeiden.<br>3. <strong>Schmerz:</strong> Kurzwirksame Opioide." },
+                11: { category: "Mittelschweres SHT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Lethargie", comaRisk: "GERING: Neurologisch beeinträchtigt.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> ARAS intakt, aber kortikale Integration unterdrückt.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>CCT:</strong> Ausschluss Subduralhämatom.<br>2. <strong>Medikation:</strong> Sedativa absetzen.<br>3. <strong>Anamnese:</strong> Fremdanamnese bzgl. Demenz." },
+                12: { category: "Mittelschweres SHT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Leichte Bewusstseinsstörung", comaRisk: "SEHR GERING: Verwirrt.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Obere Grenze mittelschweres SHT. Desorientiert.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Ausschluss:</strong> Hypoglykämie/Hypoxie.<br>2. <strong>CCT:</strong> Nach Canadian CT Head Rule.<br>3. <strong>Aufnahme:</strong> 24h Überwachung (freies Intervall)." },
+                13: { category: "Leichtes SHT", color: "text-secondary", bgClass: "bg-secondary", severityText: "Leichte Commotio", comaRisk: "KEINES: Wach, leichtes Defizit.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Leichte Verwirrtheit. Funktionelle Vernetzung gestört.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Status:</strong> Kompletter Neuro-Status.<br>2. <strong>CCT:</strong> Wenn >65J oder Antikoagulation.<br>3. <strong>Entlassung:</strong> Mit Aufklärung möglich." },
+                14: { category: "Leichtes SHT", color: "text-secondary", bgClass: "bg-secondary", severityText: "Leichte Desorientiertheit", comaRisk: "KEINES: Vollständig wach.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Fast perfekt. Punktverlust meist verbal (postiktal).<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Beobachtung:</strong> Neuro-Checks alle 2-4h.<br>2. <strong>Analgesie:</strong> Nicht-narkotische Schmerzmittel.<br>3. <strong>Entlassung:</strong> Sicher bei Betreuung." },
+                15: { category: "Normal", color: "text-secondary", bgClass: "bg-secondary", severityText: "Neurologisch unauffällig", comaRisk: "KEINES: Normales Bewusstsein.", plan: "<strong>PATHOPHYSIOLOGIE:</strong> Perfekt intakter Status.<br><br><strong>AKTIONSPLAN:</strong><br>1. <strong>Bestätigung:</strong> Komplett orientiert.<br>2. <strong>Protokoll:</strong> Kognitive Schonung 24-48h.<br>3. <strong>Entlassung:</strong> Mit Standard-Warnhinweisen." }
             };
 
-            // 3. RUSSIAN (RU) - Медицинская терминология
             const clinicalData_RU = {
-                3: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Глубокая кома / Смерть мозга", comaRisk: "КРИТИЧЕСКИ: 100% Кома.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Полная атония, отсутствие корковых и стволовых рефлексов.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Немедленная интубация.<br>2. <strong>Гемодинамика:</strong> ЦПД > 60-70 мм рт.ст.<br>3. <strong>Осмотерапия:</strong> Маннитол при асимметрии зрачков.<br>4. <strong>КТ:</strong> Срочно без контраста." },
-                4: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Глубокая кома (Децеребрация)", comaRisk: "КРИТИЧЕСКИ: Поражение ствола.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Экстензорный ответ локализует поражение ниже красного ядра.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Интубация.<br>2. <strong>ВЧД:</strong> Возвышенное положение головы 30°.<br>3. <strong>КТ:</strong> Исключить вклинение." },
-                5: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Кома (Декортикация)", comaRisk: "ВЫСОКАЯ ОПАСНОСТЬ: Повреждение коры.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Аномальное сгибание указывает на поражение выше красного ядра.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Интубация.<br>2. <strong>Судороги:</strong> Профилактика (Леветирацетам).<br>3. <strong>Температура:</strong> Строгая нормотермия." },
-                6: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Кома (Без речи)", comaRisk: "ВЫСОКАЯ ОПАСНОСТЬ: Риск вклинения.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Подозрение на диффузное аксональное повреждение.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Правило ШКГ≤8 - интубируй.<br>2. <strong>Антидоты:</strong> Налоксон, Глюкоза.<br>3. <strong>Мониторинг:</strong> Контроль зрачков." },
-                7: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Тяжелая энцефалопатия", comaRisk: "ОПАСНОСТЬ: Порог комы.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Критический порог. Тяжелое угнетение коры.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Показана интубация.<br>2. <strong>Гемодинамика:</strong> Избегать гипоксии/гипотонии.<br>3. <strong>Линия:</strong> Артериальный катетер." },
-                8: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Ступор", comaRisk: "УМЕРЕННАЯ ОПАСНОСТЬ: Риск комы.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Классический порог комы. Угнетение сенсорных путей.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Интубация:</strong> Защита от аспирации.<br>2. <strong>Шея:</strong> Жесткий воротник.<br>3. <strong>Свертывание:</strong> Ввести антидоты антикоагулянтов." },
-                9: { category: "Средняя ЧМТ", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "ЧМТ средней тяжести", comaRisk: "ПОВЫШЕННЫЙ: Оглушение.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Оглушение. Когнитивные функции серьезно нарушены.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Неврология:</strong> Осмотр каждые 30-60 мин.<br>2. <strong>КТ:</strong> Срочно.<br>3. <strong>ОРИТ:</strong> Обязательная госпитализация." },
-                10: { category: "Средняя ЧМТ", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Умеренная энцефалопатия", comaRisk: "УМЕРЕННЫЙ: Делирий.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Кортикальная фрагментация (САК, сепсис).<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Диагностика:</strong> Инфекции/метаболизм.<br>2. <strong>Безопасность:</strong> Защита от падений.<br>3. <strong>Обезболивание:</strong> Короткие опиоиды." },
-                11: { category: "Средняя ЧМТ", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Летаргия", comaRisk: "НИЗКИЙ: Функции снижены.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Пациент в сознании, но когнитивно замедлен.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>КТ:</strong> Исключить субдуральную гематому.<br>2. <strong>Лекарства:</strong> Отменить седативные.<br>3. <strong>Анамнез:</strong> Опрос родственников." },
-                12: { category: "Средняя ЧМТ", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Легкое изменение сознания", comaRisk: "ОЧЕНЬ НИЗКИЙ: Спутанность.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Верхняя граница средней ЧМТ. Выполняет команды, но дезориентирован.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Исключить:</strong> Гипоксию/гипогликемию.<br>2. <strong>КТ:</strong> Показана.<br>3. <strong>Наблюдение:</strong> 24 часа." },
-                13: { category: "Легкая ЧМТ", color: "text-secondary", bgClass: "bg-secondary", severityText: "Сотрясение", comaRisk: "ОТСУТСТВУЕТ: Легкий дефицит.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Бодрствует, легкая спутанность.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Осмотр:</strong> Полный нейростатус.<br>2. <strong>КТ:</strong> Если >65 лет.<br>3. <strong>Выписка:</strong> При нормальном КТ." },
-                14: { category: "Легкая ЧМТ", color: "text-secondary", bgClass: "bg-secondary", severityText: "Легкая дезориентация", comaRisk: "ОТСУТСТВУЕТ: В сознании.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Почти норма. Часто после судорог.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Осмотр:</strong> Каждые 2-4 часа.<br>2. <strong>Обезболивание:</strong> Парацетамол.<br>3. <strong>Выписка:</strong> Безопасна." },
-                15: { category: "Норма", color: "text-secondary", bgClass: "bg-secondary", severityText: "Неврологически интактен", comaRisk: "ОТСУТСТВУЕТ: Ясное сознание.",
-                    plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Абсолютная норма.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Проверка:</strong> Полностью ориентирован.<br>2. <strong>Покой:</strong> Когнитивный покой 24-48ч.<br>3. <strong>Выписка:</strong> Стандартные инструкции." }
+                3: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Глубокая кома / Смерть мозга", comaRisk: "КРИТИЧЕСКИ: 100% Кома.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Полная атония, отсутствие рефлексов.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Немедленная интубация.<br>2. <strong>Гемодинамика:</strong> ЦПД > 60-70 мм рт.ст.<br>3. <strong>Осмотерапия:</strong> Маннитол при асимметрии зрачков.<br>4. <strong>КТ:</strong> Срочно без контраста." },
+                4: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Глубокая кома (Децеребрация)", comaRisk: "КРИТИЧЕСКИ: Поражение ствола.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Экстензорный ответ локализует поражение ниже красного ядра.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Интубация.<br>2. <strong>ВЧД:</strong> Возвышенное положение головы 30°.<br>3. <strong>КТ:</strong> Исключить вклинение." },
+                5: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Кома (Декортикация)", comaRisk: "ВЫСОКАЯ ОПАСНОСТЬ: Повреждение коры.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Аномальное сгибание (поражение выше красного ядра).<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Интубация.<br>2. <strong>Судороги:</strong> Профилактика (Леветирацетам).<br>3. <strong>Температура:</strong> Строгая нормотермия." },
+                6: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Кома (Без речи)", comaRisk: "ВЫСОКАЯ ОПАСНОСТЬ: Риск вклинения.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Подозрение на диффузное аксональное повреждение.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Правило ШКГ≤8 - интубируй.<br>2. <strong>Антидоты:</strong> Налоксон, Глюкоза.<br>3. <strong>Мониторинг:</strong> Контроль зрачков." },
+                7: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Тяжелая энцефалопатия", comaRisk: "ОПАСНОСТЬ: Порог комы.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Критический порог. Тяжелое угнетение коры.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Дыхание:</strong> Показана интубация.<br>2. <strong>Гемодинамика:</strong> Избегать гипоксии/гипотонии.<br>3. <strong>Линия:</strong> Артериальный катетер." },
+                8: { category: "Тяжелая ЧМТ", color: "text-error", bgClass: "bg-error", severityText: "Ступор", comaRisk: "УМЕРЕННАЯ ОПАСНОСТЬ: Риск комы.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Классический порог комы.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Интубация:</strong> Защита от аспирации.<br>2. <strong>Шея:</strong> Жесткий воротник.<br>3. <strong>Свертывание:</strong> Ввести антидоты." },
+                9: { category: "Средняя ЧМТ", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "ЧМТ средней тяжести", comaRisk: "ПОВЫШЕННЫЙ: Оглушение.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Когнитивные функции серьезно нарушены.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Неврология:</strong> Осмотр каждые 30-60 мин.<br>2. <strong>КТ:</strong> Срочно.<br>3. <strong>ОРИТ:</strong> Обязательная госпитализация." },
+                10: { category: "Средняя ЧМТ", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Умеренная энцефалопатия", comaRisk: "УМЕРЕННЫЙ: Делирий.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Кортикальная фрагментация (САК, сепсис).<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Диагностика:</strong> Инфекции/метаболизм.<br>2. <strong>Безопасность:</strong> Защита от падений.<br>3. <strong>Обезболивание:</strong> Короткие опиоиды." },
+                11: { category: "Средняя ЧМТ", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Летаргия", comaRisk: "НИЗКИЙ: Функции снижены.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Пациент в сознании, но когнитивно замедлен.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>КТ:</strong> Исключить субдуральную гематому.<br>2. <strong>Лекарства:</strong> Отменить седативные.<br>3. <strong>Анамнез:</strong> Опрос родственников." },
+                12: { category: "Средняя ЧМТ", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Легкое изменение сознания", comaRisk: "ОЧЕНЬ НИЗКИЙ: Спутанность.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Верхняя граница средней ЧМТ. Выполняет команды.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Исключить:</strong> Гипоксию/гипогликемию.<br>2. <strong>КТ:</strong> Показана.<br>3. <strong>Наблюдение:</strong> 24 часа." },
+                13: { category: "Легкая ЧМТ", color: "text-secondary", bgClass: "bg-secondary", severityText: "Сотрясение", comaRisk: "ОТСУТСТВУЕТ: Легкий дефицит.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Бодрствует, легкая спутанность.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Осмотр:</strong> Полный нейростатус.<br>2. <strong>КТ:</strong> Если >65 лет.<br>3. <strong>Выписка:</strong> При нормальном КТ." },
+                14: { category: "Легкая ЧМТ", color: "text-secondary", bgClass: "bg-secondary", severityText: "Легкая дезориентация", comaRisk: "ОТСУТСТВУЕТ: В сознании.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Почти норма. Часто после судорог.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Осмотр:</strong> Каждые 2-4 часа.<br>2. <strong>Обезболивание:</strong> Парацетамол.<br>3. <strong>Выписка:</strong> Безопасна." },
+                15: { category: "Норма", color: "text-secondary", bgClass: "bg-secondary", severityText: "Неврологически интактен", comaRisk: "ОТСУТСТВУЕТ: Ясное сознание.", plan: "<strong>ПАТОФИЗИОЛОГИЯ:</strong> Абсолютная норма.<br><br><strong>АЛГОРИТМ:</strong><br>1. <strong>Проверка:</strong> Полностью ориентирован.<br>2. <strong>Покой:</strong> Когнитивный покой 24-48ч.<br>3. <strong>Выписка:</strong> Стандартные инструкции." }
             };
 
-            // 4. UZBEK (UZ) - Tibbiy terminologiya
             const clinicalData_UZ = {
-                3: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Chuqur Koma / Miya o'limi", comaRisk: "KRITIK: 100% Koma. Reflekslar yo'q.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> GKS 3 barcha kortikal va miya ustuni faolligining to'liq yo'qligini ko'rsatadi.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Nafas yo'llari:</strong> Zudlik bilan intubatsiya.<br>2. <strong>Gemodinamika:</strong> Qon bosimini ushlab turish.<br>3. <strong>Osmoterapiya:</strong> Mannitol yuborish.<br>4. <strong>KT:</strong> Zudlik bilan bosh miya KT." },
-                4: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Chuqur Koma (Detserebratsiya)", comaRisk: "KRITIK: Miya ustuni zararlangan.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> M2 (Ekstenziya) shikastlanish qizil yadrodan pastda ekanligini bildiradi.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Nafas yo'llari:</strong> Zudlik bilan intubatsiya.<br>2. <strong>Joylashuv:</strong> Boshni 30 gradusga ko'tarish.<br>3. <strong>KT:</strong> Miya churrasini inkor etish." },
-                5: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Koma (Dekortikatsiya)", comaRisk: "XAVFLI: Koma. Po'stloq zararlangan.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> M3 (Buralish) shikastlanish qizil yadrodan yuqorida ekanligini bildiradi.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Nafas yo'llari:</strong> Intubatsiya.<br>2. <strong>Tirishish:</strong> Antiepileptik profilaktika.<br>3. <strong>Harorat:</strong> Qat'iy normotermiya." },
-                6: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Koma (Nutqsiz)", comaRisk: "XAVFLI: Miya churrasi xavfi.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> Og'riqqa qochadi, lekin nutq yo'q. DAI shubhasi.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Intubatsiya:</strong> GKS ≤ 8 qoidasi.<br>2. <strong>Antidotlar:</strong> Nalokson, Glyukoza.<br>3. <strong>Kuzatuv:</strong> Qorachiqlarni tez-tez tekshirish." },
-                7: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Og'ir ensefalopatiya", comaRisk: "XAVFLI: Koma chegarasi.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> Kritik chegara. Og'riqni sezadi, lekin po'stloq faoliyati past.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Nafas:</strong> Intubatsiya ko'rsatilgan.<br>2. <strong>Gemodinamika:</strong> Gipoqsiya va gipotenziyadan saqlanish.<br>3. <strong>Zahar:</strong> Qon va siydik tahlili." },
-                8: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Stupor / Og'ir Jarohat", comaRisk: "O'RTA XAVF: Komaga tushish xavfi.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> Tarixiy koma chegarasi. Faqat kuchli og'riqqa uyg'onadi.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Intubatsiya:</strong> Aspiratsiyadan himoya.<br>2. <strong>Bo'yin:</strong> Qattiq yoqa taqish.<br>3. <strong>Koagulatsiya:</strong> Antikoagulyantlarni tekshirish." },
-                9: { category: "O'rta KMT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "O'rta og'ir kalla-miya jarohati", comaRisk: "YUQORI: Og'ir garangsirash.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> Bemor xushsizroq. Kognitiv funksiyalar buzilgan.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Nevrologiya:</strong> Har 30-60 daqiqada tekshirish.<br>2. <strong>KT:</strong> Zudlik bilan.<br>3. <strong>Reanimatsiya:</strong> Yotqizish majburiy." },
-                10: { category: "O'rta KMT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "O'rtacha ensefalopatiya", comaRisk: "O'RTA: Deliriy yoki letargiya.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> Kortikal aloqalar uzilgan (Sepsis, qon ketish).<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Diagnostika:</strong> Infeksiya/metabolizmni tekshirish.<br>2. <strong>Xavfsizlik:</strong> Yiqilishdan himoya.<br>3. <strong>Og'riq:</strong> Qisqa ta'sirli opioidlar." },
-                11: { category: "O'rta KMT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Letargiya / Chalkashish", comaRisk: "PAST: Nevrologik pasayish.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> Bemor uyg'oq, lekin kognitiv sekinlashgan.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>KT:</strong> Subdural gematomani inkor etish.<br>2. <strong>Dorilar:</strong> Sedativlarni to'xtatish.<br>3. <strong>Tarix:</strong> Oila a'zolaridan so'rash." },
-                12: { category: "O'rta KMT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Es-hushning yengil o'zgarishi", comaRisk: "JUDA PAST: Uyg'oq, ammo chalkash.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> O'rta jarohatning yuqori chegarasi. Buyruqlarni bajaradi, lekin desorientatsiyalangan.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Inkor etish:</strong> Gipoqsiya/gipoglikemiya.<br>2. <strong>KT:</strong> Ko'rsatma bo'lsa qilish.<br>3. <strong>Kuzatuv:</strong> 24 soatlik nazorat." },
-                13: { category: "Yengil KMT", color: "text-secondary", bgClass: "bg-secondary", severityText: "Yengil chayqalish", comaRisk: "YO'Q: Yengil nuqson.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> Yengil KMT. Makroanatomiya butun, tarmoq buzilgan.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Ko'rik:</strong> To'liq nevrologik ko'rik.<br>2. <strong>KT:</strong> Agar bemor >65 yosh bo'lsa.<br>3. <strong>Javob:</strong> KT toza bo'lsa, uyga javob." },
-                14: { category: "Yengil KMT", color: "text-secondary", bgClass: "bg-secondary", severityText: "Yengil dezoriyentatsiya", comaRisk: "YO'Q: To'liq uyg'oq.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> Deyarli normal holat. Nutqda biroz chalkashlik (V4).<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Kuzatuv:</strong> Har 2-4 soatda tekshirish.<br>2. <strong>Og'riq:</strong> Narkotik bo'lmagan dorilar.<br>3. <strong>Javob:</strong> Xavfsiz uyga javob." },
-                15: { category: "Normal", color: "text-secondary", bgClass: "bg-secondary", severityText: "Nevrologik jihatdan sog'lom", comaRisk: "YO'Q: Aniq es-hush.",
-                    plan: "<strong>PATOFIZIOLOGIYA:</strong> Mutlaqo normal nevrologik status.<br><br><strong>HARAKATLAR REJASI:</strong><br>1. <strong>Tasdiqlash:</strong> Vaqt va joyga to'liq mo'ljal oladi.<br>2. <strong>Protokol:</strong> 24-48 soat kognitiv dam olish.<br>3. <strong>Javob:</strong> Standart ogohlantirishlar bilan." }
+                3: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Chuqur Koma / Miya o'limi", comaRisk: "KRITIK: 100% Koma. Reflekslar yo'q.", plan: "<strong>PATOFIZIOLOGIYA:</strong> GKS 3 to'liq kortikal faollik yo'qligini bildiradi.<br><br><strong>REJA:</strong><br>1. <strong>Nafas:</strong> Zudlik bilan intubatsiya.<br>2. <strong>Qon bosimi:</strong> CPP > 60 mmHg.<br>3. <strong>Osmoterapiya:</strong> Mannitol.<br>4. <strong>KT:</strong> Bosh miya KT." },
+                4: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Chuqur Koma (Detserebratsiya)", comaRisk: "KRITIK: Miya ustuni zararlangan.", plan: "<strong>PATOFIZIOLOGIYA:</strong> M2 (Ekstenziya) zararlanish qizil yadrodan pastdaligini bildiradi.<br><br><strong>REJA:</strong><br>1. <strong>Nafas:</strong> Intubatsiya.<br>2. <strong>Joylashuv:</strong> Boshni 30° ko'tarish.<br>3. <strong>KT:</strong> Miya churrasini inkor etish." },
+                5: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Koma (Dekortikatsiya)", comaRisk: "XAVFLI: Koma. Po'stloq zararlangan.", plan: "<strong>PATOFIZIOLOGIYA:</strong> M3 zararlanish qizil yadrodan yuqoridaligini bildiradi.<br><br><strong>REJA:</strong><br>1. <strong>Nafas:</strong> Intubatsiya.<br>2. <strong>Tirishish:</strong> Levetiratsetam.<br>3. <strong>Harorat:</strong> Qat'iy normotermiya." },
+                6: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Koma (Nutqsiz)", comaRisk: "XAVFLI: Miya churrasi xavfi.", plan: "<strong>PATOFIZIOLOGIYA:</strong> DAI shubhasi.<br><br><strong>REJA:</strong><br>1. <strong>Intubatsiya:</strong> GKS ≤ 8 qoidasi.<br>2. <strong>Antidotlar:</strong> Nalokson, Glyukoza.<br>3. <strong>Kuzatuv:</strong> Qorachiqlar nazorati." },
+                7: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Og'ir ensefalopatiya", comaRisk: "XAVFLI: Koma chegarasi.", plan: "<strong>PATOFIZIOLOGIYA:</strong> Kritik chegara.<br><br><strong>REJA:</strong><br>1. <strong>Nafas:</strong> Intubatsiya ko'rsatilgan.<br>2. <strong>Gemodinamika:</strong> Gipoqsiya va gipotenziyadan saqlanish.<br>3. <strong>Zahar:</strong> Qon va siydik tahlili." },
+                8: { category: "Og'ir KMT", color: "text-error", bgClass: "bg-error", severityText: "Stupor", comaRisk: "O'RTA XAVF: Komaga xavf.", plan: "<strong>PATOFIZIOLOGIYA:</strong> Koma chegarasi.<br><br><strong>REJA:</strong><br>1. <strong>Intubatsiya:</strong> Aspiratsiyadan himoya.<br>2. <strong>Bo'yin:</strong> Qattiq yoqa taqish.<br>3. <strong>Koagulatsiya:</strong> Antikoagulyantlarni tekshirish." },
+                9: { category: "O'rta KMT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "O'rta kalla-miya jarohati", comaRisk: "YUQORI: Og'ir garangsirash.", plan: "<strong>PATOFIZIOLOGIYA:</strong> Kognitiv funksiyalar buzilgan.<br><br><strong>REJA:</strong><br>1. <strong>Nevrologiya:</strong> Har 30-60 daqiqada tekshirish.<br>2. <strong>KT:</strong> Zudlik bilan.<br>3. <strong>Reanimatsiya:</strong> Yotqizish majburiy." },
+                10: { category: "O'rta KMT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "O'rtacha ensefalopatiya", comaRisk: "O'RTA: Deliriy yoki letargiya.", plan: "<strong>PATOFIZIOLOGIYA:</strong> Kortikal aloqalar uzilgan.<br><br><strong>REJA:</strong><br>1. <strong>Diagnostika:</strong> Infeksiya/metabolizmni tekshirish.<br>2. <strong>Xavfsizlik:</strong> Yiqilishdan himoya.<br>3. <strong>Og'riq:</strong> Qisqa ta'sirli opioidlar." },
+                11: { category: "O'rta KMT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Letargiya", comaRisk: "PAST: Nevrologik pasayish.", plan: "<strong>PATOFIZIOLOGIYA:</strong> Bemor uyg'oq, lekin sekinlashgan.<br><br><strong>REJA:</strong><br>1. <strong>KT:</strong> Subdural gematomani inkor etish.<br>2. <strong>Dorilar:</strong> Sedativlarni to'xtatish.<br>3. <strong>Tarix:</strong> Oila a'zolaridan so'rash." },
+                12: { category: "O'rta KMT", color: "text-amber-500", bgClass: "bg-amber-500", severityText: "Es-hushning yengil o'zgarishi", comaRisk: "JUDA PAST: Uyg'oq, ammo chalkash.", plan: "<strong>PATOFIZIOLOGIYA:</strong> Buyruqlarni bajaradi, lekin desorientatsiyalangan.<br><br><strong>REJA:</strong><br>1. <strong>Inkor etish:</strong> Gipoqsiya/gipoglikemiya.<br>2. <strong>KT:</strong> Ko'rsatma bo'lsa.<br>3. <strong>Kuzatuv:</strong> 24 soatlik nazorat." },
+                13: { category: "Yengil KMT", color: "text-secondary", bgClass: "bg-secondary", severityText: "Yengil chayqalish", comaRisk: "YO'Q: Yengil nuqson.", plan: "<strong>PATOFIZIOLOGIYA:</strong> Yengil KMT.<br><br><strong>REJA:</strong><br>1. <strong>Ko'rik:</strong> To'liq nevrologik ko'rik.<br>2. <strong>KT:</strong> Agar >65 yosh bo'lsa.<br>3. <strong>Javob:</strong> KT toza bo'lsa, uyga." },
+                14: { category: "Yengil KMT", color: "text-secondary", bgClass: "bg-secondary", severityText: "Yengil dezoriyentatsiya", comaRisk: "YO'Q: To'liq uyg'oq.", plan: "<strong>PATOFIZIOLOGIYA:</strong> Deyarli normal holat.<br><br><strong>REJA:</strong><br>1. <strong>Kuzatuv:</strong> Har 2-4 soatda tekshirish.<br>2. <strong>Og'riq:</strong> Narkotik bo'lmagan dorilar.<br>3. <strong>Javob:</strong> Xavfsiz uyga javob." },
+                15: { category: "Normal", color: "text-secondary", bgClass: "bg-secondary", severityText: "Nevrologik jihatdan sog'lom", comaRisk: "YO'Q: Aniq es-hush.", plan: "<strong>PATOFIZIOLOGIYA:</strong> Mutlaqo normal nevrologik status.<br><br><strong>REJA:</strong><br>1. <strong>Tasdiqlash:</strong> Vaqt va joyga to'liq mo'ljal oladi.<br>2. <strong>Protokol:</strong> 24 soat dam olish.<br>3. <strong>Javob:</strong> Standart ogohlantirishlar." }
             };
 
-
-            // --- LANGUAGE SWITCHER LOGIC ---
+            // --- 3. CORE LOGIC ---
             function changeLang(lang) {
                 currentLang = lang;
+                localStorage.setItem('wardcalc_lang', lang);
                 
-                // Visual feedback for buttons
+                // Visual feedback
                 const buttons = document.querySelectorAll('#language-switcher button');
                 buttons.forEach(btn => {
                     btn.classList.remove('bg-primary/20', 'text-primary');
@@ -638,11 +568,24 @@
                     }
                 });
 
-                // Immediately recalculate to update UI to new language
+                // Translate UI
+                let uiData = (lang === 'de') ? uiDict_DE : (lang === 'ru') ? uiDict_RU : (lang === 'uz') ? uiDict_UZ : uiDict_EN;
+                
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (uiData[key]) {
+                        if(el.querySelector('.material-symbols-outlined')) {
+                            const iconHTML = el.querySelector('.material-symbols-outlined').outerHTML;
+                            el.innerHTML = iconHTML + " " + uiData[key];
+                        } else {
+                            el.innerText = uiData[key];
+                        }
+                    }
+                });
+
                 calculateGCS();
             }
 
-            // --- CORE CALCULATION LOGIC ---
             function calculateGCS() {
                 const e = document.querySelector('input[name="gcs_e"]:checked');
                 const v = document.querySelector('input[name="gcs_v"]:checked');
@@ -664,12 +607,10 @@
                     const percent = ((score - 3) / 12) * 100;
                     document.getElementById('gcs-thermometer').style.width = `${percent}%`;
 
-                    // SELECT CORRECT DICTIONARY BASED ON LANGUAGE
-                    let data;
-                    if(currentLang === 'de') data = clinicalData_DE[score];
-                    else if(currentLang === 'ru') data = clinicalData_RU[score];
-                    else if(currentLang === 'uz') data = clinicalData_UZ[score];
-                    else data = clinicalData_EN[score]; // Default English
+                    // Output translation
+                    let data = (currentLang === 'de') ? clinicalData_DE[score] : 
+                               (currentLang === 'ru') ? clinicalData_RU[score] : 
+                               (currentLang === 'uz') ? clinicalData_UZ[score] : clinicalData_EN[score];
 
                     const severityDisplay = document.getElementById('gcs-severity-display');
                     const decisionOutput = document.getElementById('decision-engine-output');
@@ -684,21 +625,18 @@
                     decisionOutput.className = `${data.bgClass}/5 border-l-4 border-${data.color.split('-')[1]} p-5 rounded-r-xl text-sm font-medium leading-relaxed`;
                     decisionOutput.innerHTML = `<div class="mb-3 p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm">
                                                     <strong class="${data.color} text-[13px] uppercase tracking-wider flex items-center gap-1">
-                                                        <span class="material-symbols-outlined text-[16px]">vital_signs</span> COMA DANGER INDEX:
+                                                        <span class="material-symbols-outlined text-[16px]">vital_signs</span> COMA INDEX:
                                                     </strong>
                                                     <span class="text-slate-700 dark:text-slate-300 font-medium">${data.comaRisk}</span>
                                                 </div>
                                                 ${data.plan}`;
 
                     svgIcon.className = `w-16 h-16 transition-colors duration-500 ${data.color}`;
-                    
                     document.getElementById('empathy-content').innerText = `Score: ${score}/15. ${data.severityText}.`;
-                    
                     generateHandoff();
                 }
             }
 
-            // --- EHR HANDOFF LOGIC ---
             function generateHandoff(langOverride = null) {
                 const e = document.querySelector('input[name="gcs_e"]:checked');
                 const v = document.querySelector('input[name="gcs_v"]:checked');
@@ -730,7 +668,6 @@
                 setTimeout(() => { btn.innerHTML = originalHtml; btn.classList.replace('bg-secondary', 'bg-primary'); }, 2000);
             }
 
-            // --- TAB AND UI LOGIC ---
             function switchTab(tabId) {
                 document.querySelectorAll('.archive-content').forEach(el => el.classList.add('hidden'));
                 document.querySelectorAll('[id^="tab-"]').forEach(btn => {
@@ -759,17 +696,12 @@
                 document.getElementById('theme-icon').innerText = isDark ? 'light_mode' : 'dark_mode';
             }
 
-            function toggleOLED() {
-                if(!document.documentElement.classList.contains('dark')) toggleTheme();
-                document.documentElement.classList.toggle('oled-mode');
-                localStorage.setItem('wardcalc_oled', document.documentElement.classList.contains('oled-mode') ? 'true' : 'false');
-            }
-
             document.addEventListener('DOMContentLoaded', () => {
                 if (localStorage.getItem('wardcalc_theme') === 'dark' || (!('wardcalc_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                     document.documentElement.classList.add('dark'); document.getElementById('theme-icon').innerText = 'light_mode';
                 }
-                if (localStorage.getItem('wardcalc_oled') === 'true') document.documentElement.classList.add('oled-mode');
+                const savedLang = localStorage.getItem('wardcalc_lang') || 'en';
+                changeLang(savedLang);
             });
         </script>
     </main>
@@ -783,11 +715,6 @@
             <p class="text-[11px] text-slate-400 max-w-2xl mx-auto mb-6 leading-relaxed bg-slate-50 dark:bg-slate-800/30 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
                 <strong class="text-error flex justify-center items-center gap-1 mb-1"><span class="material-symbols-outlined text-[14px]">warning</span> CLINICAL WARNING</strong> WardCalc is an educational and cognitive aid. Do not use for definitive bedside diagnosis or to direct critical interventions. Always defer to independent clinical judgment, verified pharmacological compendiums, and localized institutional protocols.
             </p>
-            <div class="flex justify-center gap-6 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                <a href="../privacy.html" class="hover:text-primary transition">Privacy Policy</a>
-                <a href="../terms.html" class="hover:text-primary transition">Terms of Service</a>
-                <a href="../disclaimer.html" class="hover:text-primary transition">Disclaimer</a>
-            </div>
         </div>
     </footer>
 </body>
